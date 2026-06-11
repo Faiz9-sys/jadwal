@@ -9,6 +9,23 @@
     <div><label class="lbl req">الجنس</label><select id="sex"><option value="">اختر</option><option>ذكر</option><option>أنثى</option></select></div></div>
     <div class="row"><div><label class="lbl req">الطول (سم)</label><input class="in" id="ht" type="number" min="100" max="230"></div>
     <div><label class="lbl req">الوزن (كجم)</label><input class="in" id="wt" type="number" min="25" max="300" step="0.1"></div></div>
+    <label class="lbl req">كم يوماً تستطيع التمرن أسبوعياً؟</label>
+    <select id="days"><option value="">اختر</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+    <label class="lbl req">أين ستتمرن؟</label>
+    <div class="chips">
+      <label class="chip"><input type="radio" name="place" value="نادي رياضي" onchange="plc()">🏟️ نادي رياضي</label>
+      <label class="chip"><input type="radio" name="place" value="المنزل" onchange="plc()">🏠 المنزل</label>
+    </div>
+    <div id="eqWrap" style="display:none;">
+      <label class="lbl">المعدات المتوفرة لديك في المنزل</label>
+      <div class="chips">
+        <label class="chip"><input type="checkbox" name="eq" value="أثقال / دمبلات">🏋️ أثقال / دمبلات</label>
+        <label class="chip"><input type="checkbox" name="eq" value="كرسي تمرين">🪑 كرسي تمرين</label>
+        <label class="chip"><input type="checkbox" name="eq" value="حبال مقاومة">🎗️ حبال مقاومة</label>
+        <label class="chip"><input type="checkbox" name="eq" value="عقلة جدارية أو باب">🚪 عقلة جدارية / باب</label>
+        <label class="chip"><input type="checkbox" name="eq" value="لا يوجد معدات">❌ لا يوجد معدات</label>
+      </div>
+    </div>
   </div>
   <div class="card"><div class="sec">🎯 الهدف الرئيسي</div>
     <div class="chips">
@@ -43,18 +60,22 @@
 </div>
 <div class="ok" id="ok"><div class="e">✅</div><h1>وصل نموذجك للمدرب!</h1><div class="sub">سيتواصل معك قريباً لبدء برنامجك 💪</div></div><script>
 var FB={"p":"jadwal-app-87ae0","k":"AIzaSyAiGbeXvyjRkL-Grb8RD75SMMHcFe61b_Y","u":"ftGXJ5iZGuc5ZtF1y27ZOqmBIsv1"};
+function plc(){var p=(document.querySelector('input[name="place"]:checked')||{}).value;document.getElementById('eqWrap').style.display=p==='المنزل'?'block':'none';}
 function vals(n){return Array.prototype.map.call(document.querySelectorAll('input[name="'+n+'"]:checked'),function(c){return c.value;});}
 function send(){
   var nm=document.getElementById('nm').value.trim();
   var age=document.getElementById('age').value,sex=document.getElementById('sex').value;
   var ht=document.getElementById('ht').value,wt=document.getElementById('wt').value;
   var goal=(document.querySelector('input[name="goal"]:checked')||{}).value||'';
-  if(!nm||!age||!sex||!ht||!wt||!goal){alert('فضلاً أكمل الحقول الأساسية المعلمة بـ * واختر الهدف الرئيسي');return;}
+  var days=document.getElementById('days').value;
+  var place=(document.querySelector('input[name="place"]:checked')||{}).value||'';
+  if(!nm||!age||!sex||!ht||!wt||!goal||!days||!place){alert('فضلاً أكمل الحقول الأساسية المعلمة بـ * (ومنها أيام التمرين ومكانه)');return;}
   var share=document.getElementById('share').checked;
   var meas=null;
   if(share){meas={chest:m('m1'),waist:m('m2'),abd:m('m3'),hip:m('m4'),thigh:m('m5'),arm:m('m6')};}
   function m(id){return document.getElementById(id).value||'';}
   var d={nm:nm,ph:document.getElementById('ph').value.trim(),age:+age,sex:sex,ht:+ht,wt:+wt,
+    days:+days,place:place,eq:place==='المنزل'?vals('eq'):[],
     goal:goal,sg:vals('sg'),sother:document.getElementById('sother').value.trim(),
     vt:vals('vt'),vother:document.getElementById('vother').value.trim(),
     ch:vals('ch'),chother:document.getElementById('chother').value.trim(),
@@ -69,7 +90,7 @@ function send(){
   } else { wa(d); }
 }
 function wa(d){
-  var L=['📋 نموذج تعريفي جديد','الاسم: '+d.nm,'الجوال: '+(d.ph||'—'),'العمر: '+d.age+' · '+d.sex,'الطول: '+d.ht+' سم · الوزن: '+d.wt+' كجم','الهدف: '+d.goal,'أهداف رياضية: '+(d.sg.join('، ')||'—')+(d.sother?' ('+d.sother+')':''),'نقص فيتامينات: '+(d.vt.join('، ')||'—')+(d.vother?' + '+d.vother:''),'أمراض مزمنة: '+(d.ch.join('، ')||'—')+(d.chother?' + '+d.chother:''),'إصابات: '+(d.inj||'—'),'عمليات: '+(d.surg||'—'),'أدوية: '+(d.meds||'—')];
+  var L=['📋 نموذج تعريفي جديد','الاسم: '+d.nm,'الجوال: '+(d.ph||'—'),'العمر: '+d.age+' · '+d.sex,'الطول: '+d.ht+' سم · الوزن: '+d.wt+' كجم','الهدف: '+d.goal,'أيام التمرين: '+d.days+' أسبوعياً · المكان: '+d.place+(d.eq&&d.eq.length?' ('+d.eq.join('، ')+')':''),'أهداف رياضية: '+(d.sg.join('، ')||'—')+(d.sother?' ('+d.sother+')':''),'نقص فيتامينات: '+(d.vt.join('، ')||'—')+(d.vother?' + '+d.vother:''),'أمراض مزمنة: '+(d.ch.join('، ')||'—')+(d.chother?' + '+d.chother:''),'إصابات: '+(d.inj||'—'),'عمليات: '+(d.surg||'—'),'أدوية: '+(d.meds||'—')];
   if(d.meas)L.push('مقاسات: صدر '+d.meas.chest+' خصر '+d.meas.waist+' بطن '+d.meas.abd+' أرداف '+d.meas.hip+' فخذ '+d.meas.thigh+' ذراع '+d.meas.arm);
   window.open('https://wa.me/?text='+encodeURIComponent(L.join('\n')),'_blank');done();
 }
