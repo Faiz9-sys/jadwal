@@ -1,0 +1,76 @@
+<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>النموذج التعريفي</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Cairo,sans-serif;background:#f4f6fb;color:#1a1a2e;padding:16px;max-width:560px;margin:auto;}h1{font-size:20px;font-weight:900;margin:14px 0 4px;}.sub{font-size:12px;color:#6b7280;margin-bottom:16px;}.card{background:#fff;border:1.5px solid #e5e9f4;border-radius:16px;padding:16px;margin-bottom:14px;}.lbl{display:block;font-size:12px;font-weight:800;margin:10px 0 5px;}.req::after{content:" *";color:#ef4444;}.in,select,textarea{width:100%;padding:11px;border:1.5px solid #e5e9f4;border-radius:10px;font-family:Cairo,sans-serif;font-size:14px;background:#fff;}textarea{min-height:64px;resize:vertical;}.row{display:flex;gap:10px;}.row>div{flex:1;}.chips{display:flex;flex-wrap:wrap;gap:7px;}.chip{display:flex;align-items:center;gap:5px;padding:8px 12px;border:1.5px solid #e5e9f4;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;background:#fff;}.chip input{accent-color:#6366f1;width:15px;height:15px;}.chip:has(input:checked){border-color:#6366f1;background:#eef2ff;}.note{font-size:10px;color:#9ca3af;margin-top:4px;line-height:1.6;}.sec{font-size:14px;font-weight:900;margin-bottom:4px;}.btn{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-family:Cairo,sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-top:6px;}.ok{display:none;text-align:center;padding:50px 20px;}.ok .e{font-size:60px;}</style></head><body>
+<div id="frm">
+  <h1>📋 النموذج التعريفي</h1>
+  <div class="sub">عبِّئ بياناتك بدقة ليصمم مدربك برنامجاً يناسبك تماماً — تصل الإجابات للمدرب مباشرة</div>
+  <div class="card"><div class="sec">👤 البيانات الأساسية</div>
+    <label class="lbl req">الاسم الكامل</label><input class="in" id="nm">
+    <label class="lbl">رقم الجوال (للتواصل)</label><input class="in" id="ph" type="tel" style="direction:ltr;">
+    <div class="row"><div><label class="lbl req">العمر</label><input class="in" id="age" type="number" min="10" max="90"></div>
+    <div><label class="lbl req">الجنس</label><select id="sex"><option value="">اختر</option><option>ذكر</option><option>أنثى</option></select></div></div>
+    <div class="row"><div><label class="lbl req">الطول (سم)</label><input class="in" id="ht" type="number" min="100" max="230"></div>
+    <div><label class="lbl req">الوزن (كجم)</label><input class="in" id="wt" type="number" min="25" max="300" step="0.1"></div></div>
+  </div>
+  <div class="card"><div class="sec">🎯 الهدف الرئيسي</div>
+    <div class="chips">
+      <label class="chip"><input type="radio" name="goal" value="تغذية ورياضة عامة">تغذية ورياضة فقط</label>
+      <label class="chip"><input type="radio" name="goal" value="علاج النحافة (زيادة الوزن)">حل مشكلة نحافة</label>
+      <label class="chip"><input type="radio" name="goal" value="إنقاص الوزن الزائد">حل مشكلة وزن زائد</label>
+    </div>
+    <label class="lbl">الأهداف الرياضية (اختر كل ما ينطبق)</label>
+    <div class="chips"><label class="chip"><input type="checkbox" name="sg" value="بناء عضل وتضخيم">بناء عضل وتضخيم</label><label class="chip"><input type="checkbox" name="sg" value="خسارة دهون">خسارة دهون</label><label class="chip"><input type="checkbox" name="sg" value="زيادة القوة">زيادة القوة</label><label class="chip"><input type="checkbox" name="sg" value="لياقة وتحمّل">لياقة وتحمّل</label><label class="chip"><input type="checkbox" name="sg" value="مرونة وحركية">مرونة وحركية</label><label class="chip"><input type="checkbox" name="sg" value="صحة عامة ونشاط">صحة عامة ونشاط</label><label class="chip"><input type="checkbox" name="sg" value="شد الجسم وتحسين القوام">شد الجسم وتحسين القوام</label><label class="chip"><input type="checkbox" name="sg" value="إعادة تأهيل بعد إصابة">إعادة تأهيل بعد إصابة</label><label class="chip"><input type="checkbox" name="sg" value="تحسين أداء رياضة معينة">تحسين أداء رياضة معينة</label></div>
+    <input class="in" id="sother" placeholder="إن اخترت رياضة معينة: ما هي؟" style="margin-top:8px;">
+  </div>
+  <div class="card"><div class="sec">💊 الصحة</div>
+    <label class="lbl">نقص فيتامينات أو معادن (حسب آخر تحليل)</label>
+    <div class="chips"><label class="chip"><input type="checkbox" name="vt" value="فيتامين د">فيتامين د</label><label class="chip"><input type="checkbox" name="vt" value="فيتامين ب12">فيتامين ب12</label><label class="chip"><input type="checkbox" name="vt" value="حديد">حديد</label><label class="chip"><input type="checkbox" name="vt" value="كالسيوم">كالسيوم</label><label class="chip"><input type="checkbox" name="vt" value="مغنيسيوم">مغنيسيوم</label><label class="chip"><input type="checkbox" name="vt" value="زنك">زنك</label><label class="chip"><input type="checkbox" name="vt" value="لا يوجد / لا أعلم">لا يوجد / لا أعلم</label></div>
+    <input class="in" id="vother" placeholder="نقص آخر غير مذكور..." style="margin-top:8px;">
+    <label class="lbl">أمراض مزمنة</label>
+    <div class="chips"><label class="chip"><input type="checkbox" name="ch" value="سكري">سكري</label><label class="chip"><input type="checkbox" name="ch" value="ضغط الدم">ضغط الدم</label><label class="chip"><input type="checkbox" name="ch" value="ربو">ربو</label><label class="chip"><input type="checkbox" name="ch" value="الغدة الدرقية">الغدة الدرقية</label><label class="chip"><input type="checkbox" name="ch" value="القولون العصبي">القولون العصبي</label><label class="chip"><input type="checkbox" name="ch" value="لا يوجد">لا يوجد</label></div>
+    <textarea id="chother" placeholder="أمراض أخرى أو تفاصيل..."></textarea>
+    <label class="lbl">إصابات سابقة (مفاصل، عضلات، ظهر...)</label><textarea id="inj" placeholder="مثال: إصابة ركبة يمنى قبل سنتين — لا يوجد: اتركه فارغاً"></textarea>
+    <label class="lbl">عمليات جراحية سابقة</label><textarea id="surg"></textarea>
+    <label class="lbl">أدوية تستخدمها حالياً</label><textarea id="meds"></textarea>
+  </div>
+  <div class="card"><div class="sec">📏 مقاسات الجسم</div>
+    <div class="note">اختياري — لست ملزماً بمشاركتها مع المدرب، لكن <b>ننصحك بشدة بقياسها وتسجيلها والاحتفاظ بها لديك</b> لمتابعة تقدمك حتى لو لم ترغب بمشاركتها.</div>
+    <div class="row" style="margin-top:8px;"><div><label class="lbl">الصدر (سم)</label><input class="in m" id="m1" type="number"></div><div><label class="lbl">الخصر (سم)</label><input class="in m" id="m2" type="number"></div></div>
+    <div class="row"><div><label class="lbl">البطن (سم)</label><input class="in m" id="m3" type="number"></div><div><label class="lbl">الأرداف (سم)</label><input class="in m" id="m4" type="number"></div></div>
+    <div class="row"><div><label class="lbl">الفخذ (سم)</label><input class="in m" id="m5" type="number"></div><div><label class="lbl">الذراع (سم)</label><input class="in m" id="m6" type="number"></div></div>
+    <label class="chip" style="margin-top:10px;"><input type="checkbox" id="share" checked>أوافق على مشاركة المقاسات مع المدرب</label>
+  </div>
+  <button class="btn" onclick="send()">📨 إرسال النموذج للمدرب</button>
+  <div class="note" style="text-align:center;margin:10px 0 30px;">بياناتك تُرسل لمدربك فقط</div>
+</div>
+<div class="ok" id="ok"><div class="e">✅</div><h1>وصل نموذجك للمدرب!</h1><div class="sub">سيتواصل معك قريباً لبدء برنامجك 💪</div></div><script>
+var FB=null;
+function vals(n){return Array.prototype.map.call(document.querySelectorAll('input[name="'+n+'"]:checked'),function(c){return c.value;});}
+function send(){
+  var nm=document.getElementById('nm').value.trim();
+  var age=document.getElementById('age').value,sex=document.getElementById('sex').value;
+  var ht=document.getElementById('ht').value,wt=document.getElementById('wt').value;
+  var goal=(document.querySelector('input[name="goal"]:checked')||{}).value||'';
+  if(!nm||!age||!sex||!ht||!wt||!goal){alert('فضلاً أكمل الحقول الأساسية المعلمة بـ * واختر الهدف الرئيسي');return;}
+  var share=document.getElementById('share').checked;
+  var meas=null;
+  if(share){meas={chest:m('m1'),waist:m('m2'),abd:m('m3'),hip:m('m4'),thigh:m('m5'),arm:m('m6')};}
+  function m(id){return document.getElementById(id).value||'';}
+  var d={nm:nm,ph:document.getElementById('ph').value.trim(),age:+age,sex:sex,ht:+ht,wt:+wt,
+    goal:goal,sg:vals('sg'),sother:document.getElementById('sother').value.trim(),
+    vt:vals('vt'),vother:document.getElementById('vother').value.trim(),
+    ch:vals('ch'),chother:document.getElementById('chother').value.trim(),
+    inj:document.getElementById('inj').value.trim(),surg:document.getElementById('surg').value.trim(),
+    meds:document.getElementById('meds').value.trim(),meas:meas,ts:Date.now()};
+  if(FB){
+    var cid='f'+Date.now()+Math.random().toString(36).slice(2,7);
+    var url='https://firestore.googleapis.com/v1/projects/'+FB.p+'/databases/(default)/documents/trainers/'+FB.u+'/intake/'+cid+'?key='+FB.k;
+    fetch(url,{method:'PATCH',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({fields:{data:{stringValue:JSON.stringify(d)},ts:{integerValue:String(d.ts)}}})})
+      .then(function(r){if(r.ok){done();}else{wa(d);}}).catch(function(){wa(d);});
+  } else { wa(d); }
+}
+function wa(d){
+  var L=['📋 نموذج تعريفي جديد','الاسم: '+d.nm,'الجوال: '+(d.ph||'—'),'العمر: '+d.age+' · '+d.sex,'الطول: '+d.ht+' سم · الوزن: '+d.wt+' كجم','الهدف: '+d.goal,'أهداف رياضية: '+(d.sg.join('، ')||'—')+(d.sother?' ('+d.sother+')':''),'نقص فيتامينات: '+(d.vt.join('، ')||'—')+(d.vother?' + '+d.vother:''),'أمراض مزمنة: '+(d.ch.join('، ')||'—')+(d.chother?' + '+d.chother:''),'إصابات: '+(d.inj||'—'),'عمليات: '+(d.surg||'—'),'أدوية: '+(d.meds||'—')];
+  if(d.meas)L.push('مقاسات: صدر '+d.meas.chest+' خصر '+d.meas.waist+' بطن '+d.meas.abd+' أرداف '+d.meas.hip+' فخذ '+d.meas.thigh+' ذراع '+d.meas.arm);
+  window.open('https://wa.me/?text='+encodeURIComponent(L.join('\n')),'_blank');done();
+}
+function done(){document.getElementById('frm').style.display='none';document.getElementById('ok').style.display='block';window.scrollTo(0,0);}<\/script></body></html>
