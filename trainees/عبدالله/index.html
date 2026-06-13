@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>برنامج عبدالله</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&family=Tajawal:wght@700;800;900&display=swap" rel="stylesheet">
+<style>*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+:root{--ac:#3b6db5;--dg:linear-gradient(135deg,#3b6db5,#5b8de0);--bd:#dde6f0;}
+body.dark{background:#0f1115!important;color:#e8ebf4;}
+body.dark .card{background:#161a23;border-color:#2a3040;box-shadow:none;}
+body.dark [style*="background:#fff"]{background:#161a23!important;}
+body.dark [style*="background:#f8faff"]{background:#1b2030!important;}
+body.dark [style*="background:#f0f2f8"]{background:#202637!important;}
+body.dark [style*="background:#eef2ff"]{background:#232a44!important;}
+body.dark [style*="color:#1a1a2e"]{color:#e8ebf4!important;}
+body.dark [style*="color:#6b7280"]{color:#9aa3b8!important;}
+body.dark .tu0,body.dark .tu3{color:#e8ebf4;}
+body.dark .tu1,body.dark .tu2,body.dark .tu4{color:#9aa3b8;}
+body.dark .ti,body.dark input,body.dark select{background:#161a23;color:#e8ebf4;border-color:#2a3040;}
+body.dark .ex-card{background:#161a23!important;border-color:#2a3040!important;}
+body.dark .ex-name,body.dark .card-title,body.dark .stitle,body.dark .ex-stat-val,body.dark .ct-val,body.dark .macro-val{color:#e8ebf4!important;}
+body.dark .ex-sub,body.dark .ex-stat-lbl,body.dark .ex-note,body.dark .meal-tag,body.dark .ct-lbl,body.dark .macro-lbl{color:#9aa3b8!important;}
+body.dark .ex-stat,body.dark .recipe-macros,body.dark .ct-box,body.dark .macro-card,body.dark .meal-row{background:#202637!important;border-color:#2a3040!important;}
+body.dark .food-item{background:#161a23!important;border-color:#2a3040!important;}
+body.dark .food-item.sel{background:#232a44!important;}
+body.dark .recipe-card{background:#161a23!important;border-color:#2a3040!important;}
+body.dark .fm-box{background:#161a23!important;}
+body.dark .filter-btn{background:#161a23!important;color:#9aa3b8!important;border-color:#2a3040!important;}
+body.dark .filter-btn.sel,body.dark .filter-btn.act{background:var(--dg)!important;color:#fff!important;border-color:transparent!important;}
+body.dark .tf:not(.act){background:#161a23!important;color:#9aa3b8!important;border-color:#2a3040!important;}
+.f1{flex:1;}.mb14{margin-bottom:14px;}.mb12{margin-bottom:12px;}.t10g{font-size:10px;color:#6b7280;}.t9g{font-size:9px;color:#6b7280;}
+.tu0{font-size:12px;font-weight:800;color:#1a1a2e;}
+.tu1{font-size:10px;color:#6b7280;}
+.tu2{font-size:9px;color:#6b7280;}
+.tu3{font-size:13px;font-weight:900;color:#1a1a2e;}
+.tu4{font-size:11px;color:#6b7280;font-weight:700;}
+html{scroll-behavior:smooth;}
+body{font-family:Cairo,sans-serif;background:#f0f4f8;direction:rtl;min-height:100vh;padding-bottom:80px;-webkit-font-smoothing:antialiased;}
+.hdr{background:linear-gradient(135deg,#3b6db5,#5b8de0);padding:max(16px,env(safe-area-inset-top)) 16px 20px;position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.15);}
+.hdr-top{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+.hdr-av{width:52px;height:52px;border-radius:16px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;border:2px solid rgba(255,255,255,.3);}
+.hdr-info{flex:1;}
+.hdr-name{font-size:20px;font-weight:900;color:#fff;font-family:Tajawal,sans-serif;line-height:1.2;}
+.hdr-meta{font-size:12px;color:rgba(255,255,255,.75);margin-top:3px;font-weight:600;}
+.dtabs{display:flex;gap:6px;overflow-x:auto;padding:2px 0 2px;-webkit-overflow-scrolling:touch;scrollbar-width:none;}
+.dtabs::-webkit-scrollbar{display:none;}
+.dtab{flex-shrink:0;padding:5px 11px;border-radius:18px;border:1.5px solid rgba(255,255,255,.3);font-size:11px;font-weight:800;cursor:pointer;touch-action:manipulation;font-family:Cairo,sans-serif;white-space:nowrap;color:rgba(255,255,255,.8);background:rgba(255,255,255,.1);transition:all .2s;}
+.dtab.act{background:#fff;color:#1a1a2e;border-color:transparent;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.content{padding:16px;}
+.sec{display:none;}
+.sec.act{display:block!important;}
+.stitle{font-size:17px;font-weight:900;color:#3b6db5;margin-bottom:16px;font-family:Tajawal,sans-serif;display:flex;align-items:center;gap:8px;}
+.stitle::before{content:'';width:4px;height:20px;background:linear-gradient(135deg,#3b6db5,#5b8de0);border-radius:4px;display:inline-block;}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;}
+.ex-card{background:#fff;border-radius:16px;padding:14px;position:relative;box-shadow:0 2px 12px rgba(0,0,0,.06);border:1.5px solid #dde6f0;transition:transform .15s,box-shadow .15s;}
+.ex-card:active{transform:scale(.98);box-shadow:0 1px 6px rgba(0,0,0,.08);}
+.ex-card.stretch{background:linear-gradient(135deg,#f0fff8,#fff);border-color:#a7f3d0;}
+.ex-num{position:absolute;top:10px;left:10px;width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,#3b6db5,#5b8de0);color:#fff;font-size:10px;font-weight:900;display:flex;align-items:center;justify-content:center;}
+.ex-emoji{font-size:28px;margin:6px 0 8px;display:block;}
+.ex-name{font-size:13px;font-weight:900;color:#111;margin-bottom:4px;line-height:1.3;}
+.ex-sub{font-size:10px;color:#6b7280;direction:ltr;margin-bottom:10px;}
+.ex-stats{display:flex;gap:6px;}
+.ex-stat{flex:1;background:#f8faff;border-radius:8px;padding:6px 4px;text-align:center;border:1px solid #dde6f0;}
+.ex-stat-val{font-size:15px;font-weight:900;color:#3b6db5;display:block;font-family:Tajawal,sans-serif;}
+.ex-stat-lbl{font-size:8px;color:#6b7280;font-weight:700;}
+.ex-note{font-size:10px;color:#374151;background:#f8faff;border-radius:8px;padding:6px 8px;margin-top:8px;border:1px solid #dde6f0;}
+.ex-video{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;border-radius:20px;color:#fff;font-size:11px;font-weight:800;text-decoration:none;margin-top:8px;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+.stretch-tag{display:inline-flex;align-items:center;gap:4px;font-size:9px;background:#d1fae5;color:#059669;padding:2px 8px;border-radius:20px;font-weight:700;margin-bottom:6px;}
+.bnav{position:fixed;bottom:0;right:0;left:0;background:#1a1d2e;z-index:200;padding-bottom:env(safe-area-inset-bottom);border-top:1px solid rgba(255,255,255,.08);}
+.bnav-inner{display:flex;justify-content:space-around;padding:6px 0;}
+.nb{flex:1;padding:8px 4px 6px;border:none;background:transparent;color:#6b7280;font-size:9px;font-weight:700;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;touch-action:manipulation;transition:color .2s;min-width:0;}
+.nb .ic{font-size:20px;line-height:1;pointer-events:none;transition:transform .2s;}
+.nb.act{color:#3b6db5;}
+.nb.act .ic{transform:scale(1.1);}
+.nb-dot{width:4px;height:4px;border-radius:50%;background:transparent;margin:-2px auto 0;}
+.nb.act .nb-dot{background:#3b6db5;}
+.card{background:#fff;border-radius:16px;border:1.5px solid #dde6f0;padding:16px;margin-bottom:14px;box-shadow:0 2px 12px rgba(0,0,0,.04);}
+.card-title{font-size:14px;font-weight:900;color:#1a1a2e;margin-bottom:12px;}
+.macro-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
+.macro-card{border-radius:12px;padding:10px;text-align:center;}
+.macro-val{font-size:19px;font-weight:900;font-family:Tajawal,sans-serif;display:block;}
+.macro-lbl{font-size:9px;color:#6b7280;font-weight:700;margin-top:2px;}
+.meal-row{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #dde6f0;}
+.meal-num{width:30px;height:30px;border-radius:50%;color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.meal-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px;}
+.meal-tag{padding:2px 8px;border-radius:20px;font-size:9px;font-weight:700;}
+.food-item{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;border:1.5px solid #dde6f0;background:#fff;cursor:pointer;touch-action:manipulation;margin-bottom:6px;transition:border-color .15s,background .15s;}
+.food-item.sel{border-color:#3b6db5;background:#eef2ff;}
+.prog-bar-wrap{background:#f0f2f8;border-radius:20px;height:12px;overflow:hidden;margin:6px 0;}
+.prog-bar-fill{height:100%;border-radius:20px;transition:width .6s ease;}
+.ct-box{border-radius:14px;padding:14px;text-align:center;}
+.ct-val{font-size:24px;font-weight:900;font-family:Tajawal,sans-serif;display:block;margin-bottom:2px;}
+.ct-lbl{font-size:10px;color:#6b7280;font-weight:700;}
+.ti{width:100%;padding:10px 12px;font-size:16px;border-radius:10px;border:1.5px solid #dde6f0;background:#fff;font-size:14px;font-weight:700;color:#000;font-family:Cairo,sans-serif;-webkit-appearance:none;touch-action:manipulation;transition:border-color .2s;}
+.ti:focus{outline:none;border-color:#3b6db5;}
+.sp{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,#3b6db5,#5b8de0);color:#fff;font-size:14px;font-weight:800;cursor:pointer;font-family:Cairo,sans-serif;margin-top:12px;touch-action:manipulation;box-shadow:0 4px 12px rgba(0,0,0,.15);}
+.filter-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:14px;scrollbar-width:none;}
+.filter-row::-webkit-scrollbar{display:none;}
+.filter-btn{flex-shrink:0;padding:7px 14px;border-radius:20px;border:1.5px solid #dde6f0;font-size:11px;font-weight:700;cursor:pointer;background:#fff;color:#6b7280;touch-action:manipulation;font-family:Cairo,sans-serif;min-height:36px;transition:all .15s;}
+.filter-btn.act{color:#fff;border-color:transparent;box-shadow:0 2px 8px rgba(0,0,0,.12);}
+.recipe-card{background:#fff;border-radius:14px;border:1.5px solid #dde6f0;margin-bottom:12px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+.recipe-header{padding:12px;display:flex;align-items:center;gap:10px;}
+.recipe-macros{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px 12px;background:#f8faff;}
+.wa-btn{width:100%;padding:14px;border-radius:12px;border:none;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;font-size:14px;font-weight:800;cursor:pointer;font-family:Cairo,sans-serif;margin-top:10px;touch-action:manipulation;display:none;align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 12px rgba(37,211,102,.3);text-decoration:none;}
+.fm-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:3000;align-items:flex-end;}
+.fm-modal.open{display:flex;}
+.fm-box{background:#fff;width:100%;max-height:88vh;border-radius:20px 20px 0 0;overflow:hidden;display:flex;flex-direction:column;}
+.fm-header{padding:16px;border-bottom:1px solid #dde6f0;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.fm-body{flex:1;overflow-y:auto;padding:14px;}
+.fm-close{border:none;background:#f0f2f8;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;}</style>
+</head><body>
+<header class="hdr">
+      <div class="hdr-top">
+        <div class="hdr-av">👨</div>
+        <div class="hdr-info">
+          <div class="hdr-name">عبدالله</div>
+          <div class="hdr-meta">مبتدئ · أوزان · 3 أيام</div>
+        </div>
+        <a id="fbBtn" target="_blank" title="أرسل ملاحظة للمدرب"
+          href="https://wa.me/966530579387?text=%F0%9F%93%9D%20%D9%85%D9%84%D8%A7%D8%AD%D8%B8%D8%AA%D9%8A%20%D8%B9%D9%84%D9%89%20%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%20%D8%A7%D9%84%D8%AC%D8%AF%D9%88%D9%84%3A%0A"
+          style="width:38px;height:38px;border-radius:12px;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);font-size:16px;flex-shrink:0;display:flex;align-items:center;justify-content:center;text-decoration:none;">💬</a>
+        <button id="tmBtn" onclick="tmCycle()" title="المظهر" style="width:38px;height:38px;border-radius:12px;border:2px solid rgba(255,255,255,.3);background:rgba(255,255,255,.15);font-size:17px;cursor:pointer;flex-shrink:0;touch-action:manipulation;">🌓</button>
+      </div>
+      <div class="dtabs" id="dayTabsHdr"><button id="dtb0" onclick="showDay(0)" style="flex-shrink:0;padding:8px 16px;border-radius:50px;min-height:40px;border:2px solid transparent;font-size:12px;font-weight:800;cursor:pointer;touch-action:manipulation;font-family:Cairo,sans-serif;white-space:nowrap;background:linear-gradient(135deg,#3b6db5,#5b8de0);color:#fff;">1. 💪 سحب</button><button id="dtb1" onclick="showDay(1)" style="flex-shrink:0;padding:8px 16px;border-radius:50px;min-height:40px;border:2px solid #dde6f0;font-size:12px;font-weight:800;cursor:pointer;touch-action:manipulation;font-family:Cairo,sans-serif;white-space:nowrap;background:#fff;color:#1a1a2e;">2. 💪 سحب</button><button id="dtb2" onclick="showDay(2)" style="flex-shrink:0;padding:8px 16px;border-radius:50px;min-height:40px;border:2px solid #dde6f0;font-size:12px;font-weight:800;cursor:pointer;touch-action:manipulation;font-family:Cairo,sans-serif;white-space:nowrap;background:#fff;color:#1a1a2e;">3. 💪 يوم 3</button><button id="dtb3" onclick="showDay(3)" style="flex-shrink:0;padding:8px 16px;border-radius:50px;min-height:40px;border:2px solid #dde6f0;font-size:12px;font-weight:800;cursor:pointer;touch-action:manipulation;font-family:Cairo,sans-serif;white-space:nowrap;background:#fff;color:#1a1a2e;">4. 💪 يوم 4</button><button id="dtb4" onclick="showDay(4)" style="flex-shrink:0;padding:8px 16px;border-radius:50px;min-height:40px;border:2px solid #dde6f0;font-size:12px;font-weight:800;cursor:pointer;touch-action:manipulation;font-family:Cairo,sans-serif;white-space:nowrap;background:#fff;color:#1a1a2e;">5. 💪 يوم 5</button></div>
+    </header>
+<div id="s0" class="sec act" style="display:block">
+      <div class="content">
+        <div class="stitle">📋 جدول التمارين</div>
+        <div id="ds0" style="display:block;">
+        <div class="ex-grid"><div class="ex-card "><div class="ex-num">1</div><span class="ex-emoji">💪</span><div class="ex-name">ضغط الصدر بالدمبل المستوي</div><div class="ex-sub">Flat Dumbbell Press</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر المائل بالدمبل</span><a href="https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الضغط على جهاز الصدر</span><a href="https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">تفتيح بالكيبل (كروس أوفر)</span><a href="https://www.youtube.com/results?search_query=Cable%20Crossover%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> الكوع 45 درجة، تثبيت القدمين بالأرض، النزول ببطء حتى مستوى الصدر ثم الدفع دون قفل الكوع.</div><div style="text-align:left;margin-top:4px;"><button data-rej="ضغط الصدر بالدمبل المستوي" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div><img src="https://img.youtube.com/vi/y19R6ag0GVE/mqdefault.jpg" loading="lazy" alt="" style="display:block;width:100%;max-height:140px;object-fit:cover;border-radius:12px;margin-top:10px;"><a href="https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK" target="_blank" rel="noopener"
+          style="display:flex;align-items:center;justify-content:center;gap:8px;
+          margin-top:10px;padding:11px 16px;border-radius:12px;
+          border:2px solid #3b6db5;
+          background:transparent;color:#3b6db5;
+          font-size:13px;font-weight:800;font-family:Cairo,sans-serif;
+          text-decoration:none;touch-action:manipulation;-webkit-tap-highlight-color:transparent;">
+          <span style="font-size:16px;">▶</span>
+          <span>مشاهدة الفيديو</span>
+        </a></div><div class="ex-card "><div class="ex-num">2</div><span class="ex-emoji">💪</span><div class="ex-name">ضغط الصدر المائل بالدمبل</div><div class="ex-sub">Incline Dumbbell Press</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر بالدمبل المستوي</span><a href="https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الضغط على جهاز الصدر</span><a href="https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">تفتيح بالكيبل (كروس أوفر)</span><a href="https://www.youtube.com/results?search_query=Cable%20Crossover%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> زاوية المقعد 30-45، استهداف أعلى الصدر، إنزال متحكم وكتف مسحوب للخلف.</div><div style="text-align:left;margin-top:4px;"><button data-rej="ضغط الصدر المائل بالدمبل" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">3</div><span class="ex-emoji">💪</span><div class="ex-name">الضغط على جهاز الصدر</div><div class="ex-sub">Chest Press Machine</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر بالدمبل المستوي</span><a href="https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر المائل بالدمبل</span><a href="https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">تفتيح بالكيبل (كروس أوفر)</span><a href="https://www.youtube.com/results?search_query=Cable%20Crossover%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> الظهر ملاصق للمسند، الدفع للأمام دون قفل الكوع، عودة بطيئة مع مقاومة.</div><div style="text-align:left;margin-top:4px;"><button data-rej="الضغط على جهاز الصدر" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">4</div><span class="ex-emoji">💪</span><div class="ex-name">تفتيح بالكيبل (كروس أوفر)</div><div class="ex-sub">Cable Crossover</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر بالدمبل المستوي</span><a href="https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر المائل بالدمبل</span><a href="https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الضغط على جهاز الصدر</span><a href="https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> خطوة للأمام وانحناء خفيف بالكوع، تقاطع اليدين أمام الصدر مع عصرة وعودة بطيئة.</div><div style="text-align:left;margin-top:4px;"><button data-rej="تفتيح بالكيبل (كروس أوفر)" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">5</div><span class="ex-emoji">💪</span><div class="ex-name">تفتيح مائل بالدمبل</div><div class="ex-sub">Incline Dumbbell Fly</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر بالدمبل المستوي</span><a href="https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر المائل بالدمبل</span><a href="https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الضغط على جهاز الصدر</span><a href="https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> انحناء ثابت بالكوع، فتح الذراعين حتى مستوى الصدر ثم تقريب بعصر، تجنّب النزول الزائد.</div><div style="text-align:left;margin-top:4px;"><button data-rej="تفتيح مائل بالدمبل" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">6</div><span class="ex-emoji">💪</span><div class="ex-name">التفتيح على جهاز البيك-ديك</div><div class="ex-sub">Pec Deck Machine</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر بالدمبل المستوي</span><a href="https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر المائل بالدمبل</span><a href="https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الضغط على جهاز الصدر</span><a href="https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> الظهر ملاصق، تقريب الذراعين أمام الصدر بعصرة، عودة بطيئة مع الحفاظ على التوتر.</div><div style="text-align:left;margin-top:4px;"><button data-rej="التفتيح على جهاز البيك-ديك" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">7</div><span class="ex-emoji">💪</span><div class="ex-name">الضغط على المتوازي (للصدر)</div><div class="ex-sub">Chest Dips</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر بالدمبل المستوي</span><a href="https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر المائل بالدمبل</span><a href="https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الضغط على جهاز الصدر</span><a href="https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> ميل الجذع للأمام لاستهداف الصدر، النزول حتى يوازي الكتف الكوع، تجنّب الهبوط الزائد.</div><div style="text-align:left;margin-top:4px;"><button data-rej="الضغط على المتوازي (للصدر)" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">8</div><span class="ex-emoji">💪</span><div class="ex-name">الضغط المنخفض على الجهاز</div><div class="ex-sub">Decline Chest Press</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر بالدمبل المستوي</span><a href="https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">ضغط الصدر المائل بالدمبل</span><a href="https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الضغط على جهاز الصدر</span><a href="https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> استهداف أسفل الصدر، الدفع دون قفل الكوع، عودة متحكّمة.</div><div style="text-align:left;margin-top:4px;"><button data-rej="الضغط المنخفض على الجهاز" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div></div>
+        
+      </div><div id="ds1" style="display:none;">
+        <div class="ex-grid"><div class="ex-card "><div class="ex-num">1</div><span class="ex-emoji">🔙</span><div class="ex-name">سحب البار للذقن (Lat Pulldown)</div><div class="ex-sub">Lat Pulldown</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">السحب الأرضي بالكيبل</span><a href="https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">تجديف بالدمبل بذراع واحدة</span><a href="https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الرفعة المميتة الرومانية</span><a href="https://www.youtube.com/results?search_query=Romanian%20Deadlift%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> قبضة أعرض من الكتف، سحب البار لأعلى الصدر مع تقريب الكوع، عودة كاملة لإطالة الظهر.</div><div style="text-align:left;margin-top:4px;"><button data-rej="سحب البار للذقن (Lat Pulldown)" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">2</div><span class="ex-emoji">🔙</span><div class="ex-name">السحب الأرضي بالكيبل</div><div class="ex-sub">Seated Cable Row</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">سحب البار للذقن (Lat Pulldown)</span><a href="https://www.youtube.com/results?search_query=Lat%20Pulldown%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">تجديف بالدمبل بذراع واحدة</span><a href="https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الرفعة المميتة الرومانية</span><a href="https://www.youtube.com/results?search_query=Romanian%20Deadlift%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> الظهر مستقيم والصدر مرفوع، السحب من المرفقين وعصر لوحي الكتف، تجنّب أرجحة الجذع.</div><div style="text-align:left;margin-top:4px;"><button data-rej="السحب الأرضي بالكيبل" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">3</div><span class="ex-emoji">🔙</span><div class="ex-name">تجديف بالدمبل بذراع واحدة</div><div class="ex-sub">One-Arm Dumbbell Row</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">سحب البار للذقن (Lat Pulldown)</span><a href="https://www.youtube.com/results?search_query=Lat%20Pulldown%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">السحب الأرضي بالكيبل</span><a href="https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الرفعة المميتة الرومانية</span><a href="https://www.youtube.com/results?search_query=Romanian%20Deadlift%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> ركبة ويد على المقعد، الظهر مستوٍ، سحب الدمبل نحو الورك دون لف الجذع.</div><div style="text-align:left;margin-top:4px;"><button data-rej="تجديف بالدمبل بذراع واحدة" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">4</div><span class="ex-emoji">🔙</span><div class="ex-name">الرفعة المميتة الرومانية</div><div class="ex-sub">Romanian Deadlift</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">سحب البار للذقن (Lat Pulldown)</span><a href="https://www.youtube.com/results?search_query=Lat%20Pulldown%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">السحب الأرضي بالكيبل</span><a href="https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">تجديف بالدمبل بذراع واحدة</span><a href="https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> ركبة مرنة قليلاً، دفع الورك للخلف بظهر مستقيم، البار/الدمبل قريب من الجسم.</div><div style="text-align:left;margin-top:4px;"><button data-rej="الرفعة المميتة الرومانية" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">5</div><span class="ex-emoji">🔙</span><div class="ex-name">التجديف بالكيبل بقبضة ضيقة</div><div class="ex-sub">Close-Grip Cable Row</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">سحب البار للذقن (Lat Pulldown)</span><a href="https://www.youtube.com/results?search_query=Lat%20Pulldown%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">السحب الأرضي بالكيبل</span><a href="https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">تجديف بالدمبل بذراع واحدة</span><a href="https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> قبضة ضيقة، السحب للبطن مع عصر الظهر، الجذع ثابت دون أرجحة.</div><div style="text-align:left;margin-top:4px;"><button data-rej="التجديف بالكيبل بقبضة ضيقة" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">6</div><span class="ex-emoji">🔙</span><div class="ex-name">سحب لأسفل بذراع مستقيمة</div><div class="ex-sub">Straight-Arm Pulldown</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">سحب البار للذقن (Lat Pulldown)</span><a href="https://www.youtube.com/results?search_query=Lat%20Pulldown%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">السحب الأرضي بالكيبل</span><a href="https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">تجديف بالدمبل بذراع واحدة</span><a href="https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> الذراعان ممدودتان، السحب للأسفل من الكتف نحو الفخذ بعصر اللاتس، حركة من الكتف.</div><div style="text-align:left;margin-top:4px;"><button data-rej="سحب لأسفل بذراع مستقيمة" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">7</div><span class="ex-emoji">🔙</span><div class="ex-name">سحب الوجه بالكيبل</div><div class="ex-sub">Face Pull</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">سحب البار للذقن (Lat Pulldown)</span><a href="https://www.youtube.com/results?search_query=Lat%20Pulldown%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">السحب الأرضي بالكيبل</span><a href="https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">تجديف بالدمبل بذراع واحدة</span><a href="https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> سحب الحبل نحو الوجه مع فتح المرفقين، عصر الكتف الخلفي، ممتاز لصحة الكتف والوضعية.</div><div style="text-align:left;margin-top:4px;"><button data-rej="سحب الوجه بالكيبل" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">8</div><span class="ex-emoji">🔙</span><div class="ex-name">العقلة</div><div class="ex-sub">Pull-Up</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">سحب البار للذقن (Lat Pulldown)</span><a href="https://www.youtube.com/results?search_query=Lat%20Pulldown%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">السحب الأرضي بالكيبل</span><a href="https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">تجديف بالدمبل بذراع واحدة</span><a href="https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> قبضة أعرض من الكتف، السحب حتى تتجاوز الذقن البار، نزول كامل بطيء وشد لوحي الكتف.</div><div style="text-align:left;margin-top:4px;"><button data-rej="العقلة" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div></div>
+        
+      </div><div id="ds2" style="display:none;">
+        <div class="ex-grid"><div class="ex-card "><div class="ex-num">1</div><span class="ex-emoji">💪</span><div class="ex-name">الباي بالدمبل</div><div class="ex-sub">Dumbbell Biceps Curl</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><div style="margin-top:8px;text-align:center;background:#3b6db51a;border:1.5px solid #3b6db5;border-radius:10px;padding:7px;font-size:13px;font-weight:900;color:#3b6db5;">🏋️ الوزن المقترح: 20 كجم</div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الباي بالبار / EZ بار</span><a href="https://www.youtube.com/results?search_query=EZ-Bar%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الباي المطرقي</span><a href="https://www.youtube.com/results?search_query=Hammer%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">باي التركيز</span><a href="https://www.youtube.com/results?search_query=Concentration%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> الكوع ثابت بجانب الجسم، الرفع بعصر العضلة، نزول كامل بطيء دون تأرجح.</div><div style="text-align:left;margin-top:4px;"><button data-rej="الباي بالدمبل" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">2</div><span class="ex-emoji">💪</span><div class="ex-name">الباي بالبار / EZ بار</div><div class="ex-sub">EZ-Bar Curl</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الباي بالدمبل</span><a href="https://www.youtube.com/results?search_query=Dumbbell%20Biceps%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الباي المطرقي</span><a href="https://www.youtube.com/results?search_query=Hammer%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">باي التركيز</span><a href="https://www.youtube.com/results?search_query=Concentration%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> الكوع ثابت، رفع البار بعصر العضلة، الجذع ثابت دون أرجحة.</div><div style="text-align:left;margin-top:4px;"><button data-rej="الباي بالبار / EZ بار" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">3</div><span class="ex-emoji">💪</span><div class="ex-name">الباي المطرقي</div><div class="ex-sub">Hammer Curl</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الباي بالدمبل</span><a href="https://www.youtube.com/results?search_query=Dumbbell%20Biceps%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الباي بالبار / EZ بار</span><a href="https://www.youtube.com/results?search_query=EZ-Bar%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">باي التركيز</span><a href="https://www.youtube.com/results?search_query=Concentration%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> الكفّان متقابلان (قبضة محايدة)، الرفع بثبات، يستهدف الباي والساعد.</div><div style="text-align:left;margin-top:4px;"><button data-rej="الباي المطرقي" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div><div class="ex-card "><div class="ex-num">4</div><span class="ex-emoji">💪</span><div class="ex-name">باي التركيز</div><div class="ex-sub">Concentration Curl</div><div class="ex-stats">
+        <div class="ex-stat"><span class="ex-stat-val">3</span><span class="ex-stat-lbl">جولات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">10</span><span class="ex-stat-lbl">عدات</span></div>
+        <div class="ex-stat"><span class="ex-stat-val">60ث</span><span class="ex-stat-lbl">راحة</span></div>
+      </div><details style="margin-top:8px;"><summary style="cursor:pointer;font-size:11px;font-weight:800;color:#3b6db5;">🔄 بدائل إن كان الجهاز مشغولاً (3)</summary><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الباي بالدمبل</span><a href="https://www.youtube.com/results?search_query=Dumbbell%20Biceps%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الباي بالبار / EZ بار</span><a href="https://www.youtube.com/results?search_query=EZ-Bar%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 8px;background:rgba(0,0,0,.04);border-radius:8px;margin-top:5px;"><span style="font-size:11px;font-weight:700;">الباي المطرقي</span><a href="https://www.youtube.com/results?search_query=Hammer%20Curl%20form" target="_blank" style="font-size:10px;color:#3b6db5;font-weight:800;text-decoration:none;">▶ فيديو</a></div></details><div style="margin-top:8px;padding:8px 10px;background:rgba(99,102,241,.08);border-radius:10px;font-size:11px;font-weight:700;line-height:1.7;">📋 <b>طريقة الأداء:</b> الكوع مستند على الفخذ، رفع كامل مع عصر بالأعلى، عزل تام للباي.</div><div style="text-align:left;margin-top:4px;"><button data-rej="باي التركيز" style="background:none;border:none;color:#ef4444;font-size:10px;font-weight:800;font-family:Cairo,sans-serif;cursor:pointer;padding:4px;opacity:.8;">🚫 طلب تغيير التمرين</button></div></div></div>
+        
+      </div><div id="ds3" style="display:none;">
+        <div class="ex-grid"></div>
+        
+      </div><div id="ds4" style="display:none;">
+        <div class="ex-grid"></div>
+        
+      </div>
+      </div>
+    </div>
+
+
+<div id="s6" class="sec"><div class="content"><div class="stitle">🔥 متتبع السعرات</div><div id="ctSec"></div></div></div>
+<div id="s2" class="sec"><div class="content">
+      <div class="stitle">🔄 استبدال الأطعمة</div>
+      <div class="card">
+        <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap;">
+          <input id="si" class="ti" placeholder="🔍 ابحث عن صنف..." oninput="rF()" style="flex:1;min-width:140px;">
+          <select id="sc" class="ti" onchange="rF()" style="max-width:130px;">
+            <option value="">الكل</option>
+            <option value="بروتين">🥩 بروتين</option>
+            <option value="كارب">🍚 كارب</option>
+            <option value="خضار">🥦 خضار</option>
+            <option value="دهون">🥑 دهون</option>
+            <option value="فواكه">🍌 فواكه</option>
+            <option value="ألبان">🥛 ألبان</option>
+          </select>
+        </div>
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:12px;">
+          <label style="font-size:12px;font-weight:700;color:#6b7280;white-space:nowrap;">الكمية:</label>
+          <input id="sa" class="ti" type="number" value="100" min="1" oninput="cS()" style="width:90px;text-align:center;">
+          <span style="font-size:11px;color:#6b7280;">جرام</span>
+        </div>
+        <div id="fg" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:6px;margin-bottom:12px;"></div>
+        <div id="sr"></div>
+      </div>
+    </div></div>
+<div id="s3" class="sec"><div class="content">
+      <div class="stitle">👨‍🍳 وصفات رياضية</div>
+      <div class="filter-row" id="rf">
+        <button class="filter-btn act" id="rfall" data-f="all" style="background:linear-gradient(135deg,#3b6db5,#5b8de0);">الكل</button>
+        <button class="filter-btn" data-f="bulk">💪 تضخيم</button>
+        <button class="filter-btn" data-f="cut">🔥 تنشيف</button>
+        <button class="filter-btn" data-f="quick">⚡ سريع</button>
+        <button class="filter-btn" data-f="highpro">🥩 بروتين عالي</button>
+      </div>
+      <div id="rg"></div>
+    </div></div>
+<div id="s4" class="sec"><div class="content">
+      <div class="stitle">📊 سجل التقدم</div>
+      <div class="filter-row" id="pd"></div>
+      <div id="pc"></div>
+    </div></div>
+<nav class="bnav"><div class="bnav-inner">
+      <button class="nb act" id="nb0" onclick="gS(0,this)"><span class="ic">📋</span><span>جدولي</span><div class="nb-dot"></div></button>
+      <button class="nb" id="nb6" onclick="gS(6,this)"><span class="ic">🔥</span><span>سعراتي</span><div class="nb-dot"></div></button>
+      <button class="nb" id="nb2" onclick="gS(2,this)"><span class="ic">🔄</span><span>استبدال</span><div class="nb-dot"></div></button>
+      <button class="nb" id="nb3" onclick="gS(3,this)"><span class="ic">👨‍🍳</span><span>وصفات</span><div class="nb-dot"></div></button>
+      <button class="nb" id="nb4" onclick="gS(4,this)"><span class="ic">📊</span><span>تقدمي</span><div class="nb-dot"></div></button>
+    </div></nav>
+<script>
+/* === درع التخزين: وضع التصفح الخاص بسفاري يرمي خطأ عند الكتابة === */
+var LS=(function(){try{localStorage.setItem("__t","1");localStorage.removeItem("__t");return localStorage;}catch(e){var m={};return{getItem:function(k){return m.hasOwnProperty(k)?m[k]:null;},setItem:function(k,v){m[k]=String(v);},removeItem:function(k){delete m[k];},key:function(i){return Object.keys(m)[i]||null;},get length(){return Object.keys(m).length;}};}})();
+
+var _C={"ac":"#3b6db5","dg":"linear-gradient(135deg,#3b6db5,#5b8de0)","bd":"#dde6f0","pk":"tp_t1781367630303","nd":{},"wk":{"n":4,"inc":2.5,"deload":false},"eo":false,"intro":"\nإليك مجموعة من المقدمات التحفيزية للمتمرن، يمكنك اختيار الأنسب منها حسب نوع الرياضة أو شخصية المتدرب:\n1. المقدمة القوية (لرفع الحماس والنشاط)\n\"أهلاً بك في ساحة التحدي! تذكر أن كل قطرة عرق تسقط منك اليوم هي خطوة تقربك من النسخة الأقوى التي تحلم بها. العالم مليء بالأشخاص الذين يتمنون، لكنك هنا لأنك اخترت أن تفعل. لا تدع عقلك يقنعك بالتوقف، فجسمك قادر على فعل المستحيل. ابدأ الآن، فالأبطال لا يُصنعون في الراحة، بل يُصنعون تحت الضغط!\"\n2. مقدمة التركيز على الانضباط (للمدى الطويل)\n\"الدافع هو ما يجعلك تبدأ، لكن الانضباط هو ما يجعلك تستمر. قد لا تشعر بالرغبة في التمرين كل يوم، وهذا هو الاختبار الحقيقي. اليوم هو فرصتك لتثبت لنفسك أن إرادتك أقوى من أعذارك. تذكر دائماً لماذا بدأت، واجعل من كل تكرار اليوم استثماراً في صحتك ومستقبلك. لنبدأ العمل!\"\n3. مقدمة \"الاستثمار في الذات\" (هادئة وملهمة)\n\"جسمك هو منزلك الوحيد الذي ستعيش فيه طوال عمرك، واليوم أنت تقوم بترميمه وتقويته. لا تقارن بدايتك بموسم حصاد الآخرين؛ ركز فقط على أن تكون اليوم أفضل مما كنت عليه بالأمس بنسبة 1%. كل تمرين تقوم به هو رسالة حب وتقدير لذاتك. تنفس بعمق، واستشعر قوتك، وانطلق!\"\n4. مقدمة قصيرة وسريعة (قبل البدء مباشرة)\n\"اترك كل همومك خارج باب الصالة. هذا الوقت هو ملكك وحدك. لا تنظر إلى الساعة، بل انظر إلى الهدف. القوة لا تأتي من ما يمكنك فعله، بل من التغلب على الأشياء التي كنت تعتقد أنك لا تستطيع فعلها. هل أنت مستعد؟ لنبدأ!\"\n5. مقدمة للتغلب على الألم (للتمارين الشاقة)\n\"الألم الذي تشعر به اليوم سيكون هو القوة التي تشعر بها غداً. عندما تبدأ عضلاتك بالاحتراق، اعلم أن التغيير قد بدأ فعلاً. لا تستسلم في اللحظة التي يبدأ فيها التحدي، ففي تلك اللحظة بالذات ينمو الأبطال. واصل الضغط، فالنتائج المذهلة لا تأتي من التمارين السهلة.\"","bld":1781371432759,"fb":null};
+var _AC=_C.ac,_DG=_C.dg,_BD=_C.bd,_PK=_C.pk;
+function EMO(e,f){return _C.eo?"":(e||f||"");}
+_C.nd=_C.nd||{};
+var _CYT={};
+try{LS.setItem('custom_yt',JSON.stringify(_CYT));}catch(e){}
+var _pd=JSON.parse(LS.getItem(_PK)||"{}");
+var _FD=[{"id":"f1","name":"دجاج مشوي","nameEn":"Grilled Chicken","cat":"بروتين","emoji":"🍗","cal":165,"pro":31,"carb":0,"fat":3.6},{"id":"f2","name":"لحم بقر مفروم","nameEn":"Ground Beef","cat":"بروتين","emoji":"🥩","cal":250,"pro":26,"carb":0,"fat":17},{"id":"f3","name":"سمك تونا","nameEn":"Tuna","cat":"بروتين","emoji":"🐟","cal":130,"pro":28,"carb":0,"fat":1},{"id":"f4","name":"سمك سلمون","nameEn":"Salmon","cat":"بروتين","emoji":"🐟","cal":208,"pro":20,"carb":0,"fat":13},{"id":"f5","name":"بيض كامل","nameEn":"Whole Egg","cat":"بروتين","emoji":"🥚","cal":155,"pro":13,"carb":1.1,"fat":11},{"id":"f6","name":"بياض بيض","nameEn":"Egg White","cat":"بروتين","emoji":"🥚","cal":52,"pro":11,"carb":0.7,"fat":0.2},{"id":"f7","name":"صدر ديك رومي","nameEn":"Turkey Breast","cat":"بروتين","emoji":"🍗","cal":135,"pro":30,"carb":0,"fat":1},{"id":"f8","name":"جمبري","nameEn":"Shrimp","cat":"بروتين","emoji":"🦐","cal":99,"pro":24,"carb":0.2,"fat":0.3},{"id":"f9","name":"لحم خروف","nameEn":"Lamb","cat":"بروتين","emoji":"🥩","cal":294,"pro":25,"carb":0,"fat":21},{"id":"f10","name":"سردين","nameEn":"Sardines","cat":"بروتين","emoji":"🐟","cal":208,"pro":25,"carb":0,"fat":11},{"id":"c1","name":"رز أبيض مسلوق","nameEn":"White Rice","cat":"كارب","emoji":"🍚","cal":130,"pro":2.7,"carb":28,"fat":0.3},{"id":"c2","name":"رز بني","nameEn":"Brown Rice","cat":"كارب","emoji":"🍚","cal":123,"pro":2.7,"carb":26,"fat":1},{"id":"c3","name":"بطاطس مسلوقة","nameEn":"Boiled Potato","cat":"كارب","emoji":"🥔","cal":87,"pro":1.9,"carb":20,"fat":0.1},{"id":"c4","name":"بطاطا حلوة","nameEn":"Sweet Potato","cat":"كارب","emoji":"🍠","cal":86,"pro":1.6,"carb":20,"fat":0.1},{"id":"c5","name":"شوفان","nameEn":"Oats","cat":"كارب","emoji":"🌾","cal":389,"pro":17,"carb":66,"fat":7},{"id":"c6","name":"خبز أسمر","nameEn":"Brown Bread","cat":"كارب","emoji":"🍞","cal":247,"pro":13,"carb":41,"fat":4},{"id":"c7","name":"معكرونة مسلوقة","nameEn":"Pasta","cat":"كارب","emoji":"🍝","cal":158,"pro":6,"carb":31,"fat":1},{"id":"c8","name":"عدس مسلوق","nameEn":"Lentils","cat":"كارب","emoji":"🫘","cal":116,"pro":9,"carb":20,"fat":0.4},{"id":"c9","name":"حمص مسلوق","nameEn":"Chickpeas","cat":"كارب","emoji":"🫘","cal":164,"pro":9,"carb":27,"fat":2.6},{"id":"c10","name":"كينوا","nameEn":"Quinoa","cat":"كارب","emoji":"🌾","cal":120,"pro":4.4,"carb":21,"fat":1.9},{"id":"c11","name":"خبز أبيض","nameEn":"White Bread","cat":"كارب","emoji":"🍞","cal":265,"pro":9,"carb":49,"fat":3.2},{"id":"v1","name":"بروكلي","nameEn":"Broccoli","cat":"خضار","emoji":"🥦","cal":34,"pro":2.8,"carb":6.6,"fat":0.4},{"id":"v2","name":"خيار","nameEn":"Cucumber","cat":"خضار","emoji":"🥒","cal":15,"pro":0.7,"carb":3.6,"fat":0.1},{"id":"v3","name":"طماطم","nameEn":"Tomato","cat":"خضار","emoji":"🍅","cal":18,"pro":0.9,"carb":3.9,"fat":0.2},{"id":"v4","name":"سبانخ","nameEn":"Spinach","cat":"خضار","emoji":"🥬","cal":23,"pro":2.9,"carb":3.6,"fat":0.4},{"id":"v5","name":"جزر","nameEn":"Carrot","cat":"خضار","emoji":"🥕","cal":41,"pro":0.9,"carb":10,"fat":0.2},{"id":"v6","name":"فلفل رومي","nameEn":"Bell Pepper","cat":"خضار","emoji":"🫑","cal":31,"pro":1,"carb":6,"fat":0.3},{"id":"v7","name":"كوسا","nameEn":"Zucchini","cat":"خضار","emoji":"🥒","cal":17,"pro":1.2,"carb":3.1,"fat":0.3},{"id":"v8","name":"باذنجان","nameEn":"Eggplant","cat":"خضار","emoji":"🍆","cal":25,"pro":1,"carb":6,"fat":0.2},{"id":"v9","name":"ملفوف","nameEn":"Cabbage","cat":"خضار","emoji":"🥬","cal":25,"pro":1.3,"carb":5.8,"fat":0.1},{"id":"v10","name":"قرنبيط","nameEn":"Cauliflower","cat":"خضار","emoji":"🥦","cal":25,"pro":1.9,"carb":5,"fat":0.3},{"id":"d1","name":"أفوكادو","nameEn":"Avocado","cat":"دهون","emoji":"🥑","cal":160,"pro":2,"carb":9,"fat":15},{"id":"d2","name":"زيت زيتون","nameEn":"Olive Oil","cat":"دهون","emoji":"🫒","cal":884,"pro":0,"carb":0,"fat":100},{"id":"d3","name":"لوز","nameEn":"Almonds","cat":"دهون","emoji":"🌰","cal":579,"pro":21,"carb":22,"fat":50},{"id":"d4","name":"جوز","nameEn":"Walnuts","cat":"دهون","emoji":"🌰","cal":654,"pro":15,"carb":14,"fat":65},{"id":"d5","name":"زبدة فول سوداني","nameEn":"Peanut Butter","cat":"دهون","emoji":"🥜","cal":588,"pro":25,"carb":20,"fat":50},{"id":"d6","name":"بذور شيا","nameEn":"Chia Seeds","cat":"دهون","emoji":"🌱","cal":486,"pro":17,"carb":42,"fat":31},{"id":"fr1","name":"موز","nameEn":"Banana","cat":"فواكه","emoji":"🍌","cal":89,"pro":1.1,"carb":23,"fat":0.3},{"id":"fr2","name":"تفاح","nameEn":"Apple","cat":"فواكه","emoji":"🍎","cal":52,"pro":0.3,"carb":14,"fat":0.2},{"id":"fr3","name":"برتقال","nameEn":"Orange","cat":"فواكه","emoji":"🍊","cal":47,"pro":0.9,"carb":12,"fat":0.1},{"id":"fr4","name":"عنب","nameEn":"Grapes","cat":"فواكه","emoji":"🍇","cal":69,"pro":0.7,"carb":18,"fat":0.2},{"id":"fr5","name":"تمر","nameEn":"Dates","cat":"فواكه","emoji":"🌴","cal":282,"pro":2.5,"carb":75,"fat":0.4},{"id":"fr6","name":"فراولة","nameEn":"Strawberry","cat":"فواكه","emoji":"🍓","cal":32,"pro":0.7,"carb":7.7,"fat":0.3},{"id":"m1","name":"حليب كامل الدسم","nameEn":"Whole Milk","cat":"ألبان","emoji":"🥛","cal":61,"pro":3.2,"carb":4.8,"fat":3.3},{"id":"m2","name":"حليب خالي الدسم","nameEn":"Skim Milk","cat":"ألبان","emoji":"🥛","cal":34,"pro":3.4,"carb":5,"fat":0.1},{"id":"m3","name":"زبادي يوناني","nameEn":"Greek Yogurt","cat":"ألبان","emoji":"🥛","cal":97,"pro":9,"carb":3.6,"fat":5},{"id":"m4","name":"جبن قريش","nameEn":"Cottage Cheese","cat":"ألبان","emoji":"🧀","cal":98,"pro":11,"carb":3.4,"fat":4.3},{"id":"m5","name":"بروتين واي","nameEn":"Whey Protein","cat":"ألبان","emoji":"💊","cal":400,"pro":80,"carb":8,"fat":5}];
+var _RD=[{"id":"r1","name":"أرز بالدجاج المشوي","emoji":"🍗","tag":"bulk","time":25,"cal":520,"pro":42,"carb":58,"fat":9,"ingredients":["150g صدر دجاج","150g أرز بسمتي","1 ملعقة زيت زيتون","بهارات مشوي","ملح وفلفل"],"steps":["تتبّل الدجاج بالبهارات","اشوه 20 دقيقة على 200°","اطبخ الأرز","قدّم معاً"],"alts":[{"name":"أرز باللحم المفروم","emoji":"🥩","cal":540,"pro":38,"carb":58,"fat":14,"why":"نفس السعرات بروتين أعلى قليلاً"}]},{"id":"r2","name":"عجة البيض بالجبن","emoji":"🥚","tag":"bulk","time":10,"cal":380,"pro":28,"carb":4,"fat":28,"ingredients":["4 بيضات","50g جبن شيدر","1 ملعقة زبدة","ملح وفلفل","أعشاب"],"steps":["اكسر البيض وقلّب","أذب الزبدة في المقلاة","صبّ البيض واطبخ","أضف الجبن قبل الطي"],"alts":[{"name":"عجة بياض البيض","emoji":"🥚","cal":180,"pro":26,"carb":3,"fat":4,"why":"أقل دهوناً للتنشيف"}]},{"id":"r3","name":"شوفان بالموز والبروتين","emoji":"🌾","tag":"bulk","time":8,"cal":480,"pro":35,"carb":68,"fat":8,"ingredients":["80g شوفان","1 موزة","1 scoop بروتين فانيلا","200ml حليب","1 ملعقة عسل"],"steps":["اطبخ الشوفان بالحليب","أضف البروتين وقلّب جيداً","قطّع الموز فوقه","أضف العسل"],"alts":[{"name":"شوفان بالتوت","emoji":"🫐","cal":420,"pro":32,"carb":60,"fat":7,"why":"أقل سكراً أكثر مضادات أكسدة"}]},{"id":"r4","name":"سلطة التونا والكينوا","emoji":"🐟","tag":"bulk","time":15,"cal":450,"pro":40,"carb":45,"fat":12,"ingredients":["120g تونا معلبة","100g كينوا مطبوخة","خيار وطماطم","2 ملعقة زيت زيتون","ليمون وملح"],"steps":["اطبخ الكينوا وبرّدها","قطّع الخضروات","امزج الكل","أضف الزيت والليمون"],"alts":[{"name":"سلطة السلمون والكينوا","emoji":"🐟","cal":480,"pro":38,"carb":45,"fat":16,"why":"أحماض أوميغا-3 أعلى"}]},{"id":"r5","name":"بانكيك البروتين","emoji":"🥞","tag":"bulk","time":15,"cal":410,"pro":38,"carb":42,"fat":8,"ingredients":["1 scoop بروتين","2 بيضة","50g دقيق شوفان","100ml حليب","1 ملعقة عسل"],"steps":["امزج المكونات الجافة","أضف البيض والحليب","اطبخ في مقلاة نون ستيك","قدّم مع العسل"],"alts":[{"name":"وافل البروتين","emoji":"🧇","cal":420,"pro":36,"carb":44,"fat":10,"why":"نفس المكونات شكل مختلف"}]},{"id":"r6","name":"دجاج بالحمص والخضار","emoji":"🍲","tag":"bulk","time":30,"cal":560,"pro":48,"carb":52,"fat":14,"ingredients":["200g صدر دجاج","150g حمص مطبوخ","فلفل وبصل","2 ملعقة زيت","بهارات كمون"],"steps":["قطّع الدجاج مكعبات","قلّي البصل والفلفل","أضف الدجاج واطبخ","أضف الحمص وقلّب"],"alts":[{"name":"لحم غنم بالحمص","emoji":"🐑","cal":580,"pro":44,"carb":52,"fat":18,"why":"نكهة أقوى وزنك أعلى"}]},{"id":"r7","name":"سموذي التضخيم","emoji":"🥤","tag":"bulk","time":5,"cal":620,"pro":45,"carb":75,"fat":12,"ingredients":["1 scoop بروتين","1 موزة","30g زبدة فول سوداني","200ml حليب كامل الدسم","50g شوفان","1 تمرة"],"steps":["ضع كل المكونات في الخلاط","اخلط دقيقة كاملة","قدّم فوراً"],"alts":[{"name":"سموذي بالمانجو","emoji":"🥭","cal":580,"pro":40,"carb":72,"fat":10,"why":"نكهة استوائية مختلفة"}]},{"id":"r8","name":"مكرونة بالدجاج والطماطم","emoji":"🍝","tag":"bulk","time":25,"cal":580,"pro":44,"carb":68,"fat":10,"ingredients":["150g مكرونة","150g صدر دجاج","صلصة طماطم طبيعية","ثوم وبصل","بارميزان"],"steps":["اسلق المكرونة","اطبخ الدجاج مع الثوم","أضف الصلصة","امزج مع المكرونة وأضف البارميزان"],"alts":[{"name":"مكرونة باللحم","emoji":"🍝","cal":600,"pro":42,"carb":68,"fat":14,"why":"نكهة أثقل مناسبة للتضخيم"}]},{"id":"r9","name":"صدر دجاج مع سلطة خضراء","emoji":"🥗","tag":"cut","time":20,"cal":280,"pro":38,"carb":8,"fat":10,"ingredients":["180g صدر دجاج","خس رومين","خيار وطماطم كرزية","1 ملعقة زيت زيتون","خل بلسمي"],"steps":["اشوه الدجاج بدون زيت","قطّع الخضروات","امزج الصلصة","قدّم الدجاج فوق السلطة"],"alts":[{"name":"تونا مع سلطة خضراء","emoji":"🐟","cal":240,"pro":35,"carb":6,"fat":7,"why":"أسرع تحضيراً وأقل سعرات"}]},{"id":"r10","name":"سلمون مشوي مع بروكلي","emoji":"🐟","tag":"cut","time":20,"cal":320,"pro":36,"carb":12,"fat":14,"ingredients":["150g سلمون","200g بروكلي","ليمون وثوم","1 ملعقة زيت","ملح وأعشاب"],"steps":["تتبّل السلمون بالليمون والثوم","اشوه 15 دقيقة","اطبخ البروكلي بالبخار","قدّم معاً"],"alts":[{"name":"تيلابيا مع بروكلي","emoji":"🐟","cal":260,"pro":32,"carb":12,"fat":7,"why":"أقل دهوناً وسعرات"}]},{"id":"r11","name":"بيض مسلوق مع خضار نيئة","emoji":"🥚","tag":"cut","time":12,"cal":220,"pro":18,"carb":10,"fat":12,"ingredients":["3 بيضات","خيار وجزر وكرفس","ملح وفلفل أسود","قليل من الخردل"],"steps":["اسلق البيض 8 دقائق","برّد وقشّر","قطّع الخضروات","قدّم مع الخردل"],"alts":[{"name":"بياض بيض مع خضار","emoji":"🥚","cal":140,"pro":18,"carb":8,"fat":2,"why":"أقل سعرات للتنشيف الحاد"}]},{"id":"r12","name":"شوربة دجاج الحمية","emoji":"🍜","tag":"cut","time":35,"cal":260,"pro":32,"carb":18,"fat":6,"ingredients":["200g صدر دجاج","خضروات مشكلة","بصل وثوم وكرفس","ملح وبهارات","ماء أو مرق خفيف"],"steps":["اسلق الدجاج","أضف الخضروات","اطبخ 20 دقيقة","تبّل وقدّم ساخناً"],"alts":[{"name":"شوربة سمك","emoji":"🐟","cal":230,"pro":30,"carb":16,"fat":5,"why":"أخف وأسرع هضماً"}]},{"id":"r13","name":"لفة التونا والخس","emoji":"🌯","tag":"cut","time":10,"cal":240,"pro":28,"carb":14,"fat":8,"ingredients":["120g تونا","ورق خس كبير","طماطم وخيار","1 ملعقة زبادي قليل الدسم","ليمون"],"steps":["صفّي التونا","امزجها مع الزبادي والليمون","ضعها على ورق الخس","أضف الخضروات ولفّ"],"alts":[{"name":"لفة الدجاج والخس","emoji":"🍗","cal":260,"pro":30,"carb":12,"fat":9,"why":"نكهة مختلفة بنفس السعرات"}]},{"id":"r14","name":"زبادي يوناني بالتوت","emoji":"🫐","tag":"cut","time":3,"cal":180,"pro":18,"carb":20,"fat":2,"ingredients":["200g زبادي يوناني 0%","100g توت مشكل","قليل من القرفة","1 ملعقة عسل صغيرة"],"steps":["ضع الزبادي في وعاء","أضف التوت فوقه","رشّ القرفة","أضف العسل"],"alts":[{"name":"زبادي بالكيوي","emoji":"🥝","cal":170,"pro":17,"carb":22,"fat":2,"why":"فيتامين C أعلى"}]},{"id":"r15","name":"ساندويتش الدجاج بالأفوكادو","emoji":"🥪","tag":"quick","time":8,"cal":420,"pro":32,"carb":34,"fat":16,"ingredients":["120g دجاج مطبوخ مسبقاً","خبز أسمر","½ أفوكادو","طماطم وخس","قليل من الملح"],"steps":["قطّع الدجاج شرائح","هرّس الأفوكادو","ضع على الخبز","رتّب المكونات وقدّم"],"alts":[{"name":"ساندويتش التونا","emoji":"🐟","cal":360,"pro":30,"carb":34,"fat":10,"why":"أسرع تحضيراً وأقل دهوناً"}]},{"id":"r16","name":"علبة تونا مع تمر وجوز","emoji":"🐟","tag":"quick","time":2,"cal":310,"pro":28,"carb":22,"fat":12,"ingredients":["120g تونا معلبة","3 تمرات","30g جوز","ليمون وملح"],"steps":["افتح العلبة وصفّي التونا","رتّب مع التمر والجوز","أضف الليمون وقدّم"],"alts":[{"name":"تونا مع زبيب ولوز","emoji":"🍇","cal":300,"pro":27,"carb":24,"fat":10,"why":"نكهة مختلفة بسعرات مشابهة"}]},{"id":"r17","name":"بروتين شيك سريع","emoji":"🥤","tag":"quick","time":2,"cal":280,"pro":32,"carb":22,"fat":5,"ingredients":["1 scoop بروتين","250ml ماء أو حليب خفيف","ثلج"],"steps":["ضع كل شيء في الشيكر","قلّب 30 ثانية","اشرب فوراً"],"alts":[{"name":"شيك البروتين بالحليب","emoji":"🥛","cal":340,"pro":35,"carb":28,"fat":8,"why":"سعرات أعلى مناسب للتضخيم"}]},{"id":"r18","name":"بيض مقلي بالزيت الزيتون","emoji":"🍳","tag":"quick","time":5,"cal":260,"pro":14,"carb":1,"fat":22,"ingredients":["2 بيضة","1 ملعقة زيت زيتون","ملح وفلفل وأوريغانو"],"steps":["سخّن الزيت على نار متوسطة","اكسر البيض","اطبخ 3 دقائق","تبّل وقدّم"],"alts":[{"name":"بيض مسلوق","emoji":"🥚","cal":140,"pro":12,"carb":1,"fat":10,"why":"أقل دهوناً وأسرع"}]},{"id":"r19","name":"جبن قريش بالعسل واللوز","emoji":"🍯","tag":"quick","time":3,"cal":290,"pro":22,"carb":24,"fat":10,"ingredients":["150g جبن قريش","1 ملعقة عسل","20g لوز","قليل من القرفة"],"steps":["ضع الجبن في وعاء","أضف العسل والقرفة","رشّ اللوز فوقه","قدّم فوراً"],"alts":[{"name":"جبن قريش بالتوت","emoji":"🫐","cal":240,"pro":20,"carb":22,"fat":6,"why":"أقل سعرات وأكثر مضادات أكسدة"}]},{"id":"r20","name":"مقلوبة الدجاج بالأرز البني","emoji":"🍲","tag":"highpro","time":45,"cal":580,"pro":52,"carb":54,"fat":14,"ingredients":["250g صدر دجاج","150g أرز بني","بصل وثوم","بهارات عربية","ملح وفلفل"],"steps":["اطبخ الدجاج مع البهارات","اطبخ الأرز البني","رتّب طبقات في القدر","اقلبها على الصحن"],"alts":[{"name":"مقلوبة الجمبري","emoji":"🦐","cal":520,"pro":48,"carb":54,"fat":10,"why":"نكهة بحرية وبروتين عالٍ"}]},{"id":"r21","name":"سلطة الدجاج المشوي والكينوا","emoji":"🥗","tag":"highpro","time":20,"cal":460,"pro":48,"carb":42,"fat":12,"ingredients":["200g صدر دجاج","100g كينوا مطبوخة","سبانخ طازجة","طماطم كرزية","1 ملعقة زيت زيتون"],"steps":["اشوه الدجاج وقطّعه","اطبخ الكينوا وبرّدها","امزج مع السبانخ والطماطم","أضف الزيت والليمون"],"alts":[{"name":"سلطة التونا والكينوا","emoji":"🐟","cal":420,"pro":44,"carb":42,"fat":9,"why":"أسرع تحضيراً وبروتين مشابه"}]},{"id":"r22","name":"فطيرة الدجاج والبيض","emoji":"🥧","tag":"highpro","time":30,"cal":420,"pro":46,"carb":18,"fat":16,"ingredients":["180g صدر دجاج","3 بيضات","بصل وفلفل","100ml حليب خفيف","ملح وأعشاب"],"steps":["اطبخ الدجاج وقطّعه","امزج البيض مع الحليب والبهارات","أضف الدجاج والخضروات","اخبز 20 دقيقة على 180°"],"alts":[{"name":"فطيرة التونا والبيض","emoji":"🐟","cal":380,"pro":42,"carb":16,"fat":14,"why":"أسرع تحضيراً وأقل سعرات"}]},{"id":"r23","name":"لحم بقر مع البطاطا الحلوة","emoji":"🥩","tag":"highpro","time":35,"cal":540,"pro":46,"carb":48,"fat":14,"ingredients":["200g لحم بقر قليل الدهن","200g بطاطا حلوة","روزماري وثوم","1 ملعقة زيت","ملح وفلفل"],"steps":["قطّع البطاطا مكعبات واشوها 25 دقيقة","قلّي اللحم مع الثوم والروزماري","قدّم اللحم فوق البطاطا"],"alts":[{"name":"دجاج مع بطاطا حلوة","emoji":"🍗","cal":480,"pro":42,"carb":48,"fat":10,"why":"أقل دهوناً مناسب للتنشيف"}]},{"id":"r24","name":"جمبري بالثوم والليمون","emoji":"🦐","tag":"highpro","time":15,"cal":320,"pro":44,"carb":8,"fat":12,"ingredients":["250g جمبري","3 فصوص ثوم","ليمونة","2 ملعقة زيت زيتون","بقدونس وملح"],"steps":["نظّف الجمبري","قلّي الثوم بالزيت","أضف الجمبري 3 دقائق","أضف الليمون والبقدونس"],"alts":[{"name":"سمك مشوي بالثوم","emoji":"🐟","cal":280,"pro":40,"carb":4,"fat":10,"why":"أقل سعرات وبروتين مشابه"}]},{"id":"r25","name":"طاجن الدجاج بالخضار","emoji":"🫕","tag":"highpro","time":50,"cal":480,"pro":50,"carb":32,"fat":14,"ingredients":["250g صدر دجاج","كوسا وجزر وبطاطس","صلصة طماطم","بصل وثوم","بهارات عربية"],"steps":["قطّع الدجاج والخضار","رتّب في الطاجن طبقات","أضف الصلصة والبهارات","اطبخ 40 دقيقة على 180°"],"alts":[{"name":"طاجن السمك بالخضار","emoji":"🐟","cal":420,"pro":46,"carb":30,"fat":10,"why":"أخف وأسرع هضماً"}]},{"id":"r26","name":"صدر ديك رومي مع الفطر","emoji":"🍄","tag":"highpro","time":25,"cal":360,"pro":50,"carb":10,"fat":12,"ingredients":["220g صدر ديك رومي","150g فطر طازج","بصل وثوم","1 ملعقة زيت زيتون","أعشاب بروفانسال"],"steps":["قلّي الفطر مع الثوم","أضف ديك الرومي وقلّب","اطبخ 15 دقيقة مع التغطية","تبّل وقدّم"],"alts":[{"name":"صدر دجاج مع فطر","emoji":"🍗","cal":340,"pro":46,"carb":10,"fat":10,"why":"أرخص وبروتين مشابه"}]},{"id":"r27","name":"سلطة البيض والأفوكادو","emoji":"🥑","tag":"highpro","time":10,"cal":340,"pro":20,"carb":8,"fat":26,"ingredients":["3 بيضات مسلوقة","1 أفوكادو","طماطم كرزية","ليمون وملح","أوريغانو"],"steps":["قطّع البيض والأفوكادو","امزج مع الطماطم","أضف الليمون والبهارات","قدّم طازجاً"],"alts":[{"name":"سلطة بيض فقط","emoji":"🥚","cal":240,"pro":18,"carb":6,"fat":16,"why":"أقل دهوناً وسعرات"}]},{"id":"r28","name":"كفتة الدجاج المشوية","emoji":"🍗","tag":"highpro","time":25,"cal":440,"pro":52,"carb":12,"fat":16,"ingredients":["300g دجاج مفروم","بصل مبشور","بقدونس وثوم","بهارات كفتة","ملح وفلفل"],"steps":["امزج الدجاج مع المكونات","شكّل كفتة متوسطة","اشوه على الجريل 10 دقائق لكل جانب","قدّم مع سلطة"],"alts":[{"name":"كفتة لحم بقر","emoji":"🥩","cal":480,"pro":48,"carb":10,"fat":22,"why":"نكهة أقوى ودهون أعلى قليلاً"}]},{"id":"r29","name":"سمك القاروص بالأعشاب","emoji":"🐟","tag":"highpro","time":20,"cal":300,"pro":46,"carb":2,"fat":11,"ingredients":["200g سمك قاروص","ليمون وثوم","أعشاب مشكلة","1 ملعقة زيت زيتون","ملح وفلفل أبيض"],"steps":["تتبّل السمك بالأعشاب والليمون","اشوه في الفرن 180° لمدة 15 دقيقة","قدّم مع ليمون طازج"],"alts":[{"name":"سمك دنيس بالأعشاب","emoji":"🐟","cal":280,"pro":42,"carb":2,"fat":10,"why":"نكهة أخف وبروتين مشابه"}]},{"id":"r30","name":"بيتزا البروتين","emoji":"🍕","tag":"highpro","time":20,"cal":460,"pro":46,"carb":36,"fat":14,"ingredients":["خبز تورتيلا كبير","100g دجاج مشوي","صلصة طماطم خفيفة","جبن موزاريلا قليل الدسم","فلفل وفطر"],"steps":["ضع الصلصة على التورتيلا","أضف الدجاج والخضروات","رشّ الجبن","اخبز 10 دقائق على 200°"],"alts":[{"name":"بيتزا التونا","emoji":"🐟","cal":420,"pro":42,"carb":36,"fat":11,"why":"أقل سعرات وبروتين مشابه"}]},{"id":"r31","name":"تمر باللوز","emoji":"🌴","tag":"quick","time":2,"cal":220,"pro":4,"carb":38,"fat":8,"ingredients":["6 تمرات","30g لوز نيئ"],"steps":["أخرج النواة من التمر","حشوه باللوز","قدّم فوراً"],"alts":[{"name":"تمر بالفول السوداني","emoji":"🥜","cal":230,"pro":6,"carb":36,"fat":10,"why":"بروتين أعلى قليلاً"}]},{"id":"r32","name":"شوربة العدس","emoji":"🍲","tag":"cut","time":30,"cal":280,"pro":18,"carb":42,"fat":4,"ingredients":["200g عدس أحمر","بصل وثوم وجزر","كمون وكركم","ليمون وملح","ماء أو مرق"],"steps":["قلّي البصل والثوم","أضف العدس والجزر","أضف الماء واطبخ 20 دقيقة","اخلط وأضف البهارات والليمون"],"alts":[{"name":"شوربة فاصوليا","emoji":"🫘","cal":260,"pro":16,"carb":40,"fat":3,"why":"بديل نباتي بنفس الفوائد"}]},{"id":"r33","name":"شوفان بالموز والبروتين","emoji":"🥣","tag":"bulk","time":5,"cal":520,"pro":35,"carb":72,"fat":9,"ingredients":["100g شوفان","1 موزة","30g بروتين فانيلا","200ml حليب","1 ملعقة زبدة فول سوداني"],"steps":["اطبخ الشوفان بالحليب","أضف الموز المهروس","أضف البروتين بعد الطبخ","ضع زبدة الفول سوداني فوقه"],"alts":[{"emoji":"🍌","name":"شوفان بالتمر","why":"سعرات أعلى وكارب أسرع"}]},{"id":"r34","name":"بيض مخفوق بالجبن والخضار","emoji":"🍳","tag":"bulk","time":10,"cal":480,"pro":38,"carb":8,"fat":32,"ingredients":["4 بيضات كاملة","2 بياض بيض","50g جبن شيدر","فلفل ملون","بصل","ملح وفلفل"],"steps":["اخفق البيض مع التوابل","أضف الخضار للمقلاة","أضف البيض واطبخ على نار هادئة","أضف الجبن قبل الطي"],"alts":[{"emoji":"🧀","name":"أومليت الموزاريلا","why":"نكهة مختلفة وبروتين أعلى"}]},{"id":"r35","name":"مكرونة بالدجاج والكريمة","emoji":"🍝","tag":"bulk","time":20,"cal":680,"pro":45,"carb":75,"fat":18,"ingredients":["150g مكرونة","150g دجاج","50ml كريمة خفيفة","ثوم","بصل","جبن برميزان"],"steps":["اطبخ المكرونة","حمّر الدجاج مع الثوم والبصل","أضف الكريمة وقلّل النار","اخلط المكرونة والجبن"],"alts":[{"emoji":"🍅","name":"مكرونة بالصلصة الحمراء","why":"أقل دهون وأكثر فيتامينات"}]},{"id":"r36","name":"أرز بالتونة والخضار","emoji":"🍚","tag":"bulk","time":15,"cal":550,"pro":38,"carb":70,"fat":10,"ingredients":["150g أرز مطبوخ","علبة تونة","جزر","بازلاء","صلصة صويا","زيت سمسم"],"steps":["اطبخ الأرز","حمّر الخضار","أضف التونة","اخلط مع الأرز وصلصة الصويا"],"alts":[{"emoji":"🐟","name":"أرز بالسلمون","why":"أوميغا 3 أعلى"}]},{"id":"r37","name":"سموثي تضخيم كامل","emoji":"🥤","tag":"bulk","time":5,"cal":720,"pro":42,"carb":90,"fat":16,"ingredients":["2 موز","300ml حليب كامل الدسم","40g بروتين شوكولاتة","50g شوفان","2 ملعقة زبدة لوز","عسل"],"steps":["ضع كل المكونات في الخلاط","اخلط لمدة دقيقة","اشرب فوراً"],"alts":[{"emoji":"🍓","name":"سموثي بالتوت","why":"مضادات أكسدة أعلى"}]},{"id":"r38","name":"قيمر بالعسل والمكسرات","emoji":"🍯","tag":"bulk","time":3,"cal":450,"pro":12,"carb":40,"fat":28,"ingredients":["100g قيمر","2 ملعقة عسل","30g مكسرات مشكلة","5 تمرات"],"steps":["ضع القيمر في طبق","أضف العسل والتمر","رش المكسرات فوقه"],"alts":[{"emoji":"🥛","name":"لبن بالعسل","why":"سعرات أقل ومناسب قبل النوم"}]},{"id":"r39","name":"برغل باللحم والخضار","emoji":"🥘","tag":"bulk","time":25,"cal":620,"pro":42,"carb":65,"fat":18,"ingredients":["150g برغل","150g لحم مفروم","بصل","طماطم","بهارات","ملح"],"steps":["حمّر اللحم مع البصل","أضف الطماطم والبهارات","أضف البرغل والماء","اطبخ 15 دقيقة"],"alts":[{"emoji":"🌾","name":"برغل بالدجاج","why":"بروتين أخف وسعرات أقل"}]},{"id":"r40","name":"فول مدمس بالبيض","emoji":"🫘","tag":"bulk","time":10,"cal":480,"pro":28,"carb":52,"fat":16,"ingredients":["200g فول مدمس","2 بيضات","زيت زيتون","ثوم","كمون","ليمون"],"steps":["سخّن الفول مع الثوم والكمون","اقلي البيض جانباً","اخلط الفول بالليمون والزيت","ضع البيض فوقه"],"alts":[{"emoji":"🥚","name":"فول بالطحينة","why":"دهون صحية أكثر"}]},{"id":"r41","name":"سلطة الدجاج والأفوكادو","emoji":"🥗","tag":"cut","time":10,"cal":380,"pro":35,"carb":12,"fat":22,"ingredients":["150g دجاج مشوي","نصف أفوكادو","خيار","طماطم كرزية","خل بلسمي","ملح وفلفل"],"steps":["قطّع الدجاج شرائح","قطّع الأفوكادو والخضار","اخلط كل شيء","أضف الخل وتبّل"],"alts":[{"emoji":"🐟","name":"سلطة التونة","why":"سعرات أقل ودهون أخف"}]},{"id":"r42","name":"زبادي يوناني بالبروتين","emoji":"🍦","tag":"cut","time":3,"cal":280,"pro":32,"carb":18,"fat":6,"ingredients":["200g زبادي يوناني 0%","20g بروتين فانيلا","توت مجمد","ستيفيا"],"steps":["اخلط الزبادي بالبروتين","أضف الستيفيا","ضع التوت فوقه","قدّم باردة"],"alts":[{"emoji":"🍓","name":"زبادي بالفراولة الطازجة","why":"فيتامين C أعلى"}]},{"id":"r43","name":"كوسا محشي بالدجاج","emoji":"🫑","tag":"cut","time":30,"cal":320,"pro":35,"carb":18,"fat":10,"ingredients":["2 كوسة متوسطة","200g دجاج مفروم","بصل","ثوم","طماطم","بهارات"],"steps":["أفرّغ الكوسة","اخلط الدجاج مع التوابل","احشِ الكوسة","اطبخ بصلصة الطماطم 20 دقيقة"],"alts":[{"emoji":"🫑","name":"فلفل محشي","why":"نكهة مختلفة ونفس السعرات"}]},{"id":"r44","name":"سمك مشوي بالليمون","emoji":"🐟","tag":"cut","time":20,"cal":290,"pro":40,"carb":2,"fat":13,"ingredients":["200g سمك (هامور أو بلطي)","ليمون","ثوم","بقدونس","زيت زيتون","ملح"],"steps":["تبّل السمك بالثوم والليمون","اتركه 10 دقائق","اشوه على نار متوسطة 8 دقائق كل جهة","رش البقدونس فوقه"],"alts":[{"emoji":"🦐","name":"جمبري مشوي","why":"سعرات أقل وبروتين ممتاز"}]},{"id":"r45","name":"شوربة عدس حمراء","emoji":"🍲","tag":"cut","time":25,"cal":260,"pro":16,"carb":42,"fat":4,"ingredients":["150g عدس أحمر","بصل","ثوم","كمون","كركم","ليمون","ملح"],"steps":["حمّر البصل","أضف العدس والماء","أضف التوابل","اطبخ 20 دقيقة واخلط"],"alts":[{"emoji":"🥦","name":"شوربة خضار","why":"سعرات أقل ومناسب للحمية"}]},{"id":"r46","name":"تاكو الدجاج بالخس","emoji":"🌮","tag":"cut","time":15,"cal":310,"pro":38,"carb":10,"fat":12,"ingredients":["200g دجاج مشوي","4 أوراق خس كبيرة","طماطم","فلفل","صلصة تاباسكو","ليمون"],"steps":["شوّه الدجاج مع التوابل","قطّعه شرائح","ضعه في أوراق الخس","أضف الخضار والصلصة"],"alts":[{"emoji":"🫓","name":"تورتيلا كارب منخفض","why":"لو تريد كارب أكثر قليلاً"}]},{"id":"r47","name":"بيض مسلوق مع خضار نيء","emoji":"🥚","tag":"cut","time":8,"cal":220,"pro":18,"carb":12,"fat":11,"ingredients":["3 بيضات مسلوقة","جزر بالي","خيار","فلفل أخضر","ملح وفلفل"],"steps":["اسلق البيض 8 دقائق","برّده وقشّره","قدّمه مع الخضار النيئة"],"alts":[{"emoji":"🥗","name":"سلطة البيض بالخردل","why":"نكهة أغنى وسعرات متشابهة"}]},{"id":"r48","name":"توست الجبن والبيض","emoji":"🍞","tag":"quick","time":5,"cal":380,"pro":22,"carb":32,"fat":16,"ingredients":["2 خبز توست أسمر","2 بيضات","شريحة جبن","زبدة خفيفة"],"steps":["اقلي البيض","سخّن التوست","ضع الجبن ثم البيض","قدّم فوراً"],"alts":[{"emoji":"🥑","name":"توست أفوكادو وبيض","why":"دهون صحية أكثر"}]},{"id":"r49","name":"كورن فليكس بالحليب والبروتين","emoji":"🥣","tag":"quick","time":3,"cal":420,"pro":30,"carb":55,"fat":7,"ingredients":["60g كورن فليكس","250ml حليب قليل الدسم","20g بروتين","موزة صغيرة"],"steps":["ضع الكورن فليكس في الوعاء","أضف الحليب","اخلط البروتين مسبقاً","ضع الموز شرائح فوقه"],"alts":[{"emoji":"🌾","name":"مسلي بالحليب","why":"ألياف أعلى وسكر أقل"}]},{"id":"r50","name":"ساندويش التونة السريع","emoji":"🥪","tag":"quick","time":5,"cal":350,"pro":30,"carb":35,"fat":8,"ingredients":["علبة تونة في الماء","2 خبز أسمر","خس","طماطم","خردل قليل"],"steps":["صفّي التونة جيداً","اخلط مع الخردل","ضعها بين الخبز مع الخضار","قدّم فوراً"],"alts":[{"emoji":"🐔","name":"ساندويش الدجاج","why":"سعرات أقل ونكهة مختلفة"}]},{"id":"r51","name":"لبنة بالزيتون والخبز","emoji":"🫙","tag":"quick","time":3,"cal":320,"pro":14,"carb":28,"fat":16,"ingredients":["100g لبنة","10 حبات زيتون","2 خبز","زيت زيتون","زعتر"],"steps":["ضع اللبنة في طبق","أضف الزيتون والزعتر","رش زيت الزيتون","قدّم مع الخبز"],"alts":[{"emoji":"🧀","name":"جبن أبيض بالزعتر","why":"بروتين أعلى قليلاً"}]},{"id":"r52","name":"حمص بالطحينة والخبز","emoji":"🫘","tag":"quick","time":3,"cal":360,"pro":14,"carb":45,"fat":14,"ingredients":["150g حمص جاهز","ملعقة طحينة","ليمون","ثوم","خبز أسمر"],"steps":["اخلط الحمص بالطحينة والليمون","أضف الثوم المهروس","قدّم مع الخبز"],"alts":[{"emoji":"🥕","name":"حمص مع خضار نيئة","why":"سعرات أقل وألياف أكثر"}]},{"id":"r53","name":"بروتين شيك سريع","emoji":"🥤","tag":"quick","time":2,"cal":250,"pro":35,"carb":20,"fat":4,"ingredients":["30g بروتين شوكولاتة","300ml ماء أو حليب قليل الدسم","مكعبات ثلج"],"steps":["ضع كل شيء في الشيكر","اهز 30 ثانية","اشرب فوراً"],"alts":[{"emoji":"🍌","name":"شيك الموز والبروتين","why":"كارب طبيعي وطاقة أعلى"}]},{"id":"r54","name":"صدر دجاج مشوي مضاعف","emoji":"🍗","tag":"highpro","time":20,"cal":420,"pro":65,"carb":0,"fat":14,"ingredients":["300g صدر دجاج","زيت زيتون","ثوم","ليمون","ملح وفلفل","أوريغانو"],"steps":["تبّل الدجاج بجميع التوابل","اشوه 8 دقائق كل جهة","اتركه يرتاح 3 دقائق","قدّم مع ليمون"],"alts":[{"emoji":"🦃","name":"صدر ديك رومي","why":"بروتين أعلى وسعرات أقل"}]},{"id":"r55","name":"بيض كامل مع بياض إضافي","emoji":"🍳","tag":"highpro","time":8,"cal":310,"pro":38,"carb":2,"fat":16,"ingredients":["2 بيضة كاملة","4 بياض بيض","ملح وفلفل","رشة كركم"],"steps":["اخفق البيض مع التوابل","اقلي على زيت قليل","اطبخ على نار متوسطة"],"alts":[{"emoji":"🧀","name":"أومليت بياض بالجبن","why":"نكهة أغنى مع بروتين عالٍ"}]},{"id":"r56","name":"كوتاج تشيز بالتوت","emoji":"🍓","tag":"highpro","time":3,"cal":240,"pro":30,"carb":18,"fat":4,"ingredients":["200g جبن كوتاج","100g توت مشكل","ستيفيا","فانيلا"],"steps":["ضع الكوتاج في الوعاء","أضف التوت","أضف الستيفيا والفانيلا","اخلط برفق"],"alts":[{"emoji":"🍌","name":"كوتاج بالموز","why":"كارب أعلى مناسب بعد التمرين"}]},{"id":"r57","name":"تونة مع الكوينوا","emoji":"🐟","tag":"highpro","time":15,"cal":390,"pro":42,"carb":35,"fat":8,"ingredients":["علبتا تونة في الماء","100g كوينوا مطبوخة","خيار","ليمون","زيت زيتون"],"steps":["اطبخ الكوينوا","صفّي التونة","اخلط مع الكوينوا والخيار","أضف الليمون والزيت"],"alts":[{"emoji":"🐟","name":"سلمون مع الكوينوا","why":"أوميغا 3 أعلى بكثير"}]},{"id":"r58","name":"عجة البروتين الضخمة","emoji":"🍳","tag":"highpro","time":10,"cal":360,"pro":44,"carb":5,"fat":18,"ingredients":["2 بيضة","5 بياض بيض","100g دجاج مفروم","فلفل","ثوم","جبن قليل الدسم"],"steps":["اطبخ الدجاج المفروم","اخفق البيض مع التوابل","اخلط الدجاج مع البيض","اقلي حتى ينضج"],"alts":[{"emoji":"🥩","name":"عجة اللحم المفروم","why":"حديد أعلى وبروتين ممتاز"}]},{"id":"r59","name":"سلمون بالأسباراغوس","emoji":"🐟","tag":"highpro","time":20,"cal":380,"pro":42,"carb":8,"fat":19,"ingredients":["200g سلمون","100g أسباراغوس","ليمون","ثوم","زيت زيتون","ملح وفلفل"],"steps":["تبّل السلمون والأسباراغوس","ضعهم في الفرن 180 درجة","اطبخ 15 دقيقة","قدّم مع الليمون"],"alts":[{"emoji":"🐟","name":"سلمون بالبروكلي","why":"فيتامين C وK أعلى"}]},{"id":"r60","name":"لحم بقر مشوي مع سبانخ","emoji":"🥩","tag":"highpro","time":20,"cal":410,"pro":48,"carb":6,"fat":20,"ingredients":["200g لحم بقر (نضيف)","100g سبانخ طازجة","ثوم","زيت زيتون","ملح وفلفل"],"steps":["شوّه اللحم حسب الرغبة","حمّر السبانخ بالثوم والزيت","قدّم اللحم مع السبانخ"],"alts":[{"emoji":"🦌","name":"لحم غزال أو ديك رومي","why":"دهون أقل وبروتين عالٍ"}]},{"id":"r61","name":"بان كيك الشوفان بالبروتين","emoji":"🥞","tag":"bulk","time":10,"cal":480,"pro":38,"carb":55,"fat":10,"ingredients":["80g شوفان مطحون","30g بروتين","2 بيضة","100ml حليب","ستيفيا","قرفة"],"steps":["اخلط كل المكونات","سخّن مقلاة على نار متوسطة","اقلي حتى تظهر فقاعات","اقلب واتركها دقيقة"],"alts":[{"emoji":"🍌","name":"بان كيك الموز","why":"حلاوة طبيعية بدون ستيفيا"}]},{"id":"r62","name":"وافل البروتين","emoji":"🧇","tag":"bulk","time":12,"cal":510,"pro":40,"carb":52,"fat":12,"ingredients":["100g شوفان","30g بروتين شوكولاتة","2 بيضة","100ml حليب","1 موز","ملح"],"steps":["اخلط جميع المكونات في الخلاط","سخّن جهاز الوافل","اسكب الخليط واغلق","انتظر 4 دقائق"],"alts":[{"emoji":"🥞","name":"بان كيك بنفس الخليط","why":"لو ما عندك جهاز وافل"}]},{"id":"r63","name":"بودينغ الشيا بالبروتين","emoji":"🍮","tag":"cut","time":5,"cal":320,"pro":28,"carb":30,"fat":10,"ingredients":["40g بذور شيا","250ml حليب لوز","20g بروتين فانيلا","عسل","فواكه"],"steps":["اخلط الشيا بالحليب والبروتين","أضف العسل","ضعه في الثلاجة ليلة كاملة","أضف الفواكه عند التقديم"],"alts":[{"emoji":"🥛","name":"بودينغ شيا بحليب جوز الهند","why":"دهون صحية أكثر وطعم مختلف"}]},{"id":"r64","name":"إيس كريم بروتين منزلي","emoji":"🍨","tag":"cut","time":5,"cal":220,"pro":28,"carb":20,"fat":2,"ingredients":["2 موز مجمد","30g بروتين فانيلا","50ml حليب قليل الدسم"],"steps":["ضع الموز المجمد في المعالج","أضف البروتين والحليب","اخلط حتى يصبح كريمياً","قدّم فوراً"],"alts":[{"emoji":"🍓","name":"إيس كريم التوت","why":"مضادات أكسدة أعلى وسعرات أقل"}]},{"id":"r65","name":"كاسة البروتين الليلية","emoji":"🌙","tag":"highpro","time":3,"cal":280,"pro":35,"carb":15,"fat":8,"ingredients":["200g قشطة قليلة الدسم","20g كازيين أو بروتين عادي","30g مكسرات","قرفة"],"steps":["اخلط القشطة بالبروتين","أضف القرفة","ضع المكسرات فوقه","اشرب قبل النوم مباشرة"],"alts":[{"emoji":"🥛","name":"حليب دافئ بالبروتين","why":"مريح أكثر قبل النوم"}]},{"id":"r66","name":"سلطة الفراخ بالمانجو","emoji":"🥗","tag":"cut","time":10,"cal":340,"pro":32,"carb":28,"fat":8,"ingredients":["150g دجاج مشوي","نصف مانجو","خيار","خس","ليمون","زنجبيل مبشور"],"steps":["قطّع الدجاج والمانجو","اخلط الخضار","أضف الدجاج والمانجو","تبّل بالليمون والزنجبيل"],"alts":[{"emoji":"🍍","name":"سلطة دجاج بالأناناس","why":"إنزيمات هضمية طبيعية"}]},{"id":"r67","name":"ريزوتو الكوليفلاور","emoji":"🥦","tag":"cut","time":20,"cal":290,"pro":30,"carb":22,"fat":9,"ingredients":["300g كوليفلاور مبشور","150g دجاج","ثوم","بصل","مرق دجاج","جبن برميزان قليل"],"steps":["اخلط الكوليفلاور كالأرز","حمّر البصل والثوم","أضف الدجاج ثم الكوليفلاور","أضف المرق والجبن"],"alts":[{"emoji":"🥦","name":"كوليفلاور بالتونة","why":"أسرع تحضيراً وبروتين ممتاز"}]},{"id":"r68","name":"شورما الدجاج المنزلية","emoji":"🌯","tag":"quick","time":20,"cal":520,"pro":38,"carb":48,"fat":16,"ingredients":["200g دجاج","خبز عربي","طحينة","خضار مشكلة","بهارات شورما"],"steps":["تبّل الدجاج ببهارات الشورما","اشوه أو اقلي","ضعه في الخبز مع الخضار والطحينة"],"alts":[{"emoji":"🥩","name":"شورما اللحم","why":"حديد أعلى وطعم أغنى"}]},{"id":"r69","name":"سلطة البيض والأفوكادو","emoji":"🥑","tag":"cut","time":8,"cal":310,"pro":18,"carb":8,"fat":24,"ingredients":["3 بيضات مسلوقة","نصف أفوكادو","خيار","بصل أخضر","ليمون","ملح وفلفل"],"steps":["قطّع البيض والأفوكادو","اخلط مع الخيار والبصل","أضف الليمون والتوابل"],"alts":[{"emoji":"🐟","name":"سلطة تونة وأفوكادو","why":"بروتين أعلى ونكهة مختلفة"}]},{"id":"r70","name":"فاهيتا الدجاج بالفلفل الملون","emoji":"🌮","tag":"quick","time":15,"cal":490,"pro":36,"carb":45,"fat":14,"ingredients":["200g دجاج","فلفل أحمر وأصفر وأخضر","بصل","بهارات فاهيتا","خبز تورتيلا"],"steps":["شوّه الدجاج مع الفلفل والبصل","تبّل ببهارات الفاهيتا","لفّ في التورتيلا"],"alts":[{"emoji":"🥩","name":"فاهيتا لحم","why":"طعم أغنى وحديد أعلى"}]},{"id":"r71","name":"كبسة الدجاج الصحية","emoji":"🍚","tag":"bulk","time":40,"cal":650,"pro":48,"carb":72,"fat":14,"ingredients":["200g دجاج","150g أرز بسمتي","بصل","طماطم","بهارات كبسة","زعفران"],"steps":["حمّر الدجاج مع البصل","أضف الطماطم والبهارات","أضف الأرز والماء","اطبخ 25 دقيقة على نار هادئة"],"alts":[{"emoji":"🥩","name":"كبسة لحم","why":"للمناسبات والوجبات الكبيرة"}]},{"id":"r72","name":"مرق العظام بالخضار","emoji":"🍲","tag":"highpro","time":30,"cal":180,"pro":22,"carb":12,"fat":5,"ingredients":["مرق عظام","جزر","كرفس","بصل","ثوم","ملح وفلفل","بقدونس"],"steps":["أضف كل الخضار للمرق","اطبخ 20 دقيقة","صفّي وقدّم ساخناً","رش البقدونس"],"alts":[{"emoji":"🍗","name":"شوربة دجاج بالخضار","why":"أكثر دسامة وإشباعاً"}]},{"id":"r73","name":"فطيرة البروتين باللوز","emoji":"🥧","tag":"highpro","time":15,"cal":340,"pro":32,"carb":18,"fat":18,"ingredients":["100g دقيق لوز","30g بروتين","2 بيضة","ستيفيا","خلاصة فانيلا","ملح"],"steps":["اخلط الدقيق والبروتين","أضف البيض والفانيلا","اعجن وشكّل","اخبز 180 درجة 12 دقيقة"],"alts":[{"emoji":"🥜","name":"فطيرة الفول السوداني","why":"نكهة مختلفة وبروتين مشابه"}]},{"id":"r74","name":"دجاج بالكاري والأرز البني","emoji":"🍛","tag":"bulk","time":30,"cal":580,"pro":44,"carb":65,"fat":13,"ingredients":["200g دجاج","150g أرز بني","بصل","طماطم","مسحوق كاري","حليب جوز هند خفيف"],"steps":["حمّر البصل والكاري","أضف الدجاج والطماطم","أضف حليب جوز الهند","اطبخ الأرز البني منفصلاً","قدّمهم معاً"],"alts":[{"emoji":"🦐","name":"جمبري بالكاري","why":"أسرع طبخاً وبروتين ممتاز"}]},{"id":"r75","name":"لفائف الخس بالتونة","emoji":"🥬","tag":"cut","time":5,"cal":200,"pro":28,"carb":6,"fat":7,"ingredients":["علبة تونة في الماء","4 أوراق خس","طماطم","خيار","خردل","ليمون"],"steps":["صفّي التونة واخلطها مع الخردل والليمون","ضع الخضار على ورقة الخس","أضف التونة","لفّ وقدّم"],"alts":[{"emoji":"🌿","name":"لفائف السبانخ بالدجاج","why":"فيتامينات أعلى وبروتين مشابه"}]},{"id":"r76","name":"مفروم اللحم مع البطاطا الحلوة","emoji":"🍠","tag":"bulk","time":25,"cal":560,"pro":38,"carb":58,"fat":17,"ingredients":["200g لحم مفروم","200g بطاطا حلوة","بصل","ثوم","بهارات مشكلة","زيت زيتون"],"steps":["اشوِ البطاطا الحلوة في الفرن","حمّر اللحم مع البصل والثوم","تبّل بالبهارات","قدّمهم معاً"],"alts":[{"emoji":"🥔","name":"مفروم مع بطاطا عادية","why":"سعرات أعلى ومناسب للتضخيم"}]},{"id":"r77","name":"إسكرامبل البيض بالسبانخ","emoji":"🥬","tag":"quick","time":7,"cal":290,"pro":24,"carb":5,"fat":19,"ingredients":["3 بيضات","100g سبانخ طازجة","ثوم","جبن فيتا قليل","زيت زيتون","ملح"],"steps":["اقلي السبانخ بالثوم","اخفق البيض وأضفه","اطبخ مع التقليب المستمر","أضف الجبن في النهاية"],"alts":[{"emoji":"🥦","name":"إسكرامبل البروكلي والبيض","why":"فيتامين C أعلى"}]},{"id":"r78","name":"شوربة الدجاج باللاكتوز","emoji":"🍜","tag":"quick","time":20,"cal":320,"pro":35,"carb":22,"fat":8,"ingredients":["200g دجاج مقطع","100g شعيرية","جزر","كرفس","بصل","مرق دجاج","بقدونس"],"steps":["اطبخ الدجاج في المرق","أضف الخضار","أضف الشعيرية في آخر 5 دقائق","رش البقدونس"],"alts":[{"emoji":"🍚","name":"شوربة الأرز بالدجاج","why":"أثقل وأكثر إشباعاً"}]},{"id":"r79","name":"برجر الدجاج الصحي","emoji":"🍔","tag":"bulk","time":20,"cal":520,"pro":42,"carb":42,"fat":16,"ingredients":["200g دجاج مفروم","خبز برجر أسمر","خس","طماطم","خيار مخلل","صلصة خردل"],"steps":["شكّل الدجاج كباتي","اشوه على الشبكة","ضعه في الخبز مع الخضار والصلصة"],"alts":[{"emoji":"🥩","name":"برجر لحم بقر نضيف","why":"نكهة أغنى وبروتين أعلى"}]},{"id":"r80","name":"حلوى التمر والمكسرات","emoji":"🌴","tag":"bulk","time":5,"cal":380,"pro":8,"carb":52,"fat":18,"ingredients":["10 تمرات","50g مكسرات مشكلة","2 ملعقة زبدة لوز","قرفة","جوز الهند المبشور"],"steps":["أخرج نوى التمر","احشِ بزبدة اللوز والمكسرات","رش جوز الهند والقرفة","ضعها في الثلاجة ساعة"],"alts":[{"emoji":"🍫","name":"تمر بالشوكولاتة الداكنة","why":"مضادات أكسدة أعلى"}]}];
+var _SA=new Set([]);
+var _DY=[{"exercises":[{"unit":"reps","sets":3,"rest":"60ث","nameAr":"ضغط الصدر بالدمبل المستوي","note":"","videoUrl":"https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK","emoji":"💪","reps":10,"nameEn":"Flat Dumbbell Press","alt":[{"ar":"ضغط الصدر المائل بالدمبل","u":"https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form"},{"ar":"الضغط على جهاز الصدر","u":"https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form"},{"ar":"تفتيح بالكيبل (كروس أوفر)","u":"https://www.youtube.com/results?search_query=Cable%20Crossover%20form"}],"gif":"","n1":"الكوع 45 درجة، تثبيت القدمين بالأرض، النزول ببطء حتى مستوى الصدر ثم الدفع دون قفل الكوع."},{"nameEn":"Incline Dumbbell Press","reps":10,"emoji":"💪","videoUrl":"","note":"","nameAr":"ضغط الصدر المائل بالدمبل","unit":"reps","rest":"60ث","sets":3,"alt":[{"ar":"ضغط الصدر بالدمبل المستوي","u":"https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK"},{"ar":"الضغط على جهاز الصدر","u":"https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form"},{"ar":"تفتيح بالكيبل (كروس أوفر)","u":"https://www.youtube.com/results?search_query=Cable%20Crossover%20form"}],"gif":"","n1":"زاوية المقعد 30-45، استهداف أعلى الصدر، إنزال متحكم وكتف مسحوب للخلف."},{"emoji":"💪","videoUrl":"","nameEn":"Chest Press Machine","reps":10,"sets":3,"rest":"60ث","unit":"reps","note":"","nameAr":"الضغط على جهاز الصدر","alt":[{"ar":"ضغط الصدر بالدمبل المستوي","u":"https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK"},{"ar":"ضغط الصدر المائل بالدمبل","u":"https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form"},{"ar":"تفتيح بالكيبل (كروس أوفر)","u":"https://www.youtube.com/results?search_query=Cable%20Crossover%20form"}],"gif":"","n1":"الظهر ملاصق للمسند، الدفع للأمام دون قفل الكوع، عودة بطيئة مع مقاومة."},{"reps":10,"nameEn":"Cable Crossover","videoUrl":"","emoji":"💪","nameAr":"تفتيح بالكيبل (كروس أوفر)","note":"","rest":"60ث","sets":3,"unit":"reps","alt":[{"ar":"ضغط الصدر بالدمبل المستوي","u":"https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK"},{"ar":"ضغط الصدر المائل بالدمبل","u":"https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form"},{"ar":"الضغط على جهاز الصدر","u":"https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form"}],"gif":"","n1":"خطوة للأمام وانحناء خفيف بالكوع، تقاطع اليدين أمام الصدر مع عصرة وعودة بطيئة."},{"note":"","nameAr":"تفتيح مائل بالدمبل","sets":3,"rest":"60ث","unit":"reps","nameEn":"Incline Dumbbell Fly","reps":10,"emoji":"💪","videoUrl":"","alt":[{"ar":"ضغط الصدر بالدمبل المستوي","u":"https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK"},{"ar":"ضغط الصدر المائل بالدمبل","u":"https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form"},{"ar":"الضغط على جهاز الصدر","u":"https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form"}],"gif":"","n1":"انحناء ثابت بالكوع، فتح الذراعين حتى مستوى الصدر ثم تقريب بعصر، تجنّب النزول الزائد."},{"nameEn":"Pec Deck Machine","reps":10,"emoji":"💪","videoUrl":"","note":"","nameAr":"التفتيح على جهاز البيك-ديك","unit":"reps","rest":"60ث","sets":3,"alt":[{"ar":"ضغط الصدر بالدمبل المستوي","u":"https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK"},{"ar":"ضغط الصدر المائل بالدمبل","u":"https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form"},{"ar":"الضغط على جهاز الصدر","u":"https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form"}],"gif":"","n1":"الظهر ملاصق، تقريب الذراعين أمام الصدر بعصرة، عودة بطيئة مع الحفاظ على التوتر."},{"note":"","nameAr":"الضغط على المتوازي (للصدر)","sets":3,"rest":"60ث","unit":"reps","nameEn":"Chest Dips","reps":10,"emoji":"💪","videoUrl":"","alt":[{"ar":"ضغط الصدر بالدمبل المستوي","u":"https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK"},{"ar":"ضغط الصدر المائل بالدمبل","u":"https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form"},{"ar":"الضغط على جهاز الصدر","u":"https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form"}],"gif":"","n1":"ميل الجذع للأمام لاستهداف الصدر، النزول حتى يوازي الكتف الكوع، تجنّب الهبوط الزائد."},{"reps":10,"nameEn":"Decline Chest Press","videoUrl":"","emoji":"💪","nameAr":"الضغط المنخفض على الجهاز","note":"","unit":"reps","sets":3,"rest":"60ث","alt":[{"ar":"ضغط الصدر بالدمبل المستوي","u":"https://youtu.be/y19R6ag0GVE?si=PmgREApCO3_ro7BK"},{"ar":"ضغط الصدر المائل بالدمبل","u":"https://www.youtube.com/results?search_query=Incline%20Dumbbell%20Press%20form"},{"ar":"الضغط على جهاز الصدر","u":"https://www.youtube.com/results?search_query=Chest%20Press%20Machine%20form"}],"gif":"","n1":"استهداف أسفل الصدر، الدفع دون قفل الكوع، عودة متحكّمة."}],"dayNote":"","emoji":"💪","nameAr":"سحب","_cats":["صدر"]},{"dayNote":"","emoji":"💪","exercises":[{"sets":3,"rest":"60ث","unit":"reps","nameAr":"سحب البار للذقن (Lat Pulldown)","note":"","videoUrl":"","emoji":"🔙","reps":10,"nameEn":"Lat Pulldown","alt":[{"ar":"السحب الأرضي بالكيبل","u":"https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form"},{"ar":"تجديف بالدمبل بذراع واحدة","u":"https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form"},{"ar":"الرفعة المميتة الرومانية","u":"https://www.youtube.com/results?search_query=Romanian%20Deadlift%20form"}],"gif":"","n1":"قبضة أعرض من الكتف، سحب البار لأعلى الصدر مع تقريب الكوع، عودة كاملة لإطالة الظهر."},{"reps":10,"nameEn":"Seated Cable Row","videoUrl":"","emoji":"🔙","nameAr":"السحب الأرضي بالكيبل","note":"","unit":"reps","rest":"60ث","sets":3,"alt":[{"ar":"سحب البار للذقن (Lat Pulldown)","u":"https://www.youtube.com/results?search_query=Lat%20Pulldown%20form"},{"ar":"تجديف بالدمبل بذراع واحدة","u":"https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form"},{"ar":"الرفعة المميتة الرومانية","u":"https://www.youtube.com/results?search_query=Romanian%20Deadlift%20form"}],"gif":"","n1":"الظهر مستقيم والصدر مرفوع، السحب من المرفقين وعصر لوحي الكتف، تجنّب أرجحة الجذع."},{"reps":10,"nameEn":"One-Arm Dumbbell Row","videoUrl":"","emoji":"🔙","nameAr":"تجديف بالدمبل بذراع واحدة","note":"","rest":"60ث","sets":3,"unit":"reps","alt":[{"ar":"سحب البار للذقن (Lat Pulldown)","u":"https://www.youtube.com/results?search_query=Lat%20Pulldown%20form"},{"ar":"السحب الأرضي بالكيبل","u":"https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form"},{"ar":"الرفعة المميتة الرومانية","u":"https://www.youtube.com/results?search_query=Romanian%20Deadlift%20form"}],"gif":"","n1":"ركبة ويد على المقعد، الظهر مستوٍ، سحب الدمبل نحو الورك دون لف الجذع."},{"nameEn":"Romanian Deadlift","reps":10,"emoji":"🔙","videoUrl":"","note":"","nameAr":"الرفعة المميتة الرومانية","unit":"reps","sets":3,"rest":"60ث","alt":[{"ar":"سحب البار للذقن (Lat Pulldown)","u":"https://www.youtube.com/results?search_query=Lat%20Pulldown%20form"},{"ar":"السحب الأرضي بالكيبل","u":"https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form"},{"ar":"تجديف بالدمبل بذراع واحدة","u":"https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form"}],"gif":"","n1":"ركبة مرنة قليلاً، دفع الورك للخلف بظهر مستقيم، البار/الدمبل قريب من الجسم."},{"emoji":"🔙","videoUrl":"","nameEn":"Close-Grip Cable Row","reps":10,"sets":3,"rest":"60ث","unit":"reps","note":"","nameAr":"التجديف بالكيبل بقبضة ضيقة","alt":[{"ar":"سحب البار للذقن (Lat Pulldown)","u":"https://www.youtube.com/results?search_query=Lat%20Pulldown%20form"},{"ar":"السحب الأرضي بالكيبل","u":"https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form"},{"ar":"تجديف بالدمبل بذراع واحدة","u":"https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form"}],"gif":"","n1":"قبضة ضيقة، السحب للبطن مع عصر الظهر، الجذع ثابت دون أرجحة."},{"note":"","nameAr":"سحب لأسفل بذراع مستقيمة","unit":"reps","sets":3,"rest":"60ث","nameEn":"Straight-Arm Pulldown","reps":10,"emoji":"🔙","videoUrl":"","alt":[{"ar":"سحب البار للذقن (Lat Pulldown)","u":"https://www.youtube.com/results?search_query=Lat%20Pulldown%20form"},{"ar":"السحب الأرضي بالكيبل","u":"https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form"},{"ar":"تجديف بالدمبل بذراع واحدة","u":"https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form"}],"gif":"","n1":"الذراعان ممدودتان، السحب للأسفل من الكتف نحو الفخذ بعصر اللاتس، حركة من الكتف."},{"emoji":"🔙","videoUrl":"","nameEn":"Face Pull","reps":10,"sets":3,"rest":"60ث","unit":"reps","note":"","nameAr":"سحب الوجه بالكيبل","alt":[{"ar":"سحب البار للذقن (Lat Pulldown)","u":"https://www.youtube.com/results?search_query=Lat%20Pulldown%20form"},{"ar":"السحب الأرضي بالكيبل","u":"https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form"},{"ar":"تجديف بالدمبل بذراع واحدة","u":"https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form"}],"gif":"","n1":"سحب الحبل نحو الوجه مع فتح المرفقين، عصر الكتف الخلفي، ممتاز لصحة الكتف والوضعية."},{"reps":10,"nameEn":"Pull-Up","videoUrl":"","emoji":"🔙","nameAr":"العقلة","note":"","sets":3,"rest":"60ث","unit":"reps","alt":[{"ar":"سحب البار للذقن (Lat Pulldown)","u":"https://www.youtube.com/results?search_query=Lat%20Pulldown%20form"},{"ar":"السحب الأرضي بالكيبل","u":"https://www.youtube.com/results?search_query=Seated%20Cable%20Row%20form"},{"ar":"تجديف بالدمبل بذراع واحدة","u":"https://www.youtube.com/results?search_query=One-Arm%20Dumbbell%20Row%20form"}],"gif":"","n1":"قبضة أعرض من الكتف، السحب حتى تتجاوز الذقن البار، نزول كامل بطيء وشد لوحي الكتف."}],"nameAr":"سحب","_cats":["ظهر"]},{"nameAr":"يوم 3","exercises":[{"emoji":"💪","suggWtUnit":"kg","videoUrl":"","nameEn":"Dumbbell Biceps Curl","reps":10,"unit":"reps","sets":3,"rest":"60ث","suggWt":20,"note":"","nameAr":"الباي بالدمبل","alt":[{"ar":"الباي بالبار / EZ بار","u":"https://www.youtube.com/results?search_query=EZ-Bar%20Curl%20form"},{"ar":"الباي المطرقي","u":"https://www.youtube.com/results?search_query=Hammer%20Curl%20form"},{"ar":"باي التركيز","u":"https://www.youtube.com/results?search_query=Concentration%20Curl%20form"}],"gif":"","n1":"الكوع ثابت بجانب الجسم، الرفع بعصر العضلة، نزول كامل بطيء دون تأرجح."},{"reps":10,"nameEn":"EZ-Bar Curl","videoUrl":"","emoji":"💪","nameAr":"الباي بالبار / EZ بار","note":"","rest":"60ث","sets":3,"unit":"reps","alt":[{"ar":"الباي بالدمبل","u":"https://www.youtube.com/results?search_query=Dumbbell%20Biceps%20Curl%20form"},{"ar":"الباي المطرقي","u":"https://www.youtube.com/results?search_query=Hammer%20Curl%20form"},{"ar":"باي التركيز","u":"https://www.youtube.com/results?search_query=Concentration%20Curl%20form"}],"gif":"","n1":"الكوع ثابت، رفع البار بعصر العضلة، الجذع ثابت دون أرجحة."},{"sets":3,"rest":"60ث","unit":"reps","nameAr":"الباي المطرقي","note":"","videoUrl":"","emoji":"💪","reps":10,"nameEn":"Hammer Curl","alt":[{"ar":"الباي بالدمبل","u":"https://www.youtube.com/results?search_query=Dumbbell%20Biceps%20Curl%20form"},{"ar":"الباي بالبار / EZ بار","u":"https://www.youtube.com/results?search_query=EZ-Bar%20Curl%20form"},{"ar":"باي التركيز","u":"https://www.youtube.com/results?search_query=Concentration%20Curl%20form"}],"gif":"","n1":"الكفّان متقابلان (قبضة محايدة)، الرفع بثبات، يستهدف الباي والساعد."},{"videoUrl":"","emoji":"💪","reps":10,"nameEn":"Concentration Curl","unit":"reps","sets":3,"rest":"60ث","nameAr":"باي التركيز","note":"","alt":[{"ar":"الباي بالدمبل","u":"https://www.youtube.com/results?search_query=Dumbbell%20Biceps%20Curl%20form"},{"ar":"الباي بالبار / EZ بار","u":"https://www.youtube.com/results?search_query=EZ-Bar%20Curl%20form"},{"ar":"الباي المطرقي","u":"https://www.youtube.com/results?search_query=Hammer%20Curl%20form"}],"gif":"","n1":"الكوع مستند على الفخذ، رفع كامل مع عصر بالأعلى، عزل تام للباي."}],"dayNote":"","emoji":"💪","_cats":["بايسبس"]},{"nameAr":"يوم 4","emoji":"💪","exercises":[],"dayNote":"","_cats":[]},{"nameAr":"يوم 5","emoji":"💪","exercises":[],"dayNote":"","_cats":[]}];
+var _py=0,_sw=null;
+
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+
+/* === dark/light/auto mode === */
+function tmApply(){var m=LS.getItem("tm_mode")||"auto";var dark=m==="dark"||(m==="auto"&&window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);document.body.classList.toggle("dark",dark);var b=document.getElementById("tmBtn");if(b)b.textContent=({auto:"🌓",light:"☀️",dark:"🌙"})[m];}
+function tmCycle(){var o=["auto","light","dark"];var c=LS.getItem("tm_mode")||"auto";var n=o[(o.indexOf(c)+1)%3];LS.setItem("tm_mode",n);tmApply();}
+if(window.matchMedia){try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",function(){if((LS.getItem("tm_mode")||"auto")==="auto")tmApply();});}catch(e){}}
+document.addEventListener("DOMContentLoaded",tmApply);tmApply();
+
+/* === optional beep === */
+function beep(){if(LS.getItem("snd_on")!=="1")return;try{var ctx=window._actx||(window._actx=new (window.AudioContext||window.webkitAudioContext)());if(ctx.state==="suspended")ctx.resume();var o=ctx.createOscillator(),g=ctx.createGain();o.type="sine";o.frequency.value=880;o.connect(g);g.connect(ctx.destination);g.gain.setValueAtTime(.25,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.5);o.start();o.stop(ctx.currentTime+.55);}catch(e){}}
+function sndToggle(){var on=LS.getItem("snd_on")==="1";LS.setItem("snd_on",on?"0":"1");var b=document.getElementById("sndBtn");if(b)b.textContent=on?"🔕":"🔔";if(!on){try{var ctx=window._actx||(window._actx=new (window.AudioContext||window.webkitAudioContext)());if(ctx.state==="suspended")ctx.resume();}catch(e){}beepTest();}}
+function beepTest(){var keep=LS.getItem("snd_on");LS.setItem("snd_on","1");beep();LS.setItem("snd_on",keep);}
+
+/* === auto update check === */
+var _UPD_SHOWN=false;
+function chkUpd(){
+  if(location.protocol==="file:"||!_C.bld)return;
+  var base=location.pathname.replace(/index\.html?$/,"");
+  fetch(base+"v.json?ts="+Date.now(),{cache:"no-store"})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(d){if(d&&d.v&&+d.v>+_C.bld&&!_UPD_SHOWN){_UPD_SHOWN=true;showUpdBanner();}})
+    .catch(function(){});
+}
+function showUpdBanner(){
+  if(document.getElementById("updBar"))return;
+  var b=document.createElement("div");
+  b.id="updBar";
+  b.style.cssText="position:fixed;top:0;left:0;right:0;z-index:9000;background:linear-gradient(135deg,#10b981,#059669);color:#fff;padding:max(12px,env(safe-area-inset-top)) 14px 12px;font-family:Cairo,sans-serif;font-size:13px;font-weight:800;display:flex;align-items:center;gap:10px;box-shadow:0 4px 16px rgba(0,0,0,.3);";
+  b.innerHTML='<span style="font-size:18px;">📥</span><span style="flex:1;">مدربك حدّث برنامجك!</span><button id="updGo" style="padding:8px 16px;border-radius:10px;border:none;background:#fff;color:#059669;font-weight:900;font-family:Cairo,sans-serif;cursor:pointer;touch-action:manipulation;">تحديث الآن</button>';
+  document.body.appendChild(b);
+  document.getElementById("updGo").onclick=function(){location.href=location.pathname+"?u="+Date.now();};
+  if(navigator.vibrate)try{navigator.vibrate([100,50,100]);}catch(e){}
+  try{if(window.Notification&&Notification.permission==="granted")new Notification("📥 تحديث جديد من مدربك",{body:"تم تحديث برنامج تمارينك — اضغط للاطلاع"});}catch(e){}
+}
+chkUpd();setInterval(chkUpd,5*60*1000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden)chkUpd();});
+
+/* === cloud progress push === */
+function pushCloud(){
+  if(!_C.fb||!navigator.onLine)return;
+  try{
+    var f=_C.fb;
+    var url="https://firestore.googleapis.com/v1/projects/"+f.p+"/databases/(default)/documents/trainers/"+f.u+"/tprog/"+f.t+"?key="+f.k;
+    var body={fields:{data:{stringValue:JSON.stringify(_pd)},name:{stringValue:document.title||""},ts:{integerValue:String(Date.now())}}};
+    fetch(url,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).catch(function(){});
+  }catch(e){}
+}
+
+/* === personal record === */
+function histMax(k){var ss=_pd[_py]||[];var today=new Date().toLocaleDateString("ar-SA");var mx=0;ss.forEach(function(s){if(s.date===today)return;var v=s.ex&&s.ex[k];if(v&&+v.w>mx)mx=+v.w;});return mx;}
+var _prDone={};
+function prCheck(k,w){if(!w)return;var mx=histMax(k);if(mx>0&&w>mx&&!_prDone[k]){_prDone[k]=1;prToast(k,w,mx);}}
+function prToast(k,w,old){
+  var d=document.createElement("div");
+  d.style.cssText="position:fixed;bottom:90px;left:12px;right:12px;z-index:8000;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;padding:14px;border-radius:14px;font-family:Cairo,sans-serif;font-size:14px;font-weight:900;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.35);";
+  d.innerHTML='🏆 رقم قياسي جديد!<br><span style="font-size:12px;font-weight:700;opacity:.9;">'+esc(k)+': '+old+'kg ← <b>'+w+'kg</b></span>';
+  document.body.appendChild(d);
+  beep();if(navigator.vibrate)try{navigator.vibrate([100,60,100,60,220]);}catch(e){}
+  setTimeout(function(){d.remove();},2800);
+}
+
+/* === auto week === */
+function calcWk(){
+  var wkC=_C.wk||null;if(!wkC)return 1;var n=wkC.n||1;
+  if(_pd.wkManual&&_pd.wkCur)return Math.min(_pd.wkCur,n);
+  if(!_pd.wkStart)return Math.min(_pd.wkCur||1,n);
+  var w=Math.floor((Date.now()-_pd.wkStart)/(7*864e5));
+  return ((w%n)+n)%n+1;
+}
+
+/* === runtime day categories (احتياط لأسماء معدّلة) === */
+function tplCatOf(n){
+  n=String(n||"");
+  if(/صدر|بنش|تفتيح|كروس|بَتر|ضغط (مستوي|مائل|أرضي|واسع|ماسي|بالجهاز|على)/.test(n))return"صدر";
+  if(/تجديف|سحب|عقلة|ديدلفت|ظهر|شراغ|سوبرمان|راك|مجنص|لات/.test(n))return"ظهر";
+  if(/كتف|أكتاف|جانبي|أمامي|فيس بول|بول أبارت|عسكري|أرنولد/.test(n))return"أكتاف";
+  if(/رسغ|قبضة|فارمر|ساعد/.test(n))return"ساعد ورسغ";
+  if(/كيرل|باي/.test(n))return"بايسبس";
+  if(/تراي|اكستنشن|جمجمة|كيك باك|بولي داون|دبس/.test(n))return"ترايسبس";
+  if(/قرفصاء|سكوات|طعنات|لانجز|فخذ|سمانة|ساق|ليج|جسر|هيب|بلغاري|نورديك|مشية|أرجل|رجل/.test(n))return"أرجل";
+  if(/كرانش|بلانك|بطن|تويست|رفع الأرجل|حطاب|في أب|معدة/.test(n))return"بطن";
+  if(/جري|هرولة|دراجة|قفز|كارديو|مشي|سباحة|باربي|حبل/.test(n))return"كارديو";
+  return"";
+}
+function tplDayCats(day){
+  var s={},out=[];
+  ((day&&day.exercises)||[]).forEach(function(e){var c=tplCatOf(e.nameAr);if(c&&!s[c]){s[c]=1;out.push(c);}});
+  return out;
+}
+
+/* === رفض تمرين + تنبيهات === */
+var _rejEx="";
+function rejFlow(n){
+  if(!confirm('هل تريد فعلاً طلب تغيير تمرين "'+n+'"؟'))return;
+  _rejEx=n;
+  var o=document.createElement("div");o.id="rejOv";
+  o.style.cssText="position:fixed;inset:0;z-index:9400;background:rgba(0,0,0,.65);display:flex;align-items:center;justify-content:center;padding:20px;";
+  o.innerHTML='<div style="background:#fff;border-radius:16px;padding:16px;max-width:380px;width:100%;font-family:Cairo,sans-serif;color:#1a1a2e;">'
+    +'<div style="font-weight:900;font-size:14px;margin-bottom:4px;">🚫 طلب تغيير: '+esc(n)+'</div>'
+    +'<div style="font-size:11px;color:#6b7280;margin-bottom:8px;">اكتب سبب الرفض ليستبدله مدربك بما يناسبك</div>'
+    +'<textarea id="rejTxt" style="width:100%;min-height:90px;border:1.5px solid #e5e9f4;border-radius:10px;padding:10px;font-family:Cairo,sans-serif;font-size:16px;box-sizing:border-box;" placeholder="مثال: التمرين صعب عليّ · الأداء غير مفهوم · يسبب ألماً في الكتف · الجهاز غير متوفر"></textarea>'
+    +'<div style="display:flex;gap:8px;margin-top:10px;">'
+    +'<button id="rejCancel" style="flex:1;padding:11px;border:1.5px solid #e5e9f4;border-radius:10px;background:#fff;font-family:Cairo,sans-serif;font-weight:800;cursor:pointer;">إلغاء</button>'
+    +'<button id="rejSend" style="flex:2;padding:11px;border:none;border-radius:10px;background:#ef4444;color:#fff;font-family:Cairo,sans-serif;font-weight:900;cursor:pointer;">📨 إرسال للمدرب</button></div></div>';
+  document.body.appendChild(o);
+  document.getElementById("rejCancel").onclick=function(){o.remove();};
+  document.getElementById("rejSend").onclick=function(){
+    var r=(document.getElementById("rejTxt").value||"").trim();
+    sendAlert("reject","🚫 طلب تغيير تمرين: "+_rejEx+(r?" — السبب: "+r:""));
+    o.remove();
+  };
+}
+function tToast(msg,ok){
+  var d=document.createElement("div");
+  d.style.cssText="position:fixed;bottom:84px;left:14px;right:14px;z-index:9600;background:"+(ok===false?"#ef4444":"#1f2937")+";color:#fff;padding:13px 15px;border-radius:13px;font-family:Cairo,sans-serif;font-size:12.5px;font-weight:800;text-align:center;box-shadow:0 8px 24px rgba(0,0,0,.35);line-height:1.6;";
+  d.textContent=msg;document.body.appendChild(d);
+  setTimeout(function(){d.remove();},3200);
+}
+function alertQ(){try{return JSON.parse(LS.getItem("alert_q")||"[]");}catch(e){return[];}}
+function sendAlert(type,txt){
+  if(!_C.fb){tToast("⚠️ هذه النسخة غير مربوطة بالمزامنة — اطلب من مدربك تحديث رابطك ثم أعد المحاولة",false);return;}
+  var q=alertQ();
+  q.push({type:type,tid:_C.fb.t,txt:txt,ts:Date.now()});
+  LS.setItem("alert_q",JSON.stringify(q));
+  flushAlerts(true);
+}
+function flushAlerts(notify){
+  if(!_C.fb)return;
+  var q=alertQ();if(!q.length)return;
+  if(!navigator.onLine){if(notify)tToast("📡 لا يوجد اتصال الآن — سيصل طلبك تلقائياً فور عودة الشبكة");return;}
+  var a=q[0],f=_C.fb;
+  var cid="a"+a.ts+Math.random().toString(36).slice(2,5);
+  var url="https://firestore.googleapis.com/v1/projects/"+f.p+"/databases/(default)/documents/trainers/"+f.u+"/alerts/"+cid+"?key="+f.k;
+  fetch(url,{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({fields:{data:{stringValue:JSON.stringify(a)},ts:{integerValue:String(a.ts)}}})})
+    .then(function(r){
+      if(r.ok){
+        q.shift();LS.setItem("alert_q",JSON.stringify(q));
+        if(notify)tToast("✅ وصل طلبك للمدرب — سيراجعه ويرد عليك");
+        if(q.length)flushAlerts(false);
+      } else if(notify)tToast("تعذر الإرسال مؤقتاً — سيُعاد تلقائياً",false);
+    })
+    .catch(function(){if(notify)tToast("📡 سيُرسل تلقائياً عند توفر الاتصال");});
+}
+window.addEventListener("online",function(){flushAlerts(false);});
+flushAlerts(false);
+
+/* === رسائل المدرب === */
+function msgsHtml(){
+  var msgs=[];try{msgs=JSON.parse(LS.getItem("tmsg")||"[]");}catch(e){}
+  if(!msgs.length)return '<div class="card" style="margin-bottom:12px;"><div class="tu0" style="margin-bottom:4px;">📨 رسائل المدرب</div><div class="tu2">لا رسائل بعد — ردود مدربك وتشجيعه تظهر هنا تلقائياً</div></div>';
+  var h='<div class="card" style="margin-bottom:12px;"><div class="tu0" style="margin-bottom:8px;">📨 رسائل المدرب</div>';
+  msgs.slice(-5).reverse().forEach(function(mm){
+    h+='<div style="padding:8px 10px;background:rgba(99,102,241,.1);border-radius:10px;margin-bottom:6px;">'
+      +'<div style="font-size:12px;font-weight:700;">'+esc(mm.txt)+'</div>'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-top:2px;"><span class="tu2">'+new Date(+mm.ts).toLocaleDateString("ar-SA")+'</span>'
+      +'<span data-msgdel="'+mm.ts+'" style="cursor:pointer;color:#ef4444;font-size:14px;font-weight:900;padding:2px 8px;">✕</span></div></div>';
+  });
+  LS.setItem("tmsg_seen",String(Date.now()));
+  return h+'</div>';
+}
+function delTmsg(ts){
+  var msgs=[];try{msgs=JSON.parse(LS.getItem("tmsg")||"[]");}catch(e){}
+  msgs=msgs.filter(function(x){return String(x.ts)!==String(ts);});
+  LS.setItem("tmsg",JSON.stringify(msgs));
+  var el=document.getElementById("rpc");if(el)rP();
+}
+function chkMsg(){
+  if(!_C.fb||location.protocol==="file:")return;
+  var f=_C.fb;
+  fetch("https://firestore.googleapis.com/v1/projects/"+f.p+"/databases/(default)/documents/trainers/"+f.u+"/tmsg/"+f.t+"?key="+f.k,{cache:"no-store"})
+    .then(function(r){return r.ok?r.json():null;})
+    .then(function(j){
+      if(!j||!j.fields||!j.fields.data)return;
+      var msgs=[];try{msgs=JSON.parse(j.fields.data.stringValue||"[]");}catch(e){}
+      if(!msgs.length)return;
+      LS.setItem("tmsg",JSON.stringify(msgs));
+      var last=+msgs[msgs.length-1].ts||0,seen=+LS.getItem("tmsg_seen")||0;
+      if(last>seen)showMsgBanner(msgs[msgs.length-1].txt);
+    }).catch(function(){});
+}
+function showMsgBanner(txt){
+  if(document.getElementById("msgBar"))return;
+  var b=document.createElement("div");b.id="msgBar";
+  b.style.cssText="position:fixed;top:0;left:0;right:0;z-index:8900;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;padding:max(12px,env(safe-area-inset-top)) 14px 12px;font-family:Cairo,sans-serif;font-size:12px;font-weight:800;display:flex;align-items:center;gap:10px;box-shadow:0 4px 16px rgba(0,0,0,.3);";
+  b.innerHTML='<span style="font-size:17px;">📨</span><span style="flex:1;">رسالة من مدربك!</span><button id="msgOk" style="padding:7px 13px;border-radius:10px;border:none;background:#fff;color:#6366f1;font-weight:900;font-family:Cairo,sans-serif;cursor:pointer;">عرض</button>';
+  document.body.appendChild(b);
+  document.getElementById("msgOk").onclick=function(){
+    LS.setItem("tmsg_seen",String(Date.now()));b.remove();
+    var nb=document.getElementById("nb4");gS(4,nb);window.scrollTo(0,0);
+  };
+  if(navigator.vibrate)try{navigator.vibrate([80,40,80]);}catch(e){}
+  try{if(window.Notification&&Notification.permission==="granted")new Notification("📨 رسالة من مدربك",{body:String(txt).slice(0,80)});}catch(e){}
+}
+chkMsg();setInterval(chkMsg,5*60*1000);
+
+/* === muscle map === */
+function tplMuscle(cats){
+  cats=cats||[];
+  function F(c){return cats.indexOf(c)>=0?"var(--ac)":"#e5e9f4";}
+  function fig(back){
+    return '<svg width="46" height="85" viewBox="0 0 54 100" style="flex-shrink:0;">'
+      +'<circle cx="27" cy="9" r="7" fill="#cbd5e1"/>'
+      +'<rect x="14" y="18" width="26" height="30" rx="7" fill="'+(back?F("ظهر"):"#dfe5f0")+'"/>'
+      +(back?'':'<ellipse cx="20" cy="26" rx="6" ry="5" fill="'+F("صدر")+'"/><ellipse cx="34" cy="26" rx="6" ry="5" fill="'+F("صدر")+'"/><rect x="20" y="34" width="14" height="13" rx="3" fill="'+F("بطن")+'"/>')
+      +'<circle cx="11" cy="21" r="5" fill="'+F("أكتاف")+'"/><circle cx="43" cy="21" r="5" fill="'+F("أكتاف")+'"/>'
+      +'<rect x="6" y="26" width="7" height="14" rx="3.5" fill="'+(back?F("ترايسبس"):F("بايسبس"))+'"/>'
+      +'<rect x="41" y="26" width="7" height="14" rx="3.5" fill="'+(back?F("ترايسبس"):F("بايسبس"))+'"/>'
+      +'<rect x="16" y="49" width="10" height="26" rx="5" fill="'+F("أرجل")+'"/><rect x="28" y="49" width="10" height="26" rx="5" fill="'+F("أرجل")+'"/>'
+      +'<rect x="17" y="77" width="8" height="18" rx="4" fill="'+F("أرجل")+'"/><rect x="29" y="77" width="8" height="18" rx="4" fill="'+F("أرجل")+'"/>'
+      +'<text x="27" y="99" text-anchor="middle" font-size="8" fill="#9ca3af">'+(back?"خلف":"أمام")+'</text></svg>';
+  }
+  return '<div style="display:flex;gap:8px;align-items:center;justify-content:center;">'+fig(false)+fig(true)+'</div>';
+}
+
+/* === service worker (عمل بلا إنترنت) === */
+if("serviceWorker" in navigator&&location.protocol==="https:"){try{navigator.serviceWorker.register("sw.js");}catch(e){}}
+
+/* === شاشة الترحيب (أول فتح) === */
+function twShow(){
+  var o=document.createElement("div");
+  o.id="twOv";
+  o.style.cssText="position:fixed;inset:0;z-index:9500;background:rgba(15,17,21,.92);display:flex;align-items:center;justify-content:center;padding:20px;";
+  function card(e,t,s){return '<div style="background:#fff;border-radius:14px;padding:13px;margin-bottom:10px;display:flex;gap:11px;align-items:flex-start;text-align:right;"><span style="font-size:24px;flex-shrink:0;">'+e+'</span><div><div style="font-size:13px;font-weight:900;color:#1a1a2e;">'+t+'</div><div style="font-size:11px;color:#6b7280;line-height:1.6;">'+s+'</div></div></div>';}
+  o.innerHTML='<div style="max-width:380px;width:100%;font-family:Cairo,sans-serif;">'
+    +'<div style="text-align:center;color:#fff;margin-bottom:14px;"><div style="font-size:44px;">👋</div><div style="font-size:18px;font-weight:900;">أهلاً! هذا تطبيق تمارينك</div><div style="font-size:11px;opacity:.8;">4 أشياء فقط تحتاج معرفتها:</div></div>'
+    +card("▶️","وضع التمرين","من تبويب تقدمي — يقودك تمريناً بتمرين مع عداد راحة تلقائي")
+    +card("⚖️","سجّل وزنك وأوزانك","كل ما تسجله يصل مدربك تلقائياً ليتابعك ويطوّر برنامجك")
+    +card("📥","الشريط الأخضر = تحديث","إذا ظهر أعلى الشاشة فمدربك عدّل برنامجك — اضغطه")
+    +card("💬","عندك ملاحظة؟","زر 💬 أعلى الشاشة يرسلها للمدرب مباشرة — رأيك يهمنا فهذه نسخة تجريبية")
+    +'<button id="twGo" style="width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;font-family:Cairo,sans-serif;font-size:15px;font-weight:900;cursor:pointer;">فهمت — يلا نبدأ 💪</button></div>';
+  document.body.appendChild(o);
+  document.getElementById("twGo").onclick=function(){LS.setItem("tw_seen","1");o.remove();};
+}
+if(!LS.getItem("tw_seen")){try{twShow();}catch(e){}}
+
+/* === rest timer === */
+var _rtT=null,_rtEnd=0;
+function startRest(sec){clearInterval(_rtT);_rtEnd=Date.now()+sec*1000;tickRest();_rtT=setInterval(tickRest,250);}
+function tickRest(){var el=document.getElementById("rtD");if(!el)return;var r=Math.ceil((_rtEnd-Date.now())/1000);if(r<=0){clearInterval(_rtT);el.textContent="انتهت الراحة! 💪";el.style.color="#10b981";beep();if(navigator.vibrate)try{navigator.vibrate([200,100,200]);}catch(e){}return;}var mm=Math.floor(r/60),ss2=r%60;el.textContent="⏳ "+mm+":"+(ss2<10?"0":"")+ss2;el.style.color="";}
+function stopRest(){clearInterval(_rtT);var el=document.getElementById("rtD");if(el)el.textContent="";}
+
+/* === mini sparkline per exercise === */
+function spark(k,ss){var ws=[];ss.forEach(function(s){var v=s.ex&&s.ex[k];if(v&&v.w)ws.push(+v.w);});ws=ws.slice(-8);if(ws.length<2)return"";var mx=Math.max.apply(null,ws),mn=Math.min.apply(null,ws),rg=(mx-mn)||1;var W=70,H=20;var pts=ws.map(function(w,i){return (4+i/(ws.length-1)*(W-8)).toFixed(1)+","+(H-3-((w-mn)/rg)*(H-6)).toFixed(1);}).join(" ");return '<svg width="'+W+'" height="'+H+'" style="display:block;margin-top:3px;"><polyline points="'+pts+'" fill="none" style="stroke:var(--ac)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".8"/></svg>';}
+
+/* === body weight log === */
+function bwCard(){
+  var bw=_pd.bw||[];var lastW=bw.length?bw[bw.length-1]:null;
+  var h='<div class="card" style="margin-top:12px;">';
+  h+='<div style="font-size:13px;font-weight:900;color:#1a1a2e;margin-bottom:8px;">⚖️ وزن الجسم الأسبوعي</div>';
+  h+='<div style="display:flex;gap:8px;align-items:center;">';
+  h+='<input id="bwInp" class="ti" type="number" step="0.1" min="20" max="300" placeholder="'+(lastW?lastW.w:70)+'" style="flex:1;text-align:center;font-weight:900;font-size:16px;">';
+  h+='<button data-bwsave="1" style="padding:10px 18px;border-radius:10px;border:none;background:var(--dg);color:#fff;font-weight:800;font-size:13px;font-family:Cairo,sans-serif;cursor:pointer;touch-action:manipulation;">حفظ</button></div>';
+  if(bw.length>=2){
+    var ws=bw.slice(-12).map(function(x){return +x.w;});
+    var mx=Math.max.apply(null,ws),mn=Math.min.apply(null,ws),rg=(mx-mn)||1;
+    var W=260,H=64;
+    var pts=ws.map(function(w,i){return (8+i/(ws.length-1)*(W-16)).toFixed(1)+","+(H-8-((w-mn)/rg)*(H-20)).toFixed(1);}).join(" ");
+    h+='<div style="overflow-x:auto;margin-top:10px;"><svg width="'+W+'" height="'+H+'" style="display:block;margin:0 auto;max-width:100%;">';
+    h+='<polyline points="'+pts+'" fill="none" style="stroke:var(--ac)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>';
+    h+='<text x="8" y="12" font-size="10" fill="#6b7280">'+ws[0]+'kg</text>';
+    h+='<text x="'+(W-8)+'" y="12" text-anchor="end" font-size="10" style="fill:var(--ac)" font-weight="bold">'+ws[ws.length-1]+'kg</text>';
+    h+='</svg></div>';
+  }
+  if(lastW)h+='<div style="font-size:11px;color:#6b7280;margin-top:6px;">آخر تسجيل: '+lastW.w+'kg — '+esc(lastW.d)+'</div>';
+  h+='</div>';
+  return h;
+}
+
+/* === Workout Mode === */
+var _wmEx=0,_wmSet=1,_wmT=null,_wmEnd=0,_wmList=[],_wmResting=false;
+function parseRest(r){var n=parseInt(r);if(isNaN(n))return 60;return /د|min/i.test(String(r))?n*60:n;}
+function wmStart(){
+  var day=_DY[_py];var saSet=typeof _SA.has==="function"?_SA:new Set(_SA);
+  _wmList=(day.exercises||[]).filter(function(e){return !saSet.has(e.nameAr||"");});
+  if(!_wmList.length)return;
+  _wmEx=0;_wmSet=1;_wmResting=false;wmRender();
+}
+function wmPrev(k){
+  var ss=_pd[_py]||[];var today=new Date().toLocaleDateString("ar-SA");
+  for(var i=ss.length-1;i>=0;i--){if(ss[i].date!==today&&ss[i].ex&&ss[i].ex[k])return ss[i].ex[k];}
+  return null;
+}
+function wmCur(k){
+  var ss=_pd[_py]||[];var today=new Date().toLocaleDateString("ar-SA");
+  for(var i=0;i<ss.length;i++){if(ss[i].date===today)return (ss[i].ex&&ss[i].ex[k])||null;}
+  return null;
+}
+function wmRender(){
+  var el=document.getElementById("wm");if(!el)return;
+  var e=_wmList[_wmEx];var k=e.nameAr||(""+_wmEx);
+  var pv=wmPrev(k),cr=wmCur(k);
+  var totalSets=+e.sets||3;
+  var wkC=_C.wk||null;var curWk=calcWk();
+  var sug='';
+  if(wkC&&pv&&pv.w){var f=(wkC.deload&&wkC.n>1&&curWk>=wkC.n)?0.6:(1+(+wkC.inc||0)/100);if(f!==1)sug='🎯 '+(f<1?'Deload: ':'مقترح: ')+(Math.round(pv.w*f*2)/2)+'kg';}
+  var h='<div style="position:fixed;inset:0;z-index:5000;background:var(--dg);display:flex;flex-direction:column;padding:max(16px,env(safe-area-inset-top)) 16px 24px;overflow-y:auto;">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">';
+  h+='<button data-wmclose="1" style="width:38px;height:38px;border-radius:50%;border:none;background:rgba(255,255,255,.2);color:#fff;font-size:18px;cursor:pointer;touch-action:manipulation;">✕</button>';
+  h+='<div style="color:rgba(255,255,255,.85);font-size:13px;font-weight:800;">تمرين '+(_wmEx+1)+' / '+_wmList.length+'</div>';
+  h+='<button data-wmnext="1" style="padding:8px 14px;border-radius:20px;border:none;background:rgba(255,255,255,.2);color:#fff;font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation;font-family:Cairo,sans-serif;">⏭ تخطي</button></div>';
+  h+='<div style="background:rgba(255,255,255,.12);height:6px;border-radius:6px;margin-bottom:20px;"><div style="height:100%;width:'+Math.round((_wmEx/_wmList.length)*100)+'%;background:#fff;border-radius:6px;"></div></div>';
+  h+='<div style="text-align:center;color:#fff;flex:1;display:flex;flex-direction:column;justify-content:center;">';
+  if(e.suggWt!=null){h+='<div style="text-align:center;background:var(--ac);color:#fff;border-radius:12px;padding:8px;margin-bottom:10px;font-size:14px;font-weight:900;">🏋️ الوزن المقترح: '+e.suggWt+' '+(e.unit==="time"?"ثانية":"كجم")+'</div>';}
+  if(e.gif){h+='<img src="'+e.gif+'" alt="" style="display:block;max-width:240px;max-height:160px;object-fit:contain;margin:0 auto 10px;border-radius:14px;background:#000;">';}
+  else{h+='<div style="font-size:56px;margin-bottom:8px;">'+EMO(e.emoji,"💪")+'</div>';}
+  h+='<div style="font-size:22px;font-weight:900;font-family:Tajawal,sans-serif;margin-bottom:4px;">'+esc(e.nameAr)+'</div>';
+  if(e.nameEn)h+='<div style="font-size:12px;opacity:.7;direction:ltr;margin-bottom:8px;">'+esc(e.nameEn)+'</div>';
+  h+='<div style="font-size:15px;font-weight:800;opacity:.9;margin-bottom:4px;">'+e.sets+' جولات × '+e.reps+' '+(e.unit==="time"?"ثانية":"عدة")+' · راحة '+(e.rest||"60ث")+(e.suggWt!=null?' · 🏋️ '+e.suggWt+' '+(e.unit==="time"?"ث":"كجم"):"")+'</div>';
+  if(pv&&pv.w)h+='<div style="font-size:13px;opacity:.85;">السابق: '+pv.w+'kg'+(pv.r?' ×'+pv.r:'')+'</div>';
+  if(sug)h+='<div style="font-size:14px;font-weight:900;margin-top:4px;">'+sug+'</div>';
+  h+='<div style="font-size:34px;font-weight:900;font-family:Tajawal,sans-serif;margin:18px 0 6px;">الجولة '+_wmSet+' / '+totalSets+'</div>';
+  h+='<div id="wmTd" style="font-size:22px;font-weight:900;font-family:Tajawal,sans-serif;min-height:32px;margin-bottom:14px;">'+(_wmResting?'':'')+'</div>';
+  h+='<div style="display:flex;gap:10px;justify-content:center;margin-bottom:18px;">';
+  h+='<div style="background:rgba(255,255,255,.15);border-radius:14px;padding:10px 14px;"><div style="font-size:10px;opacity:.8;margin-bottom:4px;">الوزن (كج)</div><input type="number" step="0.5" data-ei="'+esc(k)+'" value="'+(cr&&cr.w?cr.w:'')+'" placeholder="'+(pv&&pv.w?pv.w:0)+'" style="width:90px;padding:10px;border-radius:10px;border:none;font-size:20px;font-weight:900;text-align:center;font-family:Tajawal,sans-serif;"></div>';
+  h+='<div style="background:rgba(255,255,255,.15);border-radius:14px;padding:10px 14px;"><div style="font-size:10px;opacity:.8;margin-bottom:4px;">عدات</div><input type="number" step="1" data-er="'+esc(k)+'" value="'+(cr&&cr.r?cr.r:'')+'" placeholder="'+(pv&&pv.r?pv.r:e.reps||'')+'" style="width:80px;padding:10px;border-radius:10px;border:none;font-size:20px;font-weight:900;text-align:center;font-family:Tajawal,sans-serif;"></div>';
+  h+='</div>';
+  h+='<button data-wmdone="1" style="width:100%;max-width:340px;margin:0 auto;padding:18px;border-radius:16px;border:none;background:#fff;color:#1a1a2e;font-size:17px;font-weight:900;font-family:Cairo,sans-serif;cursor:pointer;touch-action:manipulation;box-shadow:0 6px 20px rgba(0,0,0,.25);">'+(_wmSet<totalSets?'✅ تمت الجولة — ابدأ الراحة':(_wmEx<_wmList.length-1?'✅ انتهى التمرين — التالي':'🏁 إنهاء الجلسة'))+'</button>';
+  h+='</div></div>';
+  el.innerHTML=h;
+}
+function wmDoneSet(){
+  var e=_wmList[_wmEx];var totalSets=+e.sets||3;var rest=parseRest(e.rest);
+  if(_wmSet<totalSets){_wmSet++;wmRender();wmRest(rest);}
+  else if(_wmEx<_wmList.length-1){_wmEx++;_wmSet=1;wmRender();wmRest(rest);}
+  else{wmFinish();}
+}
+function wmNextEx(){clearInterval(_wmT);if(_wmEx<_wmList.length-1){_wmEx++;_wmSet=1;wmRender();}else{wmFinish();}}
+function wmRest(sec){_wmEnd=Date.now()+sec*1000;clearInterval(_wmT);wmTickW();_wmT=setInterval(wmTickW,250);}
+function wmTickW(){var el=document.getElementById("wmTd");if(!el){clearInterval(_wmT);return;}var r=Math.ceil((_wmEnd-Date.now())/1000);if(r<=0){clearInterval(_wmT);el.textContent="ابدأ الجولة! 💪";beep();if(navigator.vibrate)try{navigator.vibrate([200,100,200]);}catch(e2){}return;}el.textContent="⏳ راحة "+Math.floor(r/60)+":"+("0"+r%60).slice(-2);}
+function wmFinish(){
+  clearInterval(_wmT);sP();
+  var el=document.getElementById("wm");if(!el)return;
+  el.innerHTML='<div style="position:fixed;inset:0;z-index:5000;background:var(--dg);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center;color:#fff;">'
+    +'<div style="font-size:72px;margin-bottom:14px;">🎉</div>'
+    +'<div style="font-size:24px;font-weight:900;font-family:Tajawal,sans-serif;margin-bottom:8px;">أنهيت تمرين اليوم!</div>'
+    +'<div style="font-size:14px;opacity:.85;margin-bottom:24px;">تم حفظ الجلسة — أرسل تقدمك للمدرب من الصفحة</div>'
+    +'<button data-wmclose="1" style="padding:16px 40px;border-radius:16px;border:none;background:#fff;color:#1a1a2e;font-size:16px;font-weight:900;font-family:Cairo,sans-serif;cursor:pointer;touch-action:manipulation;">إغلاق</button></div>';
+}
+function wmClose(){clearInterval(_wmT);var el=document.getElementById("wm");if(el)el.innerHTML="";rP();}
+
+function saveBW(){var inp=document.getElementById("bwInp");if(!inp||!inp.value)return;var w=parseFloat(inp.value);if(!w)return;var today=new Date().toLocaleDateString("ar-SA");if(!_pd.bw)_pd.bw=[];var ex2=null;for(var i=0;i<_pd.bw.length;i++)if(_pd.bw[i].d===today)ex2=_pd.bw[i];if(ex2)ex2.w=w;else _pd.bw.push({d:today,w:w});LS.setItem(_PK,JSON.stringify(_pd));pushCloud();rP();}
+
+function showDay(i){
+  _DY.forEach(function(_,di){
+    var s=document.getElementById("ds"+di);
+    if(s)s.style.display=di===i?"block":"none";
+    var b=document.getElementById("dtb"+di);
+    if(b){
+      b.style.background=di===i?"var(--dg)":"#fff";
+      b.style.color=di===i?"#fff":"#1a1a2e";
+      b.style.borderColor=di===i?"transparent":"var(--bd)";
+    }
+  });
+}
+
+function gS(n,el){
+  for(var i=0;i<7;i++){
+    var s=document.getElementById("s"+i);
+    if(s){s.classList.remove("act");s.style.display="none";}
+    var b=document.getElementById("nb"+i);
+    if(b){b.classList.remove("act");b.style.color="";}
+  }
+  var nb1f=document.getElementById("nb1f");if(nb1f){nb1f.classList.remove("act");nb1f.style.color="";}
+  var sec=document.getElementById("s"+n);
+  if(sec){sec.classList.add("act");sec.style.display="block";}
+  var dts=document.querySelector(".dtabs");if(dts)dts.style.display=(n===0)?"flex":"none";
+  if(el){el.classList.add("act");el.style.color="var(--ac)";}
+  if(n===2)rF();
+  if(n===3){rR("all");sAct(document.getElementById("rfall"));}
+  if(n===4)iP();
+  if(n===5)renderFlexT();
+  if(n===6){renderCT();setTimeout(renderMyMeals,0);}
+}
+
+function sAct(el){
+  document.querySelectorAll("#rf .filter-btn,#rf .tf").forEach(function(b){
+    b.classList.remove("act");b.style.background="";b.style.color="";b.style.borderColor="";
+  });
+  if(el){el.classList.add("act");el.style.background="var(--dg)";el.style.color="#fff";el.style.borderColor="transparent";}
+}
+
+function rF(){
+  var q=((document.getElementById("si")||{}).value||"").toLowerCase();
+  var cat=(document.getElementById("sc")||{}).value||"";
+  var fl=_FD.filter(function(x){return(!q||x.name.includes(q))&&(!cat||x.cat===cat);});
+  document.getElementById("fg").innerHTML=fl.map(function(x){
+    var sel=_sw&&_sw.id===x.id;
+    return '<div class="food-item '+(sel?'sel':'')+'" data-fid="'+x.id+'">'+
+      '<span style="font-size:22px;">'+EMO(x.emoji,'💪')+'</span>'+
+      '<div style="flex:1;min-width:0;">'+
+      '<div class="tu0">'+x.name+'</div>'+
+      '<div style="font-size:10px;color:var(--ac);font-weight:700;">'+x.cal+' سعرة/100g</div>'+
+      '<div class="tu2">🥩'+x.pro+'g 🍚'+x.carb+'g 🧈'+x.fat+'g</div>'+
+      '</div>'+
+      (sel?'<span style="color:var(--ac);font-size:18px;">✓</span>':'')+
+      '</div>';
+  }).join("");
+}
+
+function sF(id){
+  _sw=_FD.find(function(x){return x.id===id;});
+  rF();cS();
+}
+
+function cS(){
+  if(!_sw)return;
+  var amt=parseFloat((document.getElementById("sa")||{}).value)||100;
+  var s=_sw;
+  var sC=(s.cal/100)*amt,sP=(s.pro/100)*amt,sK=(s.carb/100)*amt;
+  var res=_FD.filter(function(x){return x.id!==s.id;}).map(function(x){
+    var bP=s.pro>0&&x.pro>0?(sP/x.pro)*100:null;
+    var bC=x.cal>0?(sC/x.cal)*100:null;
+    var bK=s.carb>1&&x.carb>1?(sK/x.carb)*100:null;
+    var g=s.cat===x.cat&&s.cat==="بروتين"&&bP?bP:s.cat===x.cat&&s.cat==="كارب"&&bK?bK:bC||bP||100;
+    g=Math.round(g);if(g<5||g>2000)return null;
+    var eC=Math.round((x.cal/100)*g),eP=Math.round((x.pro/100)*g),eK=Math.round((x.carb/100)*g),eF=Math.round((x.fat/100)*g);
+    var dP=sP>0?Math.abs((eP-sP)/sP*100):0,dC=sC>0?Math.abs((eC-sC)/sC*100):0;
+    var avg=(dC+dP)/2;
+    var bd=avg<=5?{t:"دقيق ✅",c:"#059669",bg:"#d1fae5"}:avg<=15?{t:"مقبول",c:"#92400e",bg:"#fef3c7"}:{t:"تقريبي",c:"#991b1b",bg:"#fee2e2"};
+    return{x:x,g:g,eC:eC,eP:eP,eK:eK,eF:eF,sc:dC+dP*2,bd:bd};
+  }).filter(Boolean).sort(function(a,b){return a.sc-b.sc;}).slice(0,8);
+  var el=document.getElementById("sr");
+  if(!res.length){el.innerHTML="";return;}
+  var h='<div class="card">';
+  h+='<div style="font-size:12px;font-weight:800;color:var(--ac);margin-bottom:12px;">📌 '+s.emoji+' '+s.name+' ('+amt+'g) — '+Math.round(sC)+' سعرة</div>';
+  h+=res.map(function(r){
+    return '<div style="display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0f2f8;">'+
+      '<span style="font-size:22px;">'+EMO(r.x.emoji,'💪')+'</span>'+
+      '<div style="flex:1;min-width:0;">'+
+      '<div class="tu0">'+r.x.name+'</div>'+
+      '<div style="font-size:10px;color:#6b7280;margin-top:2px;">'+r.eC+' سعرة | 🥩'+r.eP+'g | 🍚'+r.eK+'g | 🧈'+r.eF+'g</div>'+
+      '</div>'+
+      '<div style="text-align:center;flex-shrink:0;">'+
+      '<div style="font-size:18px;font-weight:900;color:#059669;">'+r.g+'g</div>'+
+      '<div style="font-size:9px;padding:2px 8px;border-radius:20px;background:'+r.bd.bg+';color:'+r.bd.c+';margin-top:2px;">'+r.bd.t+'</div>'+
+      '</div></div>';
+  }).join("");
+  h+='</div>';
+  el.innerHTML=h;
+}
+
+function rR(f){
+  var gc={bulk:"#6366f1",cut:"#ef4444",quick:"#f59e0b",highpro:"#10b981"};
+  var gl={bulk:"💪 تضخيم",cut:"🔥 تنشيف",quick:"⚡ سريع",highpro:"🥩 بروتين عالي"};
+  var list=f==="all"?_RD:_RD.filter(function(r){return r.tag===f;});
+  document.getElementById("rg").innerHTML=list.map(function(r){
+    var c2=gc[r.tag]||"#6b7280";
+    return '<div class="recipe-card">'+
+      '<div class="recipe-header" style="background:'+c2+'12;border-bottom:1px solid '+c2+'20;">'+
+      '<span style="font-size:28px;">'+EMO(r.emoji,'💪')+'</span>'+
+      '<div style="flex:1;min-width:0;">'+
+      '<div class="tu3">'+r.name+'</div>'+
+      '<div style="display:flex;align-items:center;gap:8px;margin-top:3px;">'+
+      '<span style="font-size:10px;color:'+c2+';font-weight:700;">'+(gl[r.tag]||r.tag)+'</span>'+
+      '<span class="tu1">⏱ '+r.time+'د</span>'+
+      '</div></div></div>'+
+      '<div class="recipe-macros">'+
+      '<div style="text-align:center;"><div style="font-size:13px;font-weight:900;color:'+c2+';">'+r.cal+'</div><div class="tu2">سعرة</div></div>'+
+      '<div style="text-align:center;"><div style="font-size:13px;font-weight:900;color:#3b82f6;">'+r.pro+'g</div><div class="tu2">بروتين</div></div>'+
+      '<div style="text-align:center;"><div style="font-size:13px;font-weight:900;color:#f59e0b;">'+r.carb+'g</div><div class="tu2">كارب</div></div>'+
+      '<div style="text-align:center;"><div style="font-size:13px;font-weight:900;color:#10b981;">'+r.fat+'g</div><div class="tu2">دهون</div></div>'+
+      '</div>'+
+      '<div style="padding:10px 12px;">'+
+      '<details><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#6b7280;padding:4px 0;">🛒 المكونات ('+r.ingredients.length+')</summary>'+
+      '<ul style="margin:6px 0;padding-right:16px;">'+(r.ingredients||[]).map(function(i){return'<li style="font-size:11px;color:#6b7280;margin-bottom:2px;">'+i+'</li>';}).join('')+'</ul></details>'+
+      '<details style="margin-top:4px;"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#6b7280;padding:4px 0;">📋 طريقة التحضير</summary>'+
+      '<ol style="margin:6px 0;padding-right:16px;">'+(r.steps||[]).map(function(s){return'<li style="font-size:11px;color:#374151;margin-bottom:3px;">'+s+'</li>';}).join('')+'</ol></details>'+
+      ((r.alts&&r.alts.length)?
+        '<details style="margin-top:4px;"><summary style="cursor:pointer;font-size:12px;font-weight:700;color:var(--ac);padding:4px 0;">🔄 وصفة بديلة ('+r.alts.length+')</summary>'+
+        r.alts.map(function(a){return'<div style="background:#f0f8ff;border-radius:10px;padding:10px;margin-top:6px;border:1px solid #bfdbfe;">'+
+          '<div style="font-size:12px;font-weight:800;">'+a.emoji+' '+a.name+'</div>'+
+          '<div style="font-size:11px;color:#059669;margin-top:2px;">💡 '+a.why+'</div></div>';}).join('')+
+        '</details>':'')+
+      '</div></div>';
+  }).join("");
+}
+
+function iP(){
+  document.getElementById("pd").innerHTML=_DY.map(function(d,i){
+    return '<button class="tf'+(i===0?" act":"")+'" data-di="'+i+'" style="'
+      +(i===0?'background:var(--dg);color:#fff;border-color:transparent;':'')
+      +'">'+EMO(d.emoji,"📋")+' '+esc(d.nameAr||"يوم "+(i+1))+'</button>';
+  }).join("");
+  selD(0,document.querySelector("#pd .tf"));
+}
+
+function selD(i,el){
+  _py=i;
+  document.querySelectorAll("#pd .tf").forEach(function(b){
+    b.classList.remove("act");b.style.background="";b.style.color="";b.style.borderColor="";
+  });
+  if(el){el.classList.add("act");el.style.background="var(--dg)";el.style.color="#fff";el.style.borderColor="transparent";}
+  rP();
+}
+
+function rP(){
+  var _intro=_C.intro||"";
+  var _introCard=_intro?'<div class="card" style="margin-bottom:14px;border:2px solid var(--ac);background:linear-gradient(135deg,var(--ac)0a,transparent);"><div class="tu0" style="color:var(--ac);margin-bottom:6px;">🎯 أهدافي</div><div style="font-size:12.5px;line-height:1.9;white-space:pre-wrap;">'+esc(_intro)+'</div></div>':"";
+  var day=_DY[_py];
+  var today=new Date().toLocaleDateString("ar-SA");
+  if(!_pd[_py])_pd[_py]=[];
+  var ss=_pd[_py];
+  var last=null;for(var li=ss.length-1;li>=0;li--){if(ss[li].date!==today){last=ss[li];break;}}
+  var td=null;for(var ti=0;ti<ss.length;ti++){if(ss[ti].date===today){td=ss[ti];break;}}
+  if(!td)td={date:today,ex:{}};
+  var saSet=typeof _SA.has==="function"?_SA:new Set(_SA);
+  var ex=(day.exercises||[]).filter(function(e){return !saSet.has(e.nameAr||"");});
+  var h='<div class="card" style="margin-bottom:12px;"><div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">';
+  h+='<span class="tu0">⏱ راحة:</span>';
+  [["1:00",60],["1:30",90],["2:00",120],["3:00",180]].forEach(function(o){h+='<button data-rt="'+o[1]+'" style="padding:6px 12px;border-radius:20px;border:1.5px solid var(--bd);background:#fff;font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation;font-family:Tajawal,sans-serif;">'+o[0]+'</button>';});
+  h+='<button data-rt="0" style="padding:6px 10px;border-radius:20px;border:none;background:#fee2e2;color:#ef4444;font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation;">✕</button>';
+  h+='<button data-snd="1" id="sndBtn" style="padding:6px 10px;border-radius:20px;border:1.5px solid var(--bd);background:#fff;font-size:13px;cursor:pointer;touch-action:manipulation;">'+(LS.getItem("snd_on")==="1"?"🔔":"🔕")+'</button>';
+  h+='<span id="rtD" style="font-size:16px;font-weight:900;font-family:Tajawal,sans-serif;min-width:60px;"></span>';
+  h+='</div></div>';
+  var wkC=_C.wk||null;var curWk=calcWk();
+  if(wkC&&wkC.n>1){
+    h+='<div class="card" style="margin-bottom:12px;"><div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;">';
+    h+='<span class="tu0" style="margin-left:4px;">🗓 الأسبوع:</span>';
+    for(var wi=1;wi<=wkC.n;wi++){
+      var isDl=wkC.deload&&wi===wkC.n;
+      h+='<button data-wk="'+wi+'" style="padding:6px 12px;border-radius:20px;border:1.5px solid '+(wi===curWk?'transparent':'var(--bd)')+';background:'+(wi===curWk?'var(--dg)':'#fff')+';color:'+(wi===curWk?'#fff':'#6b7280')+';font-size:12px;font-weight:800;cursor:pointer;touch-action:manipulation;font-family:Tajawal,sans-serif;">'+wi+(isDl?' 🪶':'')+'</button>';
+    }
+    if(wkC.deload)h+='<span class="tu2">🪶 = Deload</span>';
+    h+='<span class="tu2" style="margin-right:auto;">'+(_pd.wkManual?'يدوي':'تلقائي')+'</span>';
+    if(_pd.wkManual)h+='<button data-wkauto="1" title="عودة للتلقائي" style="padding:5px 9px;border-radius:20px;border:1.5px solid var(--bd);background:#fff;font-size:11px;font-weight:700;cursor:pointer;touch-action:manipulation;font-family:Cairo,sans-serif;">🅰 تلقائي</button>';
+    h+='<button data-wkreset="1" title="إعادة الدورة من الأسبوع 1" style="padding:5px 9px;border-radius:20px;border:1.5px solid var(--bd);background:#fff;font-size:11px;cursor:pointer;touch-action:manipulation;">🔄</button>';
+    h+='</div></div>';
+  }
+  h+=_introCard;h+=msgsHtml();
+  var dCats=(day._cats&&day._cats.length)?day._cats:tplDayCats(day);
+  if((day.exercises||[]).length){
+    h+='<div class="card" style="margin-bottom:12px;"><div style="display:flex;align-items:center;gap:12px;">';
+    h+=tplMuscle(dCats);
+    h+='<div><div class="tu0" style="margin-bottom:4px;">🎯 عضلات اليوم</div><div class="tu2">'+(dCats.length?dCats.join(' · '):'تمارين متنوعة')+'</div></div>';
+    h+='</div></div>';
+  }
+  h+='<button data-wmstart="1" class="sp" style="margin-bottom:12px;">▶️ وضع التمرين — تمرين بتمرين</button>';
+  if(!ex.length){
+    document.getElementById("pc").innerHTML=h+'<div style="text-align:center;padding:30px;color:#aaa;">لا توجد تمارين مقاومة</div>'+bwCard();return;
+  }
+  h+='<div class="card">';
+  h+='<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">';
+  h+='<div style="font-size:14px;font-weight:900;color:#1a1a2e;">📝 جلسة اليوم</div>';
+  h+='<div style="font-size:11px;color:#6b7280;background:#f0f2f8;padding:4px 10px;border-radius:20px;">'+today+'</div></div>';
+  ex.forEach(function(e,ei){
+    var k=e.nameAr||(""+ei);
+    var pv=last&&last.ex?(last.ex[k]||last.ex[ei]):null;
+    var cr=(td.ex&&(td.ex[k]||td.ex[ei]))||null;
+    var df=cr&&cr.w&&pv&&pv.w?parseFloat(cr.w)-parseFloat(pv.w):null;
+    var arrow=df===null?"":df>0?'<span style="color:#10b981;font-weight:900;">↑+'+df.toFixed(1)+'</span>':df<0?'<span style="color:#ef4444;font-weight:900;">↓'+df.toFixed(1)+'</span>':'<span style="color:#6b7280;">→</span>';
+    var orm=cr&&cr.w&&cr.r?Math.round(cr.w*(1+cr.r/30)):null;
+    h+='<div style="display:grid;grid-template-columns:1fr 72px 56px 44px;gap:6px;align-items:center;padding:10px 0;border-bottom:1px solid #f0f2f8;">';
+    h+='<div>';
+    h+='<div class="tu0">'+EMO(e.emoji,'')+' '+esc(e.nameAr)+'</div>';
+    h+='<div style="font-size:10px;color:#6b7280;margin-top:1px;">'+e.sets+'×'+e.reps+(e.suggWt!=null?' · 🏋️ '+e.suggWt+(e.unit==="time"?"ث":"كجم"):'')
+      +(pv&&pv.w?' · السابق: '+pv.w+'kg'+(pv.r?' ×'+pv.r:''):'')
+      +(function(){if(!wkC||!pv||!pv.w)return'';var f=(wkC.deload&&wkC.n>1&&curWk>=wkC.n)?0.6:(1+(+wkC.inc||0)/100);if(f===1)return'';var s5=Math.round(pv.w*f*2)/2;return' · 🎯 '+((f<1)?'Deload: ':'مقترح: ')+s5+'kg';})()
+      +(orm?' · <b style="color:var(--ac);">1RM≈'+orm+'kg</b>':'')+'</div>';
+    h+=spark(k,ss);
+    h+='</div>';
+    h+='<div><div style="font-size:9px;color:#6b7280;margin-bottom:3px;text-align:center;">الوزن (كج)</div>';
+    h+='<input class="ti" type="number" step="0.5" placeholder="'+(pv&&pv.w?pv.w:0)+'" value="'+(cr&&cr.w?cr.w:'')+'" data-ei="'+esc(k)+'" style="text-align:center;font-size:15px;font-weight:900;padding:8px 4px;"></div>';
+    h+='<div><div style="font-size:9px;color:#6b7280;margin-bottom:3px;text-align:center;">عدات</div>';
+    h+='<input class="ti" type="number" step="1" placeholder="'+(pv&&pv.r?pv.r:e.reps||'')+'" value="'+(cr&&cr.r?cr.r:'')+'" data-er="'+esc(k)+'" style="text-align:center;font-size:15px;font-weight:900;padding:8px 4px;"></div>';
+    h+='<div style="text-align:center;font-size:13px;">'+arrow+'</div></div>';
+  });
+  h+='</div>';
+  h+='<button class="sp" id="savePBtn">💾 حفظ جلسة اليوم</button>';
+  h+='<a id="waBtn" href="#" target="_blank" class="wa-btn">📲 أرسل تقدمي للمدرب عبر واتساب</a>';
+  h+=bwCard();
+  h+='<div id="wm"></div>';
+  document.getElementById("pc").innerHTML=h;
+}
+
+function uP(k,v){
+  var today=new Date().toLocaleDateString("ar-SA");
+  if(!_pd[_py])_pd[_py]=[];
+  var s=null;for(var i=0;i<_pd[_py].length;i++)if(_pd[_py][i].date===today)s=_pd[_py][i];
+  if(!s){s={date:today,ex:{}};_pd[_py].push(s);}
+  if(!s.ex[k])s.ex[k]={};
+  s.ex[k].w=parseFloat(v)||0;
+  prCheck(k,parseFloat(v)||0);
+}
+function uPR(k,v){
+  var today=new Date().toLocaleDateString("ar-SA");
+  if(!_pd[_py])_pd[_py]=[];
+  var s=null;for(var i=0;i<_pd[_py].length;i++)if(_pd[_py][i].date===today)s=_pd[_py][i];
+  if(!s){s={date:today,ex:{}};_pd[_py].push(s);}
+  if(!s.ex[k])s.ex[k]={};
+  s.ex[k].r=parseInt(v)||0;
+}
+
+function sP(){
+  try{if(window.Notification&&Notification.permission==="default")Notification.requestPermission();}catch(e){}
+  if(!_pd.wkStart)_pd.wkStart=Date.now();
+  LS.setItem(_PK,JSON.stringify(_pd));
+  pushCloud();
+  var b=document.getElementById("savePBtn");
+  if(b){b.textContent="✅ تم الحفظ!";setTimeout(function(){b.textContent="💾 حفظ جلسة اليوم";},2000);}
+  // بناء رسالة واتساب
+  var day=_DY[_py];
+  var today=new Date().toLocaleDateString("ar-SA");
+  if(!_pd[_py])_pd[_py]=[];
+  var ss=_pd[_py];
+  var td=ss.find(function(s){return s.date===today;});
+  var saSet=typeof _SA.has==="function"?_SA:new Set(_SA);
+  var ex=(day.exercises||[]).filter(function(e){return !saSet.has(e.nameAr||"");});
+  var lines=["💪 تقدم "+day.nameAr+" — "+today,"─────────────"];
+  ex.forEach(function(e,ei){
+    var k=e.nameAr||(""+ei);
+    var rec=td&&td.ex?(td.ex[k]||td.ex[ei]):null;
+    var w=rec?rec.w:null;
+    lines.push((ei+1)+". "+e.nameAr+": "+(w?w+"kg"+(rec.r?" ×"+rec.r:"")+" ✅":"لم يُسجل"));
+  });
+  if(_pd.bw&&_pd.bw.length){var lb=_pd.bw[_pd.bw.length-1];lines.push("⚖️ وزن الجسم: "+lb.w+"kg ("+lb.d+")");}
+  lines.push("─────────────");
+  lines.push("📱 مُرسَل من تطبيق الجدول المعتمد");
+  var msg=encodeURIComponent(lines.join("\n"));
+  var waUrl="https://wa.me/?text="+msg;
+  // نبني زر واتساب
+  var pc=document.getElementById("pc");
+  if(pc){
+    var existing=document.getElementById("waBtn");
+    if(existing){existing.href=waUrl;existing.style.display="flex";}
+    else{
+      var wa=document.createElement("a");
+      wa.id="waBtn";wa.href=waUrl;wa.target="_blank";
+      wa.style.cssText="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:12px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;font-size:14px;font-weight:800;text-decoration:none;margin-top:10px;touch-action:manipulation;font-family:Cairo,sans-serif;box-shadow:0 4px 12px rgba(37,211,102,.3);";
+      wa.innerHTML="📲 أرسل تقدمي للمدرب عبر واتساب";
+      pc.appendChild(wa);
+    }
+  }
+}
+
+function sendWA(){
+  var day=_DY[_py];
+  var today=new Date().toLocaleDateString("ar-SA");
+  var ss=_pd[_py]||[];
+  var td=ss.find(function(s){return s.date===today;});
+  var last=ss.length>=2?ss[ss.length-2]:null;
+  var ex=(day.exercises||[]).filter(function(e){return !(typeof _SA.has==="function"?_SA.has:function(x){return _SA.indexOf(x)>=0;})(e.nameAr||"");});
+  var lines=["💪 تقدم "+day.nameAr+" — "+today,""];
+  ex.forEach(function(e,ei){
+    var k=e.nameAr||(""+ei);
+    var crR=td&&td.ex?(td.ex[k]||td.ex[ei]):null;
+    var cr=crR&&crR.w?crR.w:"—";
+    var pvR=last&&last.ex?(last.ex[k]||last.ex[ei]):null;
+    var pv=pvR?pvR.w:null;
+    var diff=cr!=="—"&&pv?parseFloat(cr)-parseFloat(pv):null;
+    var arrow=diff===null?"":diff>0?" ⬆️+"+diff.toFixed(1)+"kg":diff<0?" ⬇️"+diff.toFixed(1)+"kg":" ➡️";
+    lines.push((EMO(e.emoji,"")?EMO(e.emoji,"")+" ":"")+e.nameAr+": "+cr+"kg"+arrow);
+  });
+  if(_pd.bw&&_pd.bw.length){var lb=_pd.bw[_pd.bw.length-1];lines.push("⚖️ وزن الجسم: "+lb.w+"kg ("+lb.d+")");}
+  lines.push("");
+  lines.push("📅 مُرسَل من تطبيق الجدول المعتمد");
+  var msg=encodeURIComponent(lines.join("\n"));
+  var btn=document.getElementById("waBtn");if(btn){btn.href="https://wa.me/?text="+msg;btn.style.display="flex";}
+}
+
+var _ctKey="ct_"+_PK+"_";
+function getTodayKey(){return _ctKey+new Date().toISOString().slice(0,10);}
+(function cleanCT(){try{var cut=new Date(Date.now()-90*864e5).toISOString().slice(0,10);for(var i=LS.length-1;i>=0;i--){var key=LS.key(i);if(key&&key.indexOf(_ctKey)===0){var d=key.slice(_ctKey.length);if(!/^\d{4}-\d{2}-\d{2}$/.test(d)||d<cut)LS.removeItem(key);}}}catch(e){}})();
+function loadCT(){return JSON.parse(LS.getItem(getTodayKey())||'{"meals":[],"target":'+(_C.nd&&_C.nd.calories?_C.nd.calories:2000)+'}');}
+function saveCT(d){LS.setItem(getTodayKey(),JSON.stringify(d));}
+
+function renderCT(){
+  var el=document.getElementById("ctSec");
+  if(!el)return;
+  var d=loadCT();
+  var target=d.target||(_C.nd&&_C.nd.calories?_C.nd.calories:2000);
+  var nd=_C.nd||{};
+  var pp=+(nd.proP||30),cp=+(nd.carbP||45),fp=+(nd.fatP||25);
+  var tP=Math.round(target*pp/100/4);
+  var tK=Math.round(target*cp/100/4);
+  var tF=Math.round(target*fp/100/9);
+  var totCal=0,totP=0,totK=0,totF=0;
+  d.meals.forEach(function(m){totCal+=m.cal||0;totP+=m.pro||0;totK+=m.carb||0;totF+=m.fat||0;});
+  var rem=target-totCal;
+  var pct=Math.min(100,Math.round(totCal/target*100));
+  var barColor=pct<85?"#10b981":pct<100?"#f59e0b":"#ef4444";
+  var today=new Date().toLocaleDateString("ar-SA",{weekday:"long",month:"long",day:"numeric"});
+  el.innerHTML=
+    '<div id="ctSummaryDiv">'+buildCTSummary(d,target,tP,tK,tF,totCal,totP,totK,totF,rem,pct,barColor,today)+'</div>'+
+    '<div style="background:#fff;border-radius:12px;border:1.5px solid var(--bd);padding:12px;margin-bottom:14px;">'+
+    '<div style="font-size:12px;font-weight:800;color:#6b7280;margin-bottom:8px;">🎯 تعديل الهدف</div>'+
+    '<div style="display:flex;align-items:center;gap:8px;">'+
+    '<button data-ctadj="-100" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--bd);background:#fff;font-size:18px;cursor:pointer;touch-action:manipulation;">−</button>'+
+    '<input id="ctTarget" type="number" value="'+target+'" min="800" max="6000" step="50"'+
+    ' style="flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--ac);font-size:20px;font-weight:900;color:var(--ac);text-align:center;font-family:Tajawal,sans-serif;">'+
+    '<button data-ctadj="100" style="width:36px;height:36px;border-radius:50%;border:1.5px solid var(--bd);background:#fff;font-size:18px;cursor:pointer;touch-action:manipulation;">+</button>'+
+    '<button data-ctset="1" style="padding:8px 14px;border-radius:10px;border:none;background:var(--dg);color:#fff;font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation;">حفظ</button>'+
+    '</div></div>'+
+    '<div style="background:#fff;border-radius:12px;border:1.5px solid var(--bd);padding:12px;margin-bottom:14px;">'+
+    '<div style="font-size:13px;font-weight:900;color:#1a1a2e;margin-bottom:10px;">➕ أضف وجبة</div>'+
+    '<input id="ctSearch" class="ti" placeholder="🔍 ابحث عن صنف..." style="margin-bottom:8px;">'+
+    '<div id="ctFoodList" style="max-height:200px;overflow-y:auto;margin-bottom:10px;"></div>'+
+    '<div style="display:grid;grid-template-columns:1fr 80px auto;gap:6px;align-items:center;margin-bottom:8px;">'+
+    '<div id="ctSelectedFood" style="font-size:12px;font-weight:700;color:var(--ac);padding:8px;background:#eef2ff;border-radius:8px;min-height:36px;">اختر صنف من الأعلى</div>'+
+    '<input id="ctGrams" type="number" value="100" min="10" max="2000" step="10" class="ti" style="text-align:center;">'+
+    '<button data-ctadd="1" style="padding:8px 12px;border-radius:10px;border:none;background:#10b981;color:#fff;font-size:13px;font-weight:700;cursor:pointer;touch-action:manipulation;white-space:nowrap;">أضف</button>'+
+    '</div>'+
+    '<div id="myMealsBox"></div>'+
+    '<details><summary style="cursor:pointer;font-size:12px;font-weight:700;color:#6b7280;">✏️ إضافة يدوية</summary>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;margin-bottom:6px;">'+
+    '<input id="ctManName" class="ti" placeholder="اسم الوجبة" style="font-size:12px;">'+
+    '<input id="ctManCal" class="ti" type="number" placeholder="🔥 سعرات" style="font-size:12px;">'+
+    '</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:6px;">'+
+    '<input id="ctManPro" class="ti" type="number" placeholder="🥩 بروتين" style="font-size:11px;">'+
+    '<input id="ctManCarb" class="ti" type="number" placeholder="🍚 كارب" style="font-size:11px;">'+
+    '<input id="ctManFat" class="ti" type="number" placeholder="🧈 دهون" style="font-size:11px;">'+
+    '<button data-ctmanual="1" style="padding:8px 12px;border-radius:10px;border:none;background:var(--dg);color:#fff;font-size:12px;font-weight:700;cursor:pointer;touch-action:manipulation;">أضف</button>'+
+    '</div></details></div>'+
+    '<div id="ctMealsDiv">'+buildCTMeals(d)+'</div>';
+  var si=document.getElementById("ctSearch");
+  if(si)si.oninput=function(){searchCT();};
+}
+
+
+function buildCTSummary(d,target,tP,tK,tF,totCal,totP,totK,totF,rem,pct,barColor,today){
+  var h='<div style="background:#fff;border-radius:14px;border:1.5px solid #e5e9f4;padding:16px;margin-bottom:14px;">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">';
+  h+='<div class="tu3">📅 '+today+'</div>';
+  h+='<div style="font-size:11px;color:#6b7280;">الهدف: '+target+' سعرة</div></div>';
+  h+='<div style="background:#f0f2f8;border-radius:20px;height:14px;overflow:hidden;margin-bottom:10px;">';
+  h+='<div style="height:100%;width:'+pct+'%;background:'+barColor+';border-radius:20px;"></div></div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">';
+  [['مستهلك',totCal,'#3b82f6','#f0f9ff'],[(rem>=0?'متبقي':'فائض'),Math.abs(rem),(rem>=0?'#10b981':'#ef4444'),(rem>=0?'#f0fdf4':'#fef2f2')]].forEach(function(x){
+    h+='<div style="text-align:center;background:'+x[3]+';border-radius:10px;padding:8px;">';
+    h+='<div class="tu4">'+x[0]+'</div>';
+    h+='<div style="font-size:20px;font-weight:900;color:'+x[2]+';font-family:Tajawal,sans-serif;">'+x[1]+'</div></div>';
+  });
+  h+='<div style="text-align:center;background:#f5f3ff;border-radius:10px;padding:8px;">';
+  h+='<div class="tu4">الهدف</div>';
+  h+='<div style="font-size:20px;font-weight:900;color:var(--ac);font-family:Tajawal,sans-serif;">'+target+'</div></div></div>';
+  h+='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:10px;">';
+  [["🥩","بروتين",totP,tP,"#3b82f6"],["🍚","كارب",totK,tK,"#f59e0b"],["🧈","دهون",totF,tF,"#10b981"]].forEach(function(x){
+    var mp=Math.min(100,x[3]>0?Math.round(x[2]/x[3]*100):0);
+    h+='<div style="background:#fff;border-radius:10px;padding:8px;border:1px solid #f0f2f8;text-align:center;">';
+    h+='<div style="font-size:11px;font-weight:700;color:'+x[4]+';">'+x[0]+' '+x[1]+'</div>';
+    h+='<div class="tu3">'+x[2]+'<span style="font-size:10px;color:#9ca3af;">/'+x[3]+'g</span></div>';
+    h+='<div style="background:#f0f2f8;border-radius:20px;height:4px;margin-top:4px;">';
+    h+='<div style="height:100%;width:'+mp+'%;background:'+x[4]+';border-radius:20px;"></div></div></div>';
+  });
+  h+='</div></div>';
+  return h;
+}
+
+function buildCTMeals(d){
+  var h='<div style="background:#fff;border-radius:12px;border:1.5px solid #e5e9f4;padding:12px;">';
+  h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">';
+  h+='<div class="tu3">🍽️ وجبات اليوم ('+d.meals.length+')</div>';
+  if(d.meals.length>0)h+='<button data-ctclear="1" style="font-size:11px;color:#ef4444;border:none;background:none;cursor:pointer;font-weight:700;touch-action:manipulation;">مسح الكل</button>';
+  h+='</div>';
+  if(!d.meals.length){
+    h+='<div style="text-align:center;padding:16px;color:#aaa;font-size:12px;">لم تُضف أي وجبة بعد</div>';
+  } else {
+    d.meals.forEach(function(m,i){
+      h+='<div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8faff;border-radius:10px;margin-bottom:6px;border:1px solid #e5e9f4;">';
+      h+='<span style="font-size:18px;">'+(m.emoji||"🍽️")+'</span>';
+      h+='<div style="flex:1;"><div class="tu0">'+m.name+'</div>';
+      h+='<div class="tu1">'+m.cal+' سعرة | 🥩'+m.pro+'g | 🍚'+m.carb+'g | 🧈'+m.fat+'g</div></div>';
+      h+='<button data-ctrm="'+i+'" style="border:none;background:none;color:#ef4444;font-size:18px;cursor:pointer;padding:4px;touch-action:manipulation;">✕</button>';
+      h+='</div>';
+    });
+  }
+  h+='</div>';
+  return h;
+}
+
+function renderCTSummary(){
+  var d=loadCT();
+  var target=d.target||(_C.nd&&_C.nd.calories?_C.nd.calories:2000);
+  var nd=_C.nd||{};
+  var pp=+(nd.proP||30),cp=+(nd.carbP||45),fp=+(nd.fatP||25);
+  var tP=Math.round(target*pp/100/4),tK=Math.round(target*cp/100/4),tF=Math.round(target*fp/100/9);
+  var totCal=0,totP=0,totK=0,totF=0;
+  d.meals.forEach(function(m){totCal+=m.cal||0;totP+=m.pro||0;totK+=m.carb||0;totF+=m.fat||0;});
+  var rem=target-totCal,pct=Math.min(100,Math.round(totCal/target*100));
+  var barColor=pct<85?"#10b981":pct<100?"#f59e0b":"#ef4444";
+  var today=new Date().toLocaleDateString("ar-SA",{weekday:"long",month:"long",day:"numeric"});
+  var el=document.getElementById("ctSummaryDiv");
+  if(el)el.innerHTML=buildCTSummary(d,target,tP,tK,tF,totCal,totP,totK,totF,rem,pct,barColor,today);
+}
+
+function renderCTMeals(){
+  var el=document.getElementById("ctMealsDiv");
+  if(el)el.innerHTML=buildCTMeals(loadCT());
+}
+
+var _ctSel=null;
+function searchCT(){
+  var q=((document.getElementById("ctSearch")||{}).value||"").toLowerCase();
+  var list=q?_FD.filter(function(f){return f.name.includes(q)||f.nameEn.toLowerCase().includes(q);}):[];
+  var el=document.getElementById("ctFoodList");
+  if(!el)return;
+  el.innerHTML=list.slice(0,10).map(function(f){
+    var sel=_ctSel&&_ctSel.id===f.id;
+    return'<div data-ctfid="'+f.id+'" style="display:flex;align-items:center;gap:8px;padding:10px;border-radius:10px;margin-bottom:6px;cursor:pointer;touch-action:manipulation;border:1.5px solid '+(sel?'#6366f1':'#f0f2f8')+';background:'+(sel?'#eef2ff':'#fff')+';">'+
+    '<span style="font-size:20px;">'+f.emoji+'</span>'+
+    '<div style="flex:1;"><div class="tu0">'+f.name+'</div>'+
+    '<div class="tu1">'+f.cal+' سعرة/100g | 🥩'+f.pro+'g | 🍚'+f.carb+'g | 🧈'+f.fat+'g</div></div>'+
+    (sel?'<span style="color:#6366f1;font-size:18px;">✓</span>':'')+'</div>';
+  }).join("");
+}
+function selCTFood(id){
+  _ctSel=_FD.find(function(f){return f.id===id;});
+  var el=document.getElementById("ctSelectedFood");
+  if(el&&_ctSel)el.textContent=_ctSel.emoji+" "+_ctSel.name;
+  searchCT();
+}
+function addCTMeal(){
+  if(!_ctSel)return;
+  var g=+(document.getElementById("ctGrams")||{value:100}).value||100;
+  var d=loadCT();
+  d.meals.push({name:_ctSel.name,emoji:_ctSel.emoji,
+    cal:Math.round(_ctSel.cal/100*g),pro:Math.round(_ctSel.pro/100*g),
+    carb:Math.round(_ctSel.carb/100*g),fat:Math.round(_ctSel.fat/100*g)});
+  saveCT(d);_ctSel=null;
+  var si=document.getElementById("ctSearch");if(si)si.value="";
+  var fl=document.getElementById("ctFoodList");if(fl)fl.innerHTML="";
+  var sf=document.getElementById("ctSelectedFood");if(sf)sf.textContent="اختر صنف من الأعلى";
+  renderCTSummary();renderCTMeals();
+}
+function addCTManual(){
+  var name=(document.getElementById("ctManName")||{value:""}).value||"وجبة";
+  var cal=+(document.getElementById("ctManCal")||{value:0}).value||0;
+  var pro=+(document.getElementById("ctManPro")||{value:0}).value||0;
+  var carb=+(document.getElementById("ctManCarb")||{value:0}).value||0;
+  var fat=+(document.getElementById("ctManFat")||{value:0}).value||0;
+  if(!cal&&(pro||carb||fat))cal=Math.round(pro*4+carb*4+fat*9);
+  if(!cal)return;
+  var d=loadCT();
+  d.meals.push({name:name,emoji:"🍽️",cal:cal,pro:pro,carb:carb,fat:fat});
+  saveMyMeal({name:name,cal:cal,pro:pro,carb:carb,fat:fat});
+  saveCT(d);renderCTSummary();renderCTMeals();renderMyMeals();
+}
+function myMealsList(){try{return JSON.parse(LS.getItem("my_meals")||"[]");}catch(e){return[];}}
+function saveMyMeal(mm){
+  if(!mm.name||mm.name==="وجبة")return;
+  var l=myMealsList().filter(function(x){return x.name!==mm.name;});
+  l.unshift(mm);if(l.length>30)l=l.slice(0,30);
+  LS.setItem("my_meals",JSON.stringify(l));
+}
+function renderMyMeals(){
+  var el=document.getElementById("myMealsBox");if(!el)return;
+  var l=myMealsList();
+  if(!l.length){el.innerHTML="";return;}
+  var h='<div style="font-size:11px;font-weight:800;color:#6b7280;margin:8px 0 6px;">⭐ وجباتي المحفوظة — اضغط لإضافتها لليوم</div><div style="display:flex;flex-wrap:wrap;gap:6px;">';
+  l.forEach(function(mm,i){
+    h+='<span style="display:inline-flex;align-items:center;gap:6px;background:#fff;border:1.5px solid var(--bd);border-radius:18px;padding:6px 10px;font-size:11px;font-weight:700;">'
+      +'<span data-mymeal="'+i+'" style="cursor:pointer;">🍽️ '+esc(mm.name)+' · '+mm.cal+'</span>'
+      +'<span data-mymealdel="'+i+'" style="cursor:pointer;color:#ef4444;font-weight:900;padding:0 2px;">×</span></span>';
+  });
+  el.innerHTML=h+'</div>';
+}
+function addMyMeal(i){
+  var mm=myMealsList()[i];if(!mm)return;
+  var d=loadCT();
+  d.meals.push({name:mm.name,emoji:"⭐",cal:mm.cal,pro:mm.pro||0,carb:mm.carb||0,fat:mm.fat||0});
+  saveCT(d);renderCTSummary();renderCTMeals();
+}
+function delMyMeal(i){
+  var l=myMealsList();
+  if(!confirm('حذف "'+((l[i]||{}).name||'الوجبة')+'" من وجباتك المحفوظة نهائياً؟'))return;
+  l.splice(i,1);
+  LS.setItem("my_meals",JSON.stringify(l));renderMyMeals();
+}
+function rmCTMeal(i){
+  var d=loadCT();
+  if(!confirm('حذف "'+(((d.meals||[])[i]||{}).name||'الوجبة')+'" من وجبات اليوم؟'))return;
+  d.meals.splice(i,1);
+  saveCT(d);renderCTSummary();renderCTMeals();
+}
+function clearCT(){
+  if(!confirm("مسح جميع وجبات اليوم؟"))return;
+  var d=loadCT();d.meals=[];
+  saveCT(d);renderCTSummary();renderCTMeals();
+}
+function setCTTarget(){
+  var inp=document.getElementById("ctTarget");if(!inp)return;
+  var d=loadCT();d.target=+(inp.value)||2000;
+  saveCT(d);renderCTSummary();
+}
+
+
+document.addEventListener("click",function(e){
+  var t2;
+  if(t2=e.target.closest("[data-rt]")){var s4=+t2.getAttribute("data-rt");if(s4>0)startRest(s4);else stopRest();return;}
+  if(t2=e.target.closest("[data-bwsave]")){saveBW();return;}
+  if(t2=e.target.closest("[data-snd]")){sndToggle();return;}
+  if(t2=e.target.closest("[data-rej]")){rejFlow(t2.getAttribute("data-rej"));return;}
+  if(t2=e.target.closest("[data-msgdel]")){delTmsg(t2.getAttribute("data-msgdel"));return;}
+  if(t2=e.target.closest("[data-mymeal]")){addMyMeal(+t2.getAttribute("data-mymeal"));return;}
+  if(t2=e.target.closest("[data-mymealdel]")){delMyMeal(+t2.getAttribute("data-mymealdel"));return;}
+  if(t2=e.target.closest("[data-wkauto]")){_pd.wkManual=false;LS.setItem(_PK,JSON.stringify(_pd));rP();return;}
+  if(t2=e.target.closest("[data-wkreset]")){if(confirm("إعادة الدورة من الأسبوع 1؟"))_pd.wkStart=Date.now();_pd.wkManual=false;_pd.wkCur=1;LS.setItem(_PK,JSON.stringify(_pd));rP();return;}
+  if(t2=e.target.closest("[data-wk]")){_pd.wkCur=+t2.getAttribute("data-wk");_pd.wkManual=true;LS.setItem(_PK,JSON.stringify(_pd));rP();return;}
+  if(t2=e.target.closest("[data-wmstart]")){wmStart();return;}
+  if(t2=e.target.closest("[data-wmdone]")){wmDoneSet();return;}
+  if(t2=e.target.closest("[data-wmnext]")){wmNextEx();return;}
+  if(t2=e.target.closest("[data-wmclose]")){wmClose();return;}
+  if(t2=e.target.closest("[data-fmadd]")){openFmPicker(+t2.getAttribute("data-fmadd"));return;}
+  if(t2=e.target.closest("[data-fmclose]")){closeFmPicker();return;}
+  if(t2=e.target.closest("[data-fmfid]")){_fmSel=_FD.find(function(f){return f.id===t2.getAttribute("data-fmfid");});fmFilter();return;}
+  if(t2=e.target.closest("[data-fmcat]")){_fmCat=t2.getAttribute("data-fmcat");document.querySelectorAll("[data-fmcat]").forEach(function(b){var on=b.getAttribute("data-fmcat")===_fmCat;b.style.background=on?"var(--dg)":"#fff";b.style.color=on?"#fff":"#6b7280";b.style.borderColor=on?"var(--dg)":"#e5e9f4";});fmFilter();return;}
+  if(t2=e.target.closest("[data-fmconfirm]")){addFmFood();return;}
+  if(t2=e.target.closest("[data-fmrm]")){var p2=t2.getAttribute("data-fmrm").split("-");rmFmFood(+p2[0],+p2[1]);return;}
+  if(t2=e.target.closest("[data-ctfid]")){selCTFood(t2.getAttribute("data-ctfid"));return;}
+  if(t2=e.target.closest("[data-ctadj]")){var v2=+t2.getAttribute("data-ctadj");var inp2=document.getElementById("ctTarget");if(inp2)inp2.value=Math.max(800,Math.min(6000,+(inp2.value||2000)+v2));return;}
+  if(t2=e.target.closest("[data-ctset]")){setCTTarget();return;}
+  if(t2=e.target.closest("[data-ctadd]")){addCTMeal();return;}
+  if(t2=e.target.closest("[data-ctmanual]")){addCTManual();return;}
+  if(t2=e.target.closest("[data-ctrm]")){rmCTMeal(+t2.getAttribute("data-ctrm"));return;}
+  if(t2=e.target.closest("[data-ctclear]")){clearCT();return;}
+  if(t2=e.target.closest("[data-fid]")){sF(t2.getAttribute("data-fid"));return;}
+  if(t2=e.target.closest("[data-f]")){rR(t2.getAttribute("data-f"));sAct(t2);return;}
+  if(t2=e.target.closest("[data-di]")){selD(+t2.getAttribute("data-di"),t2);return;}
+  if(e.target.id==="savePBtn"||e.target.closest("#savePBtn")){sP();return;}
+});
+
+document.addEventListener("input",function(e){
+  if(e.target.id==="ctSearch"){searchCT();return;}
+  if(e.target.id==="si"||e.target.id==="sc"){rF();return;}
+  if(e.target.id==="sa"){cS();return;}
+  if(e.target.id==="fmSearch"){fmFilter();return;}
+  var fmg=e.target.closest("[data-fmg]");
+  if(fmg){var p=fmg.getAttribute("data-fmg").split("-");updFmGrams(+p[0],+p[1],fmg.value);return;}
+  var er=e.target.getAttribute&&e.target.getAttribute("data-er");
+  if(er!==null&&er!==undefined){uPR(er,e.target.value);return;}
+  var ei2=e.target.getAttribute&&e.target.getAttribute("data-ei");
+  if(ei2!==null&&ei2!==undefined){uP(ei2,e.target.value);return;}
+});
+
+
+function buildFlexPlanT(){
+  var C=_C,FD=_FD,RD=_RD;
+  var nd=C.nd||{};
+  var cal=+(nd.calories||0);if(!cal)return null;
+  var pp=+(nd.proP||30),cp=+(nd.carbP||45),fp=+(nd.fatP||25);
+  var proG=Math.round(cal*pp/100/4);
+  var carbG=Math.round(cal*cp/100/4);
+  var fatG=Math.round(cal*fp/100/9);
+  var mc=+(nd.meals)||4;
+  var ratios=mc===3?[.3,.4,.3]:mc===5?[.2,.3,.25,.15,.1]:[.25,.35,.25,.15];
+  var mnames=mc===3?["الفطور 🌅","الغداء ☀️","العشاء 🌙"]:
+    mc===5?["الفطور 🌅","وجبة صباح 🍎","الغداء ☀️","قبل التمرين 💪","العشاء 🌙"]:
+    ["الفطور 🌅","الغداء ☀️","قبل التمرين 💪","العشاء 🌙"];
+  var colors=["#6366f1","#10b981","#f59e0b","#ef4444","#8b5cf6"];
+  var saved=nd.flexMeals||{};
+  return ratios.map(function(r,i){
+    return {
+      name:mnames[i],color:colors[i],
+      cal:Math.round(cal*r),pro:Math.round(proG*r),
+      carb:Math.round(carbG*r),fat:Math.round(fatG*r),
+      items:saved[i]||[],index:i
+    };
+  });
+}
+
+function calcMIT(items){
+  return items.reduce(function(acc,it){
+    var food=_FD.find(function(f){return f.id===it.foodId;});
+    if(!food)return acc;
+    var g=it.grams||100;
+    acc.cal+=Math.round(food.cal/100*g);
+    acc.pro+=Math.round(food.pro/100*g);
+    acc.carb+=Math.round(food.carb/100*g);
+    acc.fat+=Math.round(food.fat/100*g);
+    return acc;
+  },{cal:0,pro:0,carb:0,fat:0});
+}
+
+function renderFlexT(){
+  var plan=buildFlexPlanT();
+  var el=document.getElementById("flexPlanT");
+  if(!el)return;
+  if(!plan){el.innerHTML='<div style="text-align:center;padding:20px;color:#aaa;">لم يتم تحديد برنامج غذائي</div>';return;}
+  el.innerHTML=buildFlexMeals(plan);
+}
+
+function buildFlexMeals(plan){
+  var h='';
+  plan.forEach(function(meal){
+    var actual=calcMIT(meal.items);
+    h+='<div style="background:#fff;border-radius:14px;border:1.5px solid '+meal.color+'30;margin-bottom:12px;overflow:hidden;">';
+    // header
+    h+='<div style="padding:12px;background:'+meal.color+'08;border-bottom:1px solid '+meal.color+'20;display:flex;align-items:center;gap:10px;">';
+    h+='<div style="width:30px;height:30px;border-radius:50%;background:'+meal.color+';color:#fff;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;">'+(meal.index+1)+'</div>';
+    h+='<div style="flex:1;"><div class="tu3">'+meal.name+'</div>';
+    h+='<div class="tu1">الهدف: '+meal.cal+' سعرة | 🥩'+meal.pro+'g | 🍚'+meal.carb+'g | 🧈'+meal.fat+'g</div></div>';
+    h+='<button data-fmadd="'+meal.index+'" style="padding:6px 10px;border-radius:20px;border:1.5px solid '+meal.color+'40;background:'+meal.color+'15;color:'+meal.color+';font-size:11px;font-weight:700;cursor:pointer;touch-action:manipulation;font-family:Cairo,sans-serif;">➕</button>';
+    h+='</div>';
+    // items
+    h+='<div style="padding:12px;">';
+    if(meal.items.length>0){
+      meal.items.forEach(function(it,ii){
+        var food=_FD.find(function(f){return f.id===it.foodId;});
+        if(!food)return;
+        var g=it.grams||100;
+        h+='<div style="display:flex;align-items:center;gap:8px;padding:8px;background:#f8faff;border-radius:10px;margin-bottom:6px;border:1px solid #e5e9f4;">';
+        h+='<span style="font-size:18px;">'+food.emoji+'</span>';
+        h+='<div style="flex:1;"><div class="tu0">'+food.name+'</div>';
+        h+='<div class="tu1">'+g+'g — '+Math.round(food.cal/100*g)+' سعرة | 🥩'+Math.round(food.pro/100*g)+'g</div></div>';
+        h+='<input type="number" value="'+g+'" min="10" max="2000" step="10"';
+        h+=' data-fmg="'+meal.index+'-'+ii+'"';
+        h+=' style="width:60px;padding:4px;border-radius:8px;border:1.5px solid #e5e9f4;font-size:12px;font-weight:700;text-align:center;touch-action:manipulation;">';
+        h+='<button data-fmrm="'+meal.index+'-'+ii+'" style="border:none;background:none;color:#ef4444;font-size:16px;cursor:pointer;padding:4px;touch-action:manipulation;">✕</button>';
+        h+='</div>';
+      });
+      // مؤشر الفعلي
+      var ok=Math.abs(actual.cal-meal.cal)<meal.cal*0.15;
+      h+='<div style="margin-top:8px;padding:8px 12px;border-radius:10px;background:'+(ok?'#d1fae5':'#fef3c7')+';font-size:11px;font-weight:700;color:'+(ok?'#059669':'#92400e')+'">';
+      h+=(ok?'✅':'⚠️')+' الفعلي: '+actual.cal+' سعرة | 🥩'+actual.pro+'g | 🍚'+actual.carb+'g | 🧈'+actual.fat+'g';
+      h+='<br><span style="font-weight:400;opacity:.8;">'+(actual.cal>=meal.cal?'+':'')+(actual.cal-meal.cal)+' سعرة من الهدف</span></div>';
+    } else {
+      h+='<div onclick="openFmPicker('+meal.index+')" style="text-align:center;padding:14px;color:var(--ac);font-size:13px;font-weight:700;'+'border:2px dashed var(--ac);border-radius:10px;cursor:pointer;touch-action:manipulation;background:#f8f9ff;">➕ اضغط لإضافة أصناف</div>';
+    }
+    h+='</div></div>';
+  });
+
+  // Modal إضافة صنف
+  h+='<div id="fmPickerModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:3000;">';
+  h+='<div style="position:absolute;bottom:0;left:0;right:0;background:#fff;border-radius:20px 20px 0 0;max-height:85vh;display:flex;flex-direction:column;">';
+  h+='<div style="padding:14px 16px;border-bottom:1px solid #f0f2f8;display:flex;align-items:center;justify-content:space-between;">';
+  h+='<div style="font-size:15px;font-weight:900;color:#1a1a2e;">اختر صنف</div>';
+  h+='<button data-fmclose="1" style="border:none;background:#f0f2f8;width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer;touch-action:manipulation;">✕</button>';
+  h+='</div>';
+  h+='<div style="padding:12px;border-bottom:1px solid #f0f2f8;">';
+  h+='<input id="fmSearch" class="ti" placeholder="🔍 ابحث عن صنف...">';
+  h+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px;">';
+  ['الكل','بروتين','كارب','خضار','دهون','فواكه','ألبان'].forEach(function(cat,ci){
+    h+='<button data-fmcat="'+(ci===0?'':cat)+'" style="padding:4px 10px;border-radius:20px;border:1.5px solid #e5e9f4;background:'+(ci===0?"var(--dg)":'#fff')+';color:'+(ci===0?'#fff':'#6b7280')+';font-size:11px;font-weight:700;cursor:pointer;touch-action:manipulation;font-family:Cairo,sans-serif;">'+cat+'</button>';
+  });
+  h+='</div></div>';
+  h+='<div id="fmFoodList" style="overflow-y:auto;flex:1;padding:12px;"></div>';
+  h+='<div style="padding:12px;border-top:1px solid #f0f2f8;display:flex;gap:8px;align-items:center;">';
+  h+='<label style="font-size:12px;font-weight:700;color:#374151;white-space:nowrap;">الكمية:</label>';
+  h+='<input id="fmGrams" type="number" value="100" min="10" max="2000" step="10" class="ti" style="width:90px;text-align:center;">';
+  h+='<span class="tu4">g</span>';
+  h+='<button data-fmconfirm="1" style="flex:1;padding:10px;border-radius:10px;border:none;background:var(--dg);color:#fff;font-size:13px;font-weight:800;cursor:pointer;touch-action:manipulation;">➕ إضافة</button>';
+  h+='</div></div></div>';
+
+  return h;
+}
+
+
+var _fmMealIdx=null,_fmSel=null,_fmCat="";
+
+function openFmPicker(mi){
+  _fmMealIdx=mi;_fmSel=null;_fmCat="";
+  var modal=document.getElementById("fmPickerModal");
+  if(modal)modal.style.display="block";
+  fmFilter();
+}
+function closeFmPicker(){
+  var modal=document.getElementById("fmPickerModal");
+  if(modal)modal.style.display="none";
+}
+function fmFilter(){
+  var q=((document.getElementById("fmSearch")||{}).value||"").toLowerCase();
+  var list=_FD.filter(function(f){return(!_fmCat||f.cat===_fmCat)&&(!q||f.name.includes(q)||f.nameEn.toLowerCase().includes(q));});
+  var el=document.getElementById("fmFoodList");
+  if(!el)return;
+  el.innerHTML=list.map(function(f){
+    var sel=_fmSel&&_fmSel.id===f.id;
+    return'<div data-fmfid="'+f.id+'" style="display:flex;align-items:center;gap:10px;padding:10px;border-radius:10px;margin-bottom:6px;cursor:pointer;touch-action:manipulation;border:1.5px solid '+(sel?'#6366f1':'#f0f2f8')+';background:'+(sel?'#eef2ff':'#fff')+';">'+
+    '<span style="font-size:22px;">'+f.emoji+'</span>'+
+    '<div style="flex:1;"><div class="tu0">'+f.name+'</div>'+
+    '<div class="tu1">'+f.cal+' سعرة/100g | 🥩'+f.pro+'g | 🍚'+f.carb+'g | 🧈'+f.fat+'g</div></div>'+
+    (sel?'<span style="color:#6366f1;font-size:18px;">✓</span>':'')+'</div>';
+  }).join("");
+}
+function addFmFood(){
+  if(_fmMealIdx===null||!_fmSel)return;
+  var g=+(document.getElementById("fmGrams")||{value:100}).value||100;
+  var pd=JSON.parse(LS.getItem(_PK)||"{}");
+  if(!pd.nd)pd.nd={};
+  if(!pd.nd.flexMeals)pd.nd.flexMeals={};
+  if(!pd.nd.flexMeals[_fmMealIdx])pd.nd.flexMeals[_fmMealIdx]=[];
+  pd.nd.flexMeals[_fmMealIdx].push({foodId:_fmSel.id,grams:g});
+  LS.setItem(_PK,JSON.stringify(pd));
+  _C.nd.flexMeals=pd.nd.flexMeals;
+  closeFmPicker();
+  renderFlexT();
+}
+function rmFmFood(mi,ii){
+  var pd=JSON.parse(LS.getItem(_PK)||"{}");
+  if(pd.nd&&pd.nd.flexMeals&&pd.nd.flexMeals[mi]){
+    pd.nd.flexMeals[mi].splice(ii,1);
+    LS.setItem(_PK,JSON.stringify(pd));
+    _C.nd.flexMeals=pd.nd.flexMeals;
+  }
+  renderFlexT();
+}
+function updFmGrams(mi,ii,val){
+  var pd=JSON.parse(LS.getItem(_PK)||"{}");
+  if(pd.nd&&pd.nd.flexMeals&&pd.nd.flexMeals[mi]&&pd.nd.flexMeals[mi][ii]){
+    pd.nd.flexMeals[mi][ii].grams=+val||100;
+    LS.setItem(_PK,JSON.stringify(pd));
+    _C.nd.flexMeals=pd.nd.flexMeals;
+  }
+}
+
+
+
+</script>
+</body></html>
