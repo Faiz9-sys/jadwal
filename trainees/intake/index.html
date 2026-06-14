@@ -9,6 +9,8 @@
     <div><label class="lbl req">الجنس</label><select id="sex"><option value="">اختر</option><option>ذكر</option><option>أنثى</option></select></div></div>
     <div class="row"><div><label class="lbl req">الطول (سم)</label><input class="in" id="ht" type="number" min="100" max="230"></div>
     <div><label class="lbl req">الوزن (كجم)</label><input class="in" id="wt" type="number" min="25" max="300" step="0.1"></div></div>
+    <label class="lbl">🎯 الوزن المستهدف (كجم) — اختياري</label>
+    <div class="row"><div style="flex:1;"><input class="in" id="twt" type="number" min="25" max="300" step="0.1" placeholder="الوزن الذي تطمح للوصول إليه"></div></div>
     <label class="lbl req">كم يوماً تستطيع التمرن أسبوعياً؟</label>
     <select id="days"><option value="">اختر</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
     <label class="lbl req">أين ستتمرن؟</label>
@@ -82,7 +84,7 @@ function send(){
   if(share){meas={chest:m('m1'),waist:m('m2'),abd:m('m3'),hip:m('m4'),thigh:m('m5'),arm:m('m6')};}
   function m(id){return document.getElementById(id).value||'';}
   var d={nm:nm,ph:document.getElementById('ph').value.trim(),age:+age,sex:sex,ht:+ht,wt:+wt,
-    days:+days,place:place,eq:place==='المنزل'?vals('eq'):[],
+    days:+days,twt:(document.getElementById("twt")&&document.getElementById("twt").value?+document.getElementById("twt").value:null),place:place,eq:place==='المنزل'?vals('eq'):[],
     goal:goal,sg:vals('sg'),sother:document.getElementById('sother').value.trim(),
     vt:vals('vt'),vother:document.getElementById('vother').value.trim(),
     ch:vals('ch'),chother:document.getElementById('chother').value.trim(),
