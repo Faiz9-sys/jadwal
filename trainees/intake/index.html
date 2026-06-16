@@ -55,7 +55,7 @@
     <div class="row" style="margin-top:8px;"><div><label class="lbl">الصدر (سم)</label><input class="in m" id="m1" type="number"></div><div><label class="lbl">الخصر (سم)</label><input class="in m" id="m2" type="number"></div></div>
     <div class="row"><div><label class="lbl">البطن (سم)</label><input class="in m" id="m3" type="number"></div><div><label class="lbl">الأرداف (سم)</label><input class="in m" id="m4" type="number"></div></div>
     <div class="row"><div><label class="lbl">الفخذ (سم)</label><input class="in m" id="m5" type="number"></div><div><label class="lbl">الذراع (سم)</label><input class="in m" id="m6" type="number"></div></div>
-    <label class="chip" style="margin-top:10px;"><input type="checkbox" id="share" checked>أوافق على مشاركة المقاسات مع المدرب</label>
+    <label class="chip" style="margin-top:10px;"><input type="checkbox" id="share">أوافق على مشاركة المقاسات مع المدرب</label>
   </div>
   <button class="btn" onclick="send()">📨 إرسال النموذج للمدرب</button>
   <div class="note" style="text-align:center;margin:10px 0 30px;">بياناتك تُرسل لمدربك فقط</div>
@@ -78,7 +78,16 @@ function send(){
   var goal=(document.querySelector('input[name="goal"]:checked')||{}).value||'';
   var days=document.getElementById('days').value;
   var place=(document.querySelector('input[name="place"]:checked')||{}).value||'';
-  if(!nm||!age||!sex||!ht||!wt||!goal||!days||!place){alert('فضلاً أكمل الحقول الأساسية المعلمة بـ * (ومنها أيام التمرين ومكانه)');return;}
+  var _miss=[];
+  if(!nm){_miss.push('الاسم');}
+  if(!age){_miss.push('العمر');}
+  if(!sex){_miss.push('الجنس');}
+  if(!ht){_miss.push('الطول');}
+  if(!wt){_miss.push('الوزن');}
+  if(!goal){_miss.push('الهدف');}
+  if(!days){_miss.push('عدد أيام التمرين');}
+  if(!place){_miss.push('مكان التمرين');}
+  if(_miss.length){alert('فضلاً أكمل: '+_miss.join('، '));return;}
   var share=document.getElementById('share').checked;
   var meas=null;
   if(share){meas={chest:m('m1'),waist:m('m2'),abd:m('m3'),hip:m('m4'),thigh:m('m5'),arm:m('m6')};}
