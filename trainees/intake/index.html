@@ -1,4 +1,4 @@
-<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>النموذج التعريفي</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Cairo,sans-serif;background:#f4f6fb;color:#1a1a2e;padding:16px;padding-bottom:max(40px,env(safe-area-inset-bottom));max-width:560px;margin:auto;}h1{font-size:20px;font-weight:900;margin:14px 0 4px;}.sub{font-size:12px;color:#6b7280;margin-bottom:16px;}.card{background:#fff;border:1.5px solid #e5e9f4;border-radius:16px;padding:16px;margin-bottom:14px;}.lbl{display:block;font-size:12px;font-weight:800;margin:10px 0 5px;}.req::after{content:" *";color:#ef4444;}.in,select,textarea{width:100%;padding:11px;border:1.5px solid #e5e9f4;border-radius:10px;font-family:Cairo,sans-serif;font-size:16px;background:#fff;}textarea{min-height:64px;resize:vertical;}.row{display:flex;gap:10px;}.row>div{flex:1;}.chips{display:flex;flex-wrap:wrap;gap:7px;}.chip{display:flex;align-items:center;gap:5px;padding:8px 12px;border:1.5px solid #e5e9f4;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;background:#fff;}.chip input{accent-color:#6366f1;width:15px;height:15px;}.chip:has(input:checked){border-color:#6366f1;background:#eef2ff;}.note{font-size:10px;color:#9ca3af;margin-top:4px;line-height:1.6;}.sec{font-size:14px;font-weight:900;margin-bottom:4px;}.btn{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-family:Cairo,sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-top:6px;}.ok{display:none;text-align:center;padding:50px 20px;}.ok .e{font-size:60px;}</style></head><body>
+<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>النموذج التعريفي</title><link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800;900&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box;}body{font-family:Cairo,sans-serif;background:#f4f6fb;color:#1a1a2e;padding:16px;padding-bottom:max(40px,env(safe-area-inset-bottom));max-width:560px;margin:auto;}h1{font-size:20px;font-weight:900;margin:14px 0 4px;}.sub{font-size:12px;color:#6b7280;margin-bottom:16px;}.card{background:#fff;border:1.5px solid #e5e9f4;border-radius:16px;padding:16px;margin-bottom:14px;}.lbl{display:block;font-size:12px;font-weight:800;margin:10px 0 5px;}.req::after{content:" *";color:#ef4444;}.in,select,textarea{width:100%;padding:11px;border:1.5px solid #e5e9f4;border-radius:10px;font-family:Cairo,sans-serif;font-size:16px;background:#fff;}textarea{min-height:64px;resize:vertical;}.row{display:flex;gap:10px;}.row>div{flex:1;}.chips{display:flex;flex-wrap:wrap;gap:7px;}.chip{display:flex;align-items:center;gap:5px;padding:8px 12px;border:1.5px solid #e5e9f4;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;background:#fff;}.chip input{accent-color:#6366f1;width:15px;height:15px;}.chip:has(input:checked){border-color:#6366f1;background:#eef2ff;}.note{font-size:10px;color:#9ca3af;margin-top:4px;line-height:1.6;}.sec{font-size:14px;font-weight:900;margin-bottom:4px;}.privacy{background:#f8fbff;border-color:#bfdbfe;}.privacy ul{padding-right:18px;margin:8px 0 0;font-size:11px;color:#475569;line-height:1.8;}.privacy-check{border-radius:12px;align-items:flex-start;line-height:1.7;}.btn{width:100%;padding:15px;border:none;border-radius:14px;background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;font-family:Cairo,sans-serif;font-size:15px;font-weight:900;cursor:pointer;margin-top:6px;}.ok{display:none;text-align:center;padding:50px 20px;}.ok .e{font-size:60px;}</style></head><body>
 <div id="frm">
   <h1>📋 النموذج التعريفي</h1>
   <div class="sub">عبِّئ بياناتك بدقة ليصمم مدربك برنامجاً يناسبك تماماً — تصل الإجابات للمدرب مباشرة</div>
@@ -57,8 +57,20 @@
     <div class="row"><div><label class="lbl">الفخذ (سم)</label><input class="in m" id="m5" type="number"></div><div><label class="lbl">الذراع (سم)</label><input class="in m" id="m6" type="number"></div></div>
     <label class="chip" style="margin-top:10px;"><input type="checkbox" id="share">أوافق على مشاركة المقاسات مع المدرب</label>
   </div>
+  <div class="card privacy">
+    <div class="sec">🔐 الخصوصية والموافقة</div>
+    <div class="note" style="font-size:11px;color:#475569;">
+      يحتوي هذا النموذج على بيانات شخصية وصحية اختيارية تساعد المدرب على تصميم برنامج مناسب. بإرسالك للنموذج فأنت توافق على مشاركة هذه البيانات مع مدربك فقط لأغراض إعداد البرنامج والمتابعة.
+    </div>
+    <ul>
+      <li>لا تُستخدم البيانات للتشخيص الطبي ولا تغني عن استشارة مختص صحي.</li>
+      <li>يمكنك ترك الحقول الصحية الاختيارية فارغة إذا لم ترغب بمشاركتها.</li>
+      <li>سيتم إرسال البيانات إلى مدربك عبر وسيلة الاستلام المفعلة لديه، وقد تُحفظ في لوحة المدرب للمراجعة والمتابعة.</li>
+    </ul>
+    <label class="chip privacy-check" style="margin-top:12px;"><input type="checkbox" id="privacyOk">أفهم ذلك وأوافق على إرسال بياناتي للمدرب لأغراض إعداد البرنامج والمتابعة.</label>
+  </div>
   <button class="btn" onclick="send()">📨 إرسال النموذج للمدرب</button>
-  <div class="note" style="text-align:center;margin:10px 0 30px;">بياناتك تُرسل لمدربك فقط</div>
+  <div class="note" style="text-align:center;margin:10px 0 30px;">بياناتك تُرسل لمدربك فقط وفق الموافقة أعلاه</div>
 </div>
 <div class="ok" id="ok"><div class="e">✅</div><h1>وصل نموذجك للمدرب!</h1><div class="sub">سيتواصل معك قريباً لبدء برنامجك 💪</div></div><script>
 var FB={"p":"jadwal-app-87ae0","k":"AIzaSyAiGbeXvyjRkL-Grb8RD75SMMHcFe61b_Y","u":"ftGXJ5iZGuc5ZtF1y27ZOqmBIsv1"};
@@ -87,6 +99,7 @@ function send(){
   if(!goal){_miss.push('الهدف');}
   if(!days){_miss.push('عدد أيام التمرين');}
   if(!place){_miss.push('مكان التمرين');}
+  if(!document.getElementById('privacyOk').checked){_miss.push('الموافقة على الخصوصية');}
   if(_miss.length){alert('فضلاً أكمل: '+_miss.join('، '));return;}
   var share=document.getElementById('share').checked;
   var meas=null;
@@ -98,7 +111,7 @@ function send(){
     vt:vals('vt'),vother:document.getElementById('vother').value.trim(),
     ch:vals('ch'),chother:document.getElementById('chother').value.trim(),
     inj:document.getElementById('inj').value.trim(),surg:document.getElementById('surg').value.trim(),
-    meds:document.getElementById('meds').value.trim(),meas:meas,ts:Date.now()};
+    meds:document.getElementById('meds').value.trim(),meas:meas,privacyConsent:true,ts:Date.now()};
   if(FB){
     var cid='f'+Date.now()+Math.random().toString(36).slice(2,7);
     var url='https://firestore.googleapis.com/v1/projects/'+FB.p+'/databases/(default)/documents/trainers/'+FB.u+'/intake/'+cid+'?key='+FB.k;
