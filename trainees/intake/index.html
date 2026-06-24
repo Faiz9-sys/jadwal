@@ -11,6 +11,8 @@
     <div><label class="lbl req">الوزن (كجم)</label><input class="in" id="wt" type="number" min="25" max="300" step="0.1"></div></div>
     <label class="lbl">🎯 الوزن المستهدف (كجم) — اختياري</label>
     <div class="row"><div style="flex:1;"><input class="in" id="twt" type="number" min="25" max="300" step="0.1" placeholder="الوزن الذي تطمح للوصول إليه"></div></div>
+    <label class="lbl req">سنوات الخبرة بالتمارين</label>
+    <select id="exp"><option value="">اختر</option><option value="مبتدئ (أقل من سنة)">مبتدئ — أقل من سنة</option><option value="1-2 سنة">1-2 سنة</option><option value="3-5 سنوات">3-5 سنوات</option><option value="أكثر من 5 سنوات">أكثر من 5 سنوات</option></select>
     <label class="lbl req">كم يوماً تستطيع التمرن أسبوعياً؟</label>
     <select id="days"><option value="">اختر</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
     <label class="lbl req">أين ستتمرن؟</label>
@@ -89,6 +91,7 @@ function send(){
   var ht=document.getElementById('ht').value,wt=document.getElementById('wt').value;
   var goal=(document.querySelector('input[name="goal"]:checked')||{}).value||'';
   var days=document.getElementById('days').value;
+  var exp=document.getElementById('exp').value;
   var place=(document.querySelector('input[name="place"]:checked')||{}).value||'';
   var _miss=[];
   if(!nm){_miss.push('الاسم');}
@@ -98,6 +101,7 @@ function send(){
   if(!wt){_miss.push('الوزن');}
   if(!goal){_miss.push('الهدف');}
   if(!days){_miss.push('عدد أيام التمرين');}
+  if(!exp){_miss.push('سنوات الخبرة');}
   if(!place){_miss.push('مكان التمرين');}
   if(!document.getElementById('privacyOk').checked){_miss.push('الموافقة على الخصوصية');}
   if(_miss.length){alert('فضلاً أكمل: '+_miss.join('، '));return;}
@@ -105,7 +109,7 @@ function send(){
   var meas=null;
   if(share){meas={chest:m('m1'),waist:m('m2'),abd:m('m3'),hip:m('m4'),thigh:m('m5'),arm:m('m6')};}
   function m(id){return document.getElementById(id).value||'';}
-  var d={nm:nm,ph:document.getElementById('ph').value.trim(),age:+age,sex:sex,ht:+ht,wt:+wt,
+  var d={nm:nm,ph:document.getElementById('ph').value.trim(),age:+age,sex:sex,exp:exp,ht:+ht,wt:+wt,
     days:+days,twt:(document.getElementById("twt")&&document.getElementById("twt").value?+document.getElementById("twt").value:null),place:place,eq:place==='المنزل'?vals('eq'):[],
     goal:goal,sg:vals('sg'),sother:document.getElementById('sother').value.trim(),
     vt:vals('vt'),vother:document.getElementById('vother').value.trim(),
@@ -121,7 +125,7 @@ function send(){
   } else { wa(d); }
 }
 function wa(d){
-  var L=['📋 نموذج تعريفي جديد','الاسم: '+d.nm,'الجوال: '+(d.ph||'—'),'العمر: '+d.age+' · '+d.sex,'الطول: '+d.ht+' سم · الوزن: '+d.wt+' كجم','الهدف: '+d.goal,'أيام التمرين: '+d.days+' أسبوعياً · المكان: '+d.place+(d.eq&&d.eq.length?' ('+d.eq.join('، ')+')':''),'أهداف رياضية: '+(d.sg.join('، ')||'—')+(d.sother?' ('+d.sother+')':''),'نقص فيتامينات: '+(d.vt.join('، ')||'—')+(d.vother?' + '+d.vother:''),'أمراض مزمنة: '+(d.ch.join('، ')||'—')+(d.chother?' + '+d.chother:''),'إصابات: '+(d.inj||'—'),'عمليات: '+(d.surg||'—'),'أدوية: '+(d.meds||'—')];
+  var L=['📋 نموذج تعريفي جديد','الاسم: '+d.nm,'الجوال: '+(d.ph||'—'),'العمر: '+d.age+' · '+d.sex,'الخبرة: '+(d.exp||'—'),'الطول: '+d.ht+' سم · الوزن: '+d.wt+' كجم','الهدف: '+d.goal,'أيام التمرين: '+d.days+' أسبوعياً · المكان: '+d.place+(d.eq&&d.eq.length?' ('+d.eq.join('، ')+')':''),'أهداف رياضية: '+(d.sg.join('، ')||'—')+(d.sother?' ('+d.sother+')':''),'نقص فيتامينات: '+(d.vt.join('، ')||'—')+(d.vother?' + '+d.vother:''),'أمراض مزمنة: '+(d.ch.join('، ')||'—')+(d.chother?' + '+d.chother:''),'إصابات: '+(d.inj||'—'),'عمليات: '+(d.surg||'—'),'أدوية: '+(d.meds||'—')];
   if(d.meas)L.push('مقاسات: صدر '+d.meas.chest+' خصر '+d.meas.waist+' بطن '+d.meas.abd+' أرداف '+d.meas.hip+' فخذ '+d.meas.thigh+' ذراع '+d.meas.arm);
   window.open('https://wa.me/?text='+encodeURIComponent(L.join('\n')),'_blank');done();
 }
