@@ -1,0 +1,729 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Jadwal Modern</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" referrerpolicy="no-referrer">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin referrerpolicy="no-referrer">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" referrerpolicy="no-referrer">
+  <style>
+    :root{
+      --bg:#f6f7fb;--panel:#ffffff;--panel2:#f0f3f8;--text:#162033;--muted:#667085;
+      --line:#d9e0ec;--brand:#2563eb;--brand2:#0f766e;--danger:#dc2626;--ok:#059669;--warn:#b45309;
+      --shadow:0 8px 22px rgba(16,24,40,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Cairo,system-ui,sans-serif;background:var(--bg);color:var(--text);font-size:14px}
+    button,input,select,textarea{font:inherit}
+    button{cursor:pointer}
+    .app{min-height:100vh;display:grid;grid-template-columns:260px minmax(0,1fr)}
+    .side{background:#111827;color:#fff;padding:16px 12px;display:flex;flex-direction:column;gap:14px}
+    .brand{display:flex;align-items:center;gap:10px;padding:6px 8px 12px;border-bottom:1px solid rgba(255,255,255,.12)}
+    .brand-mark{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#2563eb,#14b8a6);display:grid;place-items:center;font-weight:900}
+    .brand h1{font-size:16px;margin:0;font-weight:900}
+    .brand p{margin:0;color:#b7c0d1;font-size:11px}
+    .nav{display:grid;gap:4px}
+    .nav button{border:0;background:transparent;color:#cbd5e1;text-align:right;border-radius:8px;padding:10px 12px;display:flex;align-items:center;gap:10px}
+    .nav button.active,.nav button:hover{background:rgba(255,255,255,.1);color:#fff}
+    .side-foot{margin-top:auto;color:#9ca3af;font-size:11px;line-height:1.8;padding:10px 8px;border-top:1px solid rgba(255,255,255,.12)}
+    .main{min-width:0;padding:18px 20px 36px}
+    .top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+    .top h2{margin:0;font-size:22px;font-weight:900}
+    .top small{color:var(--muted)}
+    .actions{display:flex;gap:8px;flex-wrap:wrap}
+    .btn{border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:8px;padding:9px 12px;font-weight:800;display:inline-flex;align-items:center;gap:8px;min-height:38px}
+    .btn:hover{border-color:#b8c4d8}
+    .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
+    .btn.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+    .btn.danger{background:#fef2f2;color:var(--danger);border-color:#fecaca}
+    .btn.small{padding:6px 9px;min-height:31px;font-size:12px}
+    .grid{display:grid;gap:12px}
+    .grid.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+    .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:14px}
+    .card-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}
+    .card-title{font-weight:900;font-size:15px}
+    .muted{color:var(--muted)}
+    .stat b{display:block;font-size:24px;font-weight:900;margin-bottom:2px}
+    .pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:3px 8px;background:var(--panel2);color:#475467;font-size:11px;font-weight:800}
+    .pill.ok{background:#ecfdf3;color:#067647}.pill.warn{background:#fffaeb;color:#b54708}.pill.danger{background:#fef3f2;color:#b42318}
+    .toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+    .input,.select,.textarea{width:100%;border:1px solid var(--line);background:#fff;border-radius:8px;padding:10px 11px;color:var(--text)}
+    .textarea{min-height:90px;resize:vertical}
+    label{display:block;font-size:12px;font-weight:800;margin:0 0 5px;color:#344054}
+    .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .table{width:100%;border-collapse:collapse}
+    .table th,.table td{padding:9px 8px;border-bottom:1px solid var(--line);text-align:right;vertical-align:top}
+    .table th{font-size:12px;color:#475467;background:#f8fafc}
+    .list{display:grid;gap:8px}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px;border:1px solid var(--line);border-radius:8px;background:#fff}
+    .row-main{min-width:0}
+    .row-title{font-weight:900}
+    .row-meta{font-size:12px;color:var(--muted);margin-top:2px}
+    .bar{height:8px;background:#e5e7eb;border-radius:999px;overflow:hidden}
+    .bar span{display:block;height:100%;background:linear-gradient(90deg,#2563eb,#0f766e)}
+    .progress-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+    .progress-box{border:1px solid var(--line);border-radius:8px;padding:10px;background:#fff}
+    .day{border:1px solid var(--line);border-radius:8px;background:#fff;padding:12px}
+    .exercise{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;border-top:1px solid var(--line);padding-top:8px;margin-top:8px}
+    .empty{padding:30px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:8px;background:#fff}
+    .modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+    .modal.open{display:flex}
+    .modal-box{width:min(720px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:8px;border:1px solid var(--line);box-shadow:0 24px 60px rgba(0,0,0,.25)}
+    .modal-head,.modal-foot{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .modal-foot{border-bottom:0;border-top:1px solid var(--line)}
+    .modal-body{padding:16px}
+    .toast{position:fixed;left:16px;bottom:16px;background:#111827;color:#fff;border-radius:8px;padding:10px 12px;box-shadow:var(--shadow);display:none;z-index:60;max-width:min(380px,calc(100vw - 32px))}
+    .toast.show{display:block}.toast.ok{background:#047857}.toast.danger{background:#b42318}
+    .hidden{display:none!important}
+    @media (max-width:900px){
+      .app{grid-template-columns:1fr}.side{position:sticky;top:0;z-index:20;border-bottom:1px solid #263244}.nav{grid-template-columns:repeat(4,1fr)}.nav button{justify-content:center;font-size:12px;padding:8px}.side-foot{display:none}
+      .grid.cols-4,.grid.cols-3,.grid.cols-2,.form-grid{grid-template-columns:1fr}.top{align-items:flex-start;flex-direction:column}
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="side">
+      <div class="brand">
+        <div class="brand-mark">J</div>
+        <div><h1>Jadwal Modern</h1><p>Coach Console</p></div>
+      </div>
+      <nav class="nav" id="nav"></nav>
+      <div class="side-foot" id="syncStatus">محلي</div>
+    </aside>
+    <main class="main">
+      <div class="top">
+        <div><h2 id="viewTitle">لوحة التحكم</h2><small id="viewSub">جاهز</small></div>
+        <div class="actions" id="topActions"></div>
+      </div>
+      <section id="view"></section>
+    </main>
+  </div>
+
+  <div class="modal" id="modal"><div class="modal-box" id="modalBox"></div></div>
+  <div class="toast" id="toast"></div>
+  <input type="file" id="filePicker" class="hidden" accept=".json,application/json">
+
+  <script type="module">
+    const STORAGE_KEY = 'jadwal_modern_v1';
+    const FIREBASE_CDN = 'https://www.gstatic.com/firebasejs/10.12.5';
+    const NAV = [
+      ['dashboard','لوحة التحكم','M4 6h16M4 12h16M4 18h16'],
+      ['trainees','المتدربون','M16 21v-2a4 4 0 0 0-8 0v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8'],
+      ['builder','الخطط','M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01'],
+      ['nutrition','التغذية','M12 2v20M2 12h20M5 5l14 14M19 5L5 19'],
+      ['messages','الرسائل','M21 15a4 4 0 0 1-4 4H7l-4 4V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z'],
+      ['progress','التقدم','M4 19V5M10 19V9M16 19v-7M22 19V3'],
+      ['exercises','التمارين','M6 7h12M6 12h12M6 17h12'],
+      ['settings','الإعدادات','M12 15.5A3.5 3.5 0 1 0 12 8a3.5 3.5 0 0 0 0 7.5zM19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.1-2 3.46-.1-.03a1.7 1.7 0 0 0-1.94.72l-.06.1H11.7l-.06-.1a1.7 1.7 0 0 0-1.94-.72l-.1.03-2-3.46.06-.1A1.7 1.7 0 0 0 8 15l-.06-.1a1.7 1.7 0 0 0-1.6-1.16H6.2v-4h.14A1.7 1.7 0 0 0 7.94 8.6L8 8.5a1.7 1.7 0 0 0-.34-1.88l-.06-.1 2-3.46.1.03a1.7 1.7 0 0 0 1.94-.72l.06-.1h4.6l.06.1a1.7 1.7 0 0 0 1.94.72l.1-.03 2 3.46-.06.1A1.7 1.7 0 0 0 20 8.5l.06.1a1.7 1.7 0 0 0 1.6 1.14h.14v4h-.14A1.7 1.7 0 0 0 20.06 14.9z']
+    ];
+    const DEFAULT_EXERCISES = [
+      {id:'ex-bench',cat:'صدر',name:'ضغط صدر بالدمبل',sets:4,reps:10,rest:'75ث'},
+      {id:'ex-row',cat:'ظهر',name:'تجديف دمبل',sets:4,reps:10,rest:'75ث'},
+      {id:'ex-squat',cat:'أرجل',name:'سكوات',sets:4,reps:8,rest:'90ث'},
+      {id:'ex-shoulder',cat:'أكتاف',name:'ضغط كتف',sets:3,reps:10,rest:'60ث'},
+      {id:'ex-plank',cat:'بطن',name:'بلانك',sets:3,reps:45,rest:'45ث',unit:'time'}
+    ];
+    const DEFAULT_STATE = () => ({
+      schema:1,
+      settings:{coachName:'',workerUrl:'',firebase:{apiKey:'',authDomain:'',projectId:'',appId:'',appCheckSiteKey:''}},
+      trainees:[],
+      exercises:structuredClone(DEFAULT_EXERCISES),
+      messages:[],
+      progress:[],
+      currentTraineeId:null,
+      cloud:{user:null,lastSync:null,lastPull:null,status:'local'}
+    });
+
+    const $ = (sel,root=document) => root.querySelector(sel);
+    const $$ = (sel,root=document) => [...root.querySelectorAll(sel)];
+    const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const attr = esc;
+    const jsonSafe = v => JSON.stringify(v).replace(/</g,'\\u003c').replace(/>/g,'\\u003e');
+    const uid = (p='id') => p + '-' + (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36)+Math.random().toString(36).slice(2));
+    const token = () => {
+      const bytes = new Uint8Array(24);
+      crypto.getRandomValues(bytes);
+      return [...bytes].map(b => b.toString(16).padStart(2,'0')).join('');
+    };
+    const clampInt = (v,min,max,fb) => {
+      const n = Number.parseInt(v,10);
+      return Number.isFinite(n) ? Math.max(min,Math.min(max,n)) : fb;
+    };
+    const nowISO = () => new Date().toISOString();
+    const fmt = ts => ts ? new Date(ts).toLocaleString('ar-SA',{dateStyle:'short',timeStyle:'short'}) : 'لم تتم';
+    const icon = path => `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${path}"/></svg>`;
+
+    const Store = {
+      state: DEFAULT_STATE(),
+      load(){
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          this.state = raw ? normalizeState(JSON.parse(raw)) : DEFAULT_STATE();
+        } catch(e) {
+          logError('load', e);
+          this.state = DEFAULT_STATE();
+        }
+      },
+      save(){
+        this.state.updatedAt = nowISO();
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state));
+        updateSyncStatus();
+      },
+      patch(fn){ fn(this.state); this.save(); render(); },
+      current(){ return this.state.trainees.find(t => t.id === this.state.currentTraineeId) || this.state.trainees[0] || null; }
+    };
+
+    function normalizeState(s){
+      const base = DEFAULT_STATE();
+      const out = {...base, ...s};
+      out.settings = {...base.settings, ...(s.settings||{}), firebase:{...base.settings.firebase, ...((s.settings||{}).firebase||{})}};
+      out.trainees = Array.isArray(s.trainees) ? s.trainees.map(normalizeTrainee) : [];
+      out.exercises = Array.isArray(s.exercises) && s.exercises.length ? s.exercises.map(normalizeExercise) : structuredClone(DEFAULT_EXERCISES);
+      out.messages = Array.isArray(s.messages) ? s.messages : [];
+      out.progress = Array.isArray(s.progress) ? s.progress.map(normalizeProgress) : [];
+      if(!out.currentTraineeId && out.trainees[0]) out.currentTraineeId = out.trainees[0].id;
+      return out;
+    }
+    function normalizeTrainee(t){
+      return {
+        id:t.id || uid('tr'), syncToken:t.syncToken || token(), archived:!!t.archived,
+        name:String(t.name||'متدرب جديد'), phone:String(t.phone||''), level:String(t.level||'مبتدئ'),
+        goal:String(t.goal||''), notes:String(t.notes||''), createdAt:t.createdAt||nowISO(), updatedAt:t.updatedAt||nowISO(),
+        nutrition:{calories:+(t.nutrition?.calories||0), protein:+(t.nutrition?.protein||0), carbs:+(t.nutrition?.carbs||0), fat:+(t.nutrition?.fat||0), note:String(t.nutrition?.note||'')},
+        days:Array.isArray(t.days) ? t.days.map(normalizeDay) : []
+      };
+    }
+    function normalizeDay(d){
+      return {id:d.id||uid('day'), name:String(d.name||'يوم تدريب'), note:String(d.note||''), exercises:Array.isArray(d.exercises)?d.exercises.map(normalizeExercise):[]};
+    }
+    function normalizeExercise(e){
+      return {id:e.id||uid('ex'), cat:String(e.cat||'عام'), name:String(e.name||e.nameAr||'تمرين'), sets:clampInt(e.sets,1,50,3), reps:clampInt(e.reps,1,500,10), rest:String(e.rest||'60ث'), unit:e.unit==='time'?'time':'reps', videoUrl:String(e.videoUrl||e.url||'')};
+    }
+    function normalizeProgress(p){
+      const rawTs = p.ts || p.updatedAt || Date.now();
+      const ts = typeof rawTs?.toMillis === 'function' ? rawTs.toMillis() : Number(rawTs) || Date.now();
+      return {
+        id:String(p.id || 'latest'),
+        traineeId:String(p.traineeId || ''),
+        progress:p.progress && typeof p.progress === 'object' ? p.progress : {},
+        message:String(p.message || ''),
+        ts
+      };
+    }
+    function logError(where,e){
+      const msg = `${where}: ${e?.message || e || 'error'}`;
+      console.warn('[jadwal-modern]', msg);
+      try {
+        const rows = JSON.parse(localStorage.getItem('jadwal_modern_errors')||'[]');
+        rows.unshift({ts:Date.now(),msg});
+        localStorage.setItem('jadwal_modern_errors', JSON.stringify(rows.slice(0,40)));
+      } catch {}
+    }
+    function toast(msg,type=''){
+      const el = $('#toast');
+      el.className = 'toast show ' + type;
+      el.textContent = msg;
+      clearTimeout(toast.t);
+      toast.t = setTimeout(()=>el.className='toast',2600);
+    }
+
+    let view = 'dashboard';
+    function render(){
+      renderNav();
+      const titles = {dashboard:'لوحة التحكم',trainees:'المتدربون',builder:'بناء الخطط',nutrition:'التغذية',messages:'الرسائل والتنبيهات',progress:'تقدم المتدربين',exercises:'قاعدة التمارين',settings:'الإعدادات'};
+      $('#viewTitle').textContent = titles[view] || 'Jadwal';
+      $('#viewSub').textContent = subtitle();
+      $('#topActions').innerHTML = topActions();
+      $('#view').innerHTML = Views[view] ? Views[view]() : Views.dashboard();
+      updateSyncStatus();
+    }
+    function subtitle(){
+      const s = Store.state;
+      if(view==='dashboard') return `${s.trainees.filter(t=>!t.archived).length} متدرب نشط`;
+      if(['builder','nutrition','messages','progress'].includes(view)) return Store.current()?.name || 'لا يوجد متدرب محدد';
+      return 'نسخة حديثة محلية مع مزامنة اختيارية';
+    }
+    function renderNav(){
+      $('#nav').innerHTML = NAV.map(([id,label,path]) => `<button data-view="${attr(id)}" class="${id===view?'active':''}">${icon(path)}<span>${esc(label)}</span></button>`).join('');
+    }
+    function topActions(){
+      if(view==='trainees') return `<button class="btn primary" data-action="open-trainee">${icon('M12 5v14M5 12h14')}متدرب جديد</button>`;
+      if(view==='builder') return `<button class="btn primary" data-action="add-day">${icon('M12 5v14M5 12h14')}إضافة يوم</button><button class="btn" data-action="export-trainee">${icon('M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3')}تطبيق المتدرب</button>`;
+      if(view==='settings') return `<button class="btn" data-action="export-backup">${icon('M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3')}نسخة احتياطية</button>`;
+      return `<button class="btn" data-action="sync-now">${icon('M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3')}مزامنة</button>`;
+    }
+
+    const Views = {
+      dashboard(){
+        const active = Store.state.trainees.filter(t=>!t.archived);
+        const plans = active.reduce((n,t)=>n+(t.days?.length||0),0);
+        const exs = active.reduce((n,t)=>n+t.days.reduce((m,d)=>m+(d.exercises?.length||0),0),0);
+        const pending = Store.state.messages.filter(m=>!m.done).length;
+        return `
+          <div class="grid cols-4">
+            ${stat('المتدربون',active.length,'نشط')}
+            ${stat('أيام الخطط',plans,'مجدولة')}
+            ${stat('التمارين',exs,'داخل الخطط')}
+            ${stat('تنبيهات مفتوحة',pending,'تحتاج متابعة')}
+          </div>
+          <div class="grid cols-2" style="margin-top:12px">
+            <div class="card"><div class="card-head"><div class="card-title">آخر المتدربين</div><button class="btn small" data-view="trainees">عرض</button></div>${active.slice(0,5).map(t=>traineeRow(t)).join('') || empty('لا يوجد متدربون')}</div>
+            <div class="card"><div class="card-head"><div class="card-title">حالة الحفظ</div></div>
+              <div class="list">
+                <div class="row"><span>الحفظ المحلي</span><span class="pill ok">مفعل</span></div>
+                <div class="row"><span>Firebase</span><span class="pill ${Cloud.ready()?'ok':'warn'}">${Cloud.ready()?'مهيأ':'غير مهيأ'}</span></div>
+                <div class="row"><span>آخر مزامنة</span><span class="muted">${esc(fmt(Store.state.cloud.lastSync))}</span></div>
+              </div>
+            </div>
+          </div>`;
+      },
+      trainees(){
+        const q = (state.search||'').toLowerCase();
+        const rows = Store.state.trainees.filter(t=>!q || t.name.toLowerCase().includes(q) || t.phone.includes(q));
+        return `
+          <div class="toolbar"><input class="input" style="max-width:360px" data-input="search" placeholder="بحث بالاسم أو الجوال" value="${attr(state.search||'')}"></div>
+          <div class="card">
+            <table class="table"><thead><tr><th>الاسم</th><th>الهدف</th><th>الأيام</th><th>الحالة</th><th></th></tr></thead>
+            <tbody>${rows.map(t=>`<tr>
+              <td><b>${esc(t.name)}</b><div class="muted">${esc(t.phone||'بدون جوال')}</div></td>
+              <td>${esc(t.goal||'غير محدد')}</td><td>${t.days.length}</td>
+              <td><span class="pill ${t.archived?'warn':'ok'}">${t.archived?'مؤرشف':'نشط'}</span></td>
+              <td><div class="actions"><button class="btn small" data-action="select-trainee" data-id="${attr(t.id)}">اختيار</button><button class="btn small" data-action="open-trainee" data-id="${attr(t.id)}">تعديل</button></div></td>
+            </tr>`).join('')}</tbody></table>
+            ${rows.length?'':empty('لا توجد نتائج')}
+          </div>`;
+      },
+      builder(){
+        const t = Store.current();
+        if(!t) return empty('أضف متدربًا أولًا');
+        return `
+          ${traineeTabs()}
+          <div class="grid cols-2">
+            <div class="card">
+              <div class="card-head"><div><div class="card-title">${esc(t.name)}</div><div class="muted">${esc(t.goal||'بدون هدف')}</div></div><span class="pill">${t.days.length} أيام</span></div>
+              <div class="list">${t.days.map(dayCard).join('') || empty('لا توجد أيام في الخطة')}</div>
+            </div>
+            <div class="card">
+              <div class="card-head"><div class="card-title">إضافة تمرين</div></div>
+              ${exercisePicker()}
+            </div>
+          </div>`;
+      },
+      nutrition(){
+        const t = Store.current();
+        if(!t) return empty('أضف متدربًا أولًا');
+        const n = t.nutrition;
+        return `
+          ${traineeTabs()}
+          <div class="card">
+            <div class="form-grid">
+              ${field('السعرات','nut-cal',n.calories,'number')}
+              ${field('البروتين g','nut-protein',n.protein,'number')}
+              ${field('الكارب g','nut-carbs',n.carbs,'number')}
+              ${field('الدهون g','nut-fat',n.fat,'number')}
+            </div>
+            <div style="margin-top:12px"><label>ملاحظة غذائية</label><textarea class="textarea" id="nut-note">${esc(n.note)}</textarea></div>
+            <div style="margin-top:12px"><button class="btn primary" data-action="save-nutrition">حفظ التغذية</button></div>
+          </div>`;
+      },
+      messages(){
+        const t = Store.current();
+        const rows = Store.state.messages.filter(m=>!t || m.traineeId===t.id);
+        return `
+          ${traineeTabs()}
+          <div class="grid cols-2">
+            <div class="card"><div class="card-head"><div class="card-title">الرسائل</div></div>${rows.map(m=>messageRow(m)).join('') || empty('لا توجد رسائل')}</div>
+            <div class="card"><div class="card-head"><div class="card-title">إضافة ملاحظة</div></div>
+              <textarea class="textarea" id="messageText" placeholder="اكتب ملاحظة أو تنبيه"></textarea>
+              <button class="btn primary" style="margin-top:10px" data-action="add-message">حفظ</button>
+            </div>
+          </div>`;
+      },
+      progress(){
+        const t = Store.current();
+        const trainees = t ? [t] : Store.state.trainees.filter(x=>!x.archived);
+        return `
+          ${traineeTabs()}
+          <div class="grid cols-2">
+            <div class="card">
+              <div class="card-head"><div class="card-title">آخر تقدم</div><button class="btn small" data-action="cloud-pull">تحديث من السحابة</button></div>
+              ${trainees.map(progressCard).join('') || empty('لا يوجد متدربون')}
+            </div>
+            <div class="card">
+              <div class="card-head"><div class="card-title">تنبيهات من المتدرب</div></div>
+              ${Store.state.progress.filter(p=>p.message).sort((a,b)=>b.ts-a.ts).slice(0,10).map(progressMessage).join('') || empty('لا توجد رسائل تقدم')}
+            </div>
+          </div>`;
+      },
+      exercises(){
+        const cats = [...new Set(Store.state.exercises.map(e=>e.cat))].sort();
+        return `
+          <div class="grid cols-2">
+            <div class="card"><div class="card-head"><div class="card-title">قاعدة التمارين</div><button class="btn small primary" data-action="open-exercise">إضافة</button></div>
+              ${cats.map(cat=>`<details open><summary style="font-weight:900;margin:8px 0">${esc(cat)}</summary>${Store.state.exercises.filter(e=>e.cat===cat).map(e=>`<div class="row"><div><b>${esc(e.name)}</b><div class="row-meta">${e.sets} × ${e.reps} · ${esc(e.rest)}</div></div><button class="btn small" data-action="open-exercise" data-id="${attr(e.id)}">تعديل</button></div>`).join('')}</details>`).join('')}
+            </div>
+            <div class="card"><div class="card-title">ملاحظات تقنية</div><div class="list" style="margin-top:10px">
+              <div class="row"><span>تطبيق المتدرب</span><span class="pill ok">بدون Firestore مباشر</span></div>
+              <div class="row"><span>الكتابة الخارجية</span><span class="pill warn">تحتاج Worker</span></div>
+              <div class="row"><span>المدخلات</span><span class="pill ok">تهريب قبل العرض</span></div>
+            </div></div>
+          </div>`;
+      },
+      settings(){
+        const f = Store.state.settings.firebase;
+        return `
+          <div class="grid cols-2">
+            <div class="card"><div class="card-head"><div class="card-title">Firebase</div><span class="pill ${Cloud.ready()?'ok':'warn'}">${Cloud.ready()?'جاهز':'اختياري'}</span></div>
+              <div class="form-grid">
+                ${field('API Key','fb-apiKey',f.apiKey)}
+                ${field('Auth Domain','fb-authDomain',f.authDomain)}
+                ${field('Project ID','fb-projectId',f.projectId)}
+                ${field('App ID','fb-appId',f.appId)}
+              </div>
+              <div style="margin-top:12px">${field('App Check site key','fb-appCheckSiteKey',f.appCheckSiteKey)}</div>
+              <div class="form-grid" style="margin-top:12px">
+                ${field('البريد','fb-email','')}
+                ${field('كلمة المرور','fb-password','','password')}
+              </div>
+              <div class="actions" style="margin-top:12px"><button class="btn primary" data-action="save-settings">حفظ</button><button class="btn" data-action="cloud-login">دخول</button><button class="btn" data-action="cloud-pull">استيراد من السحابة</button></div>
+            </div>
+            <div class="card"><div class="card-head"><div class="card-title">Worker والنسخ</div></div>
+              ${field('Worker URL','worker-url',Store.state.settings.workerUrl)}
+              <div class="actions" style="margin-top:12px"><button class="btn primary" data-action="save-settings">حفظ</button><button class="btn" data-action="export-backup">تصدير نسخة</button><button class="btn" data-action="import-backup">استيراد نسخة</button></div>
+              <div style="margin-top:12px" class="row"><span>بنية السحابة</span><span class="pill ok">subcollections</span></div>
+            </div>
+          </div>`;
+      }
+    };
+    const state = {search:''};
+    const stat = (label,value,meta) => `<div class="card stat"><b>${esc(value)}</b><span>${esc(label)}</span><div class="muted">${esc(meta)}</div></div>`;
+    const empty = text => `<div class="empty">${esc(text)}</div>`;
+    const field = (label,id,value='',type='text') => `<div><label for="${attr(id)}">${esc(label)}</label><input class="input" id="${attr(id)}" type="${attr(type)}" value="${attr(value)}"></div>`;
+    const traineeRow = t => `<div class="row"><div class="row-main"><div class="row-title">${esc(t.name)}</div><div class="row-meta">${esc(t.goal||'بدون هدف')} · ${t.days.length} أيام</div></div><button class="btn small" data-action="select-trainee" data-id="${attr(t.id)}">اختيار</button></div>`;
+    function traineeTabs(){
+      const list = Store.state.trainees.filter(t=>!t.archived);
+      return `<div class="toolbar">${list.map(t=>`<button class="btn small ${t.id===Store.state.currentTraineeId?'primary':''}" data-action="select-trainee" data-id="${attr(t.id)}">${esc(t.name)}</button>`).join('')}</div>`;
+    }
+    function dayCard(day){
+      return `<div class="day" data-day="${attr(day.id)}">
+        <div class="card-head"><input class="input" data-action="day-name" data-day="${attr(day.id)}" value="${attr(day.name)}"><button class="btn small danger" data-action="remove-day" data-day="${attr(day.id)}">حذف</button></div>
+        ${(day.exercises||[]).map((e,idx)=>`<div class="exercise">
+          <div><b>${esc(e.name)}</b><div class="muted">${e.sets} × ${e.reps} · ${esc(e.rest)}</div></div>
+          <div class="actions"><button class="btn small" data-action="move-exercise" data-day="${attr(day.id)}" data-index="${idx}" data-dir="-1">أعلى</button><button class="btn small danger" data-action="remove-exercise" data-day="${attr(day.id)}" data-index="${idx}">حذف</button></div>
+        </div>`).join('') || `<div class="muted">لا توجد تمارين</div>`}
+      </div>`;
+    }
+    function exercisePicker(){
+      const t = Store.current();
+      if(!t?.days.length) return empty('أضف يومًا أولًا');
+      return `<div class="form-grid">
+        <div><label>اليوم</label><select class="select" id="pick-day">${t.days.map(d=>`<option value="${attr(d.id)}">${esc(d.name)}</option>`).join('')}</select></div>
+        <div><label>التمرين</label><select class="select" id="pick-ex">${Store.state.exercises.map(e=>`<option value="${attr(e.id)}">${esc(e.name)} (${esc(e.cat)})</option>`).join('')}</select></div>
+      </div><button class="btn primary" style="margin-top:12px" data-action="add-exercise-to-day">إضافة للخطة</button>`;
+    }
+    function messageRow(m){
+      const t = Store.state.trainees.find(x=>x.id===m.traineeId);
+      return `<div class="row"><div><b>${esc(t?.name||'متدرب')}</b><div>${esc(m.text)}</div><div class="row-meta">${esc(fmt(m.ts))}</div></div><button class="btn small ${m.done?'':'ok'}" data-action="toggle-message" data-id="${attr(m.id)}">${m.done?'فتح':'إنجاز'}</button></div>`;
+    }
+    function latestProgress(traineeId){
+      return Store.state.progress.filter(p=>p.traineeId===traineeId).sort((a,b)=>b.ts-a.ts)[0] || null;
+    }
+    function progressStats(t, p){
+      const total = t.days.reduce((n,d)=>n+(d.exercises?.length||0),0);
+      const done = p ? Object.values(p.progress||{}).filter(Boolean).length : 0;
+      const pct = total ? Math.min(100, Math.round(done / total * 100)) : 0;
+      return {total,done,pct};
+    }
+    function progressCard(t){
+      const p = latestProgress(t.id);
+      const s = progressStats(t,p);
+      return `<div class="progress-box">
+        <div class="row" style="border:0;padding:0;margin-bottom:8px"><div><b>${esc(t.name)}</b><div class="row-meta">${p?esc(fmt(p.ts)):'لم تصل مزامنة بعد'}</div></div><span class="pill ${s.pct===100?'ok':p?'warn':''}">${s.pct}%</span></div>
+        <div class="bar"><span style="width:${s.pct}%"></span></div>
+        <div class="row-meta">${s.done} من ${s.total} تمارين منجزة</div>
+      </div>`;
+    }
+    function progressMessage(p){
+      const t = Store.state.trainees.find(x=>x.id===p.traineeId);
+      return `<div class="row"><div><b>${esc(t?.name||'متدرب')}</b><div>${esc(p.message)}</div><div class="row-meta">${esc(fmt(p.ts))}</div></div></div>`;
+    }
+
+    function openModal(title, body, foot=''){
+      $('#modalBox').innerHTML = `<div class="modal-head"><b>${esc(title)}</b><button class="btn small" data-action="close-modal">إغلاق</button></div><div class="modal-body">${body}</div>${foot?`<div class="modal-foot">${foot}</div>`:''}`;
+      $('#modal').classList.add('open');
+    }
+    function closeModal(){ $('#modal').classList.remove('open'); $('#modalBox').innerHTML=''; }
+    function openTrainee(id){
+      const t = id ? Store.state.trainees.find(x=>x.id===id) : null;
+      openModal(t?'تعديل متدرب':'متدرب جديد', `
+        <div class="form-grid">
+          ${field('الاسم','tr-name',t?.name||'')}
+          ${field('الجوال','tr-phone',t?.phone||'')}
+          ${field('المستوى','tr-level',t?.level||'مبتدئ')}
+          ${field('الهدف','tr-goal',t?.goal||'')}
+        </div>
+        <div style="margin-top:12px"><label>ملاحظات</label><textarea class="textarea" id="tr-notes">${esc(t?.notes||'')}</textarea></div>
+      `, `<button class="btn primary" data-action="save-trainee" data-id="${attr(id||'')}">حفظ</button>${t?`<button class="btn danger" data-action="delete-trainee" data-id="${attr(t.id)}">حذف</button>`:''}`);
+    }
+    function openExercise(id){
+      const e = id ? Store.state.exercises.find(x=>x.id===id) : null;
+      openModal(e?'تعديل تمرين':'تمرين جديد', `
+        <div class="form-grid">
+          ${field('الاسم','ex-name',e?.name||'')}
+          ${field('الفئة','ex-cat',e?.cat||'عام')}
+          ${field('الجولات','ex-sets',e?.sets||3,'number')}
+          ${field('العدات/الثواني','ex-reps',e?.reps||10,'number')}
+          ${field('الراحة','ex-rest',e?.rest||'60ث')}
+          ${field('رابط فيديو','ex-videoUrl',e?.videoUrl||'')}
+        </div>
+      `, `<button class="btn primary" data-action="save-exercise" data-id="${attr(id||'')}">حفظ</button>`);
+    }
+
+    document.addEventListener('click', async e => {
+      const viewBtn = e.target.closest('[data-view]');
+      if(viewBtn){ view = viewBtn.dataset.view; render(); return; }
+      const btn = e.target.closest('[data-action]');
+      if(!btn) return;
+      const a = btn.dataset.action;
+      if(a==='close-modal') closeModal();
+      if(a==='open-trainee') openTrainee(btn.dataset.id);
+      if(a==='save-trainee') saveTrainee(btn.dataset.id);
+      if(a==='delete-trainee') deleteTrainee(btn.dataset.id);
+      if(a==='select-trainee') Store.patch(s=>{s.currentTraineeId=btn.dataset.id;});
+      if(a==='add-day') addDay();
+      if(a==='remove-day') removeDay(btn.dataset.day);
+      if(a==='add-exercise-to-day') addExerciseToDay();
+      if(a==='remove-exercise') removeExercise(btn.dataset.day,+btn.dataset.index);
+      if(a==='move-exercise') moveExercise(btn.dataset.day,+btn.dataset.index,+btn.dataset.dir);
+      if(a==='save-nutrition') saveNutrition();
+      if(a==='add-message') addMessage();
+      if(a==='toggle-message') toggleMessage(btn.dataset.id);
+      if(a==='open-exercise') openExercise(btn.dataset.id);
+      if(a==='save-exercise') saveExercise(btn.dataset.id);
+      if(a==='save-settings') saveSettings();
+      if(a==='export-backup') exportBackup();
+      if(a==='import-backup') importBackup();
+      if(a==='export-trainee') exportTraineeApp();
+      if(a==='sync-now') await Cloud.sync();
+      if(a==='cloud-login') await Cloud.login();
+      if(a==='cloud-pull') await Cloud.pull();
+    });
+    document.addEventListener('input', e => {
+      if(e.target.dataset.input==='search'){ state.search = e.target.value; render(); }
+      if(e.target.dataset.action==='day-name') {
+        const t = Store.current(); const d = t?.days.find(x=>x.id===e.target.dataset.day);
+        if(d){ d.name = e.target.value; d.updatedAt = nowISO(); Store.save(); }
+      }
+    });
+
+    function saveTrainee(id){
+      const data = {
+        name:$('#tr-name').value.trim() || 'متدرب',
+        phone:$('#tr-phone').value.trim(),
+        level:$('#tr-level').value.trim() || 'مبتدئ',
+        goal:$('#tr-goal').value.trim(),
+        notes:$('#tr-notes').value.trim()
+      };
+      Store.patch(s=>{
+        if(id){
+          const t = s.trainees.find(x=>x.id===id); Object.assign(t,data,{updatedAt:nowISO()});
+        } else {
+          const t = normalizeTrainee({...data,id:uid('tr'),syncToken:token(),days:[{name:'اليوم 1',exercises:[]}]});
+          s.trainees.push(t); s.currentTraineeId = t.id;
+        }
+      });
+      closeModal(); toast('تم الحفظ','ok');
+    }
+    function deleteTrainee(id){
+      if(!confirm('حذف المتدرب؟')) return;
+      Store.patch(s=>{s.trainees=s.trainees.filter(t=>t.id!==id); if(s.currentTraineeId===id) s.currentTraineeId=s.trainees[0]?.id||null;});
+      closeModal();
+    }
+    function addDay(){
+      const t = Store.current(); if(!t){toast('أضف متدربًا أولًا','danger');return;}
+      Store.patch(()=>t.days.push(normalizeDay({name:'اليوم '+(t.days.length+1),exercises:[]})));
+    }
+    function removeDay(id){ const t=Store.current(); if(!t)return; Store.patch(()=>t.days=t.days.filter(d=>d.id!==id)); }
+    function addExerciseToDay(){
+      const t = Store.current(); const d = t?.days.find(x=>x.id===$('#pick-day')?.value); const e = Store.state.exercises.find(x=>x.id===$('#pick-ex')?.value);
+      if(!d||!e)return; Store.patch(()=>d.exercises.push(normalizeExercise({...e,id:uid('pex')})));
+    }
+    function removeExercise(dayId,index){ const d=Store.current()?.days.find(x=>x.id===dayId); if(!d)return; Store.patch(()=>d.exercises.splice(index,1)); }
+    function moveExercise(dayId,index,dir){
+      const d=Store.current()?.days.find(x=>x.id===dayId); if(!d)return;
+      const ni = index + dir; if(ni<0||ni>=d.exercises.length)return;
+      Store.patch(()=>{const [x]=d.exercises.splice(index,1); d.exercises.splice(ni,0,x);});
+    }
+    function saveNutrition(){
+      const t=Store.current(); if(!t)return;
+      Store.patch(()=>{t.nutrition={calories:+$('#nut-cal').value||0,protein:+$('#nut-protein').value||0,carbs:+$('#nut-carbs').value||0,fat:+$('#nut-fat').value||0,note:$('#nut-note').value.trim()};});
+      toast('تم حفظ التغذية','ok');
+    }
+    function addMessage(){
+      const t=Store.current(); const text=$('#messageText')?.value.trim(); if(!t||!text)return;
+      Store.patch(s=>s.messages.unshift({id:uid('msg'),traineeId:t.id,text,ts:Date.now(),done:false}));
+    }
+    function toggleMessage(id){ Store.patch(s=>{const m=s.messages.find(x=>x.id===id); if(m)m.done=!m.done;}); }
+    function saveExercise(id){
+      const data = normalizeExercise({id:id||uid('ex'),name:$('#ex-name').value.trim(),cat:$('#ex-cat').value.trim(),sets:$('#ex-sets').value,reps:$('#ex-reps').value,rest:$('#ex-rest').value.trim(),videoUrl:$('#ex-videoUrl').value.trim()});
+      Store.patch(s=>{ const i=s.exercises.findIndex(x=>x.id===id); if(i>=0)s.exercises[i]=data; else s.exercises.push(data);});
+      closeModal();
+    }
+    function saveSettings(){
+      Store.patch(s=>{
+        s.settings.workerUrl = $('#worker-url')?.value.trim() ?? s.settings.workerUrl;
+        const f=s.settings.firebase;
+        ['apiKey','authDomain','projectId','appId','appCheckSiteKey'].forEach(k=>{const el=$('#fb-'+k); if(el)f[k]=el.value.trim();});
+      });
+      toast('تم حفظ الإعدادات','ok');
+    }
+
+    function exportBackup(){
+      const blob = new Blob([JSON.stringify({meta:{app:'jadwal-modern',v:1,date:nowISO()},state:Store.state},null,2)],{type:'application/json'});
+      downloadBlob(blob,'jadwal-modern-backup-'+new Date().toISOString().slice(0,10)+'.json');
+    }
+    function importBackup(){
+      const input = $('#filePicker');
+      input.onchange = () => {
+        const file = input.files[0]; if(!file)return;
+        const r = new FileReader();
+        r.onload = () => {
+          try {
+            const data = JSON.parse(r.result);
+            const imported = importState(data);
+            Store.state = normalizeState(imported);
+            Store.save(); render(); toast('تم الاستيراد','ok');
+          } catch(e) { logError('backup import',e); toast('فشل الاستيراد','danger'); }
+        };
+        r.readAsText(file);
+      };
+      input.click();
+    }
+    function importState(data){
+      if(data?.meta?.app==='jadwal-modern' && data.state) return data.state;
+      if(data?.fitbuilder_v4) return legacyState(JSON.parse(data.fitbuilder_v4));
+      if(data?.trainees) return legacyState(data);
+      throw new Error('unsupported backup');
+    }
+    function legacyState(db){
+      const s = DEFAULT_STATE();
+      s.settings.coachName = db.settings?.coachName || '';
+      s.trainees = (db.trainees||[]).map(t => normalizeTrainee({
+        id:t.id,name:t.name,phone:t.phone,level:t.level||t.type,goal:t.goal||t.type,notes:t.notes,
+        nutrition:t.nutrition||t.nd||{},days:(t.days||[]).map(d=>({id:d.id,name:d.nameAr||d.name,exercises:(d.exercises||[]).map(e=>({name:e.nameAr||e.name,sets:e.sets,reps:e.reps,rest:e.rest,videoUrl:e.videoUrl||e.url}))}))
+      }));
+      s.currentTraineeId = s.trainees[0]?.id || null;
+      return s;
+    }
+    function downloadBlob(blob,name){
+      const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click();
+      setTimeout(()=>URL.revokeObjectURL(a.href),3000);
+    }
+
+    function exportTraineeApp(){
+      const t = Store.current(); if(!t){toast('اختر متدربًا','danger');return;}
+      const payload = {trainerId:Cloud.uid()||'local', trainee: t, workerUrl: Store.state.settings.workerUrl || ''};
+      const html = traineeHtml(payload);
+      downloadBlob(new Blob([html],{type:'text/html;charset=utf-8'}),'trainee-'+safeFile(t.name)+'.html');
+    }
+    function safeFile(s){return String(s||'trainee').replace(/[^\u0600-\u06FF\w-]+/g,'-').slice(0,60)||'trainee';}
+    function traineeHtml(payload){
+      return `<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(payload.trainee.name)}</title><style>
+      body{font-family:system-ui,Tahoma,sans-serif;margin:0;background:#f6f7fb;color:#162033;padding:14px}.wrap{max-width:760px;margin:auto}.card{background:#fff;border:1px solid #d9e0ec;border-radius:8px;padding:12px;margin-bottom:10px}.day{font-weight:900;margin-bottom:8px}.ex{display:flex;justify-content:space-between;gap:8px;border-top:1px solid #e5e7eb;padding:9px 0}.muted{color:#667085;font-size:12px}.btn{border:0;border-radius:8px;padding:9px 12px;background:#2563eb;color:#fff;font-weight:800}.ok{background:#059669}.textarea{width:100%;min-height:70px;border:1px solid #d9e0ec;border-radius:8px;padding:10px}</style></head><body><div class="wrap"><h1>${esc(payload.trainee.name)}</h1><div id="app"></div></div><script>
+      const DATA=${jsonSafe(payload)};
+      const KEY='jadwal_progress_'+DATA.trainee.id;
+      const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+      const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||'{}')}catch{return {}}};
+      const save=p=>localStorage.setItem(KEY,JSON.stringify(p));
+      function render(){const p=load();document.getElementById('app').innerHTML=DATA.trainee.days.map((d,di)=>'<div class="card"><div class="day">'+esc(d.name)+'</div>'+d.exercises.map((e,ei)=>{const k=di+'-'+ei;return '<div class="ex"><div><b>'+esc(e.name)+'</b><div class="muted">'+esc(e.sets)+' × '+esc(e.reps)+' · '+esc(e.rest)+'</div></div><button class="btn '+(p[k]?'ok':'')+'" data-k="'+k+'">'+(p[k]?'تم':'إنجاز')+'</button></div>'}).join('')+'</div>').join('')+'<div class="card"><textarea class="textarea" id="msg" placeholder="رسالة للمدرب"></textarea><button class="btn" id="send">إرسال</button><div class="muted" id="sync"></div></div>'}
+      async function push(extra={}){if(!DATA.workerUrl)return;const body={trainerId:DATA.trainerId,traineeId:DATA.trainee.id,token:DATA.trainee.syncToken,progress:load(),...extra};try{const r=await fetch(DATA.workerUrl.replace(/\\/$/,'')+'/progress',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});document.getElementById('sync').textContent=r.ok?'تمت المزامنة':'تعذرت المزامنة'}catch(e){document.getElementById('sync').textContent='سيتم الحفظ محليًا'}}
+      document.addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(b){const p=load();p[b.dataset.k]=!p[b.dataset.k];save(p);render();push()} if(e.target.id==='send'){const text=document.getElementById('msg').value.trim();if(text){push({message:text});document.getElementById('msg').value=''}}});
+      render();
+      <\/script></body></html>`;
+    }
+
+    const Cloud = {
+      modules:null, app:null, auth:null, db:null, user:null,
+      cfg(){return Store.state.settings.firebase || {};},
+      ready(){const c=this.cfg(); return !!(c.apiKey && c.projectId && c.appId);},
+      uid(){return this.user?.uid || Store.state.cloud.user?.uid || '';},
+      async init(){
+        if(!this.ready()) throw new Error('Firebase config missing');
+        if(this.modules) return;
+        const imports = [
+          import(`${FIREBASE_CDN}/firebase-app.js`),
+          import(`${FIREBASE_CDN}/firebase-auth.js`),
+          import(`${FIREBASE_CDN}/firebase-firestore.js`)
+        ];
+        if(this.cfg().appCheckSiteKey) imports.push(import(`${FIREBASE_CDN}/firebase-app-check.js`));
+        const [appMod,authMod,fsMod,appCheckMod] = await Promise.all(imports);
+        this.modules = {appMod,authMod,fsMod,appCheckMod};
+        this.app = appMod.initializeApp(this.cfg());
+        if(this.cfg().appCheckSiteKey && appCheckMod){
+          appCheckMod.initializeAppCheck(this.app, {
+            provider:new appCheckMod.ReCaptchaV3Provider(this.cfg().appCheckSiteKey),
+            isTokenAutoRefreshEnabled:true
+          });
+        }
+        this.auth = authMod.getAuth(this.app);
+        this.db = fsMod.getFirestore(this.app);
+      },
+      async login(){
+        try{
+          saveSettings();
+          await this.init();
+          const email=$('#fb-email').value.trim(), pass=$('#fb-password').value;
+          if(!email||!pass){toast('أدخل البريد وكلمة المرور','danger');return;}
+          this.user = (await this.modules.authMod.signInWithEmailAndPassword(this.auth,email,pass)).user;
+          Store.patch(s=>{s.cloud.user={uid:this.user.uid,email:this.user.email};s.cloud.status='online';});
+          toast('تم تسجيل الدخول','ok');
+        }catch(e){logError('cloud login',e);toast('فشل تسجيل الدخول','danger');}
+      },
+      async sync(){
+        try{
+          await this.init();
+          if(!this.auth.currentUser){toast('سجل الدخول أولًا','danger');return;}
+          const {doc,setDoc,collection,writeBatch,serverTimestamp} = this.modules.fsMod;
+          const uid = this.auth.currentUser.uid;
+          const batch = writeBatch(this.db);
+          batch.set(doc(this.db,'trainers',uid,'meta','main'), {schema:1,updatedAt:serverTimestamp(),coachName:Store.state.settings.coachName||''}, {merge:true});
+          for(const t of Store.state.trainees) batch.set(doc(collection(this.db,'trainers',uid,'trainees'),t.id), {...t,updatedAt:serverTimestamp()}, {merge:true});
+          for(const m of Store.state.messages.slice(0,200)) batch.set(doc(collection(this.db,'trainers',uid,'messages'),m.id), m, {merge:true});
+          await batch.commit();
+          Store.patch(s=>{s.cloud.lastSync=Date.now();s.cloud.status='online';});
+          toast('تمت المزامنة','ok');
+        }catch(e){logError('cloud sync',e);Store.state.cloud.status='error';Store.save();updateSyncStatus();toast('فشلت المزامنة','danger');}
+      },
+      async pull(){
+        if(!confirm('استيراد البيانات من السحابة سيستبدل البيانات المحلية الحالية. متابعة؟')) return;
+        try{
+          await this.init();
+          const user=this.auth.currentUser; if(!user){toast('سجل الدخول أولًا','danger');return;}
+          const {collection,getDocs} = this.modules.fsMod;
+          const trSnap = await getDocs(collection(this.db,'trainers',user.uid,'trainees'));
+          const msgSnap = await getDocs(collection(this.db,'trainers',user.uid,'messages'));
+          const progress = [];
+          for(const trDoc of trSnap.docs){
+            const pSnap = await getDocs(collection(this.db,'trainers',user.uid,'trainees',trDoc.id,'progress'));
+            progress.push(...pSnap.docs.map(d=>normalizeProgress({...d.data(),id:d.id,traineeId:trDoc.id})));
+          }
+          Store.patch(s=>{s.trainees=trSnap.docs.map(d=>normalizeTrainee(d.data()));s.messages=msgSnap.docs.map(d=>d.data());s.progress=progress;s.currentTraineeId=s.trainees[0]?.id||null;s.cloud.lastPull=Date.now();});
+          toast('تم الاستيراد من السحابة','ok');
+        }catch(e){logError('cloud pull',e);toast('فشل الاستيراد','danger');}
+      }
+    };
+    function updateSyncStatus(){
+      const c = Store.state.cloud;
+      $('#syncStatus').innerHTML = `الحفظ: محلي<br>السحابة: ${Cloud.ready()?esc(c.status||'جاهزة'):'غير مهيأة'}<br>آخر مزامنة: ${esc(fmt(c.lastSync))}`;
+    }
+
+    Store.load();
+    render();
+  </script>
+</body>
+</html>
